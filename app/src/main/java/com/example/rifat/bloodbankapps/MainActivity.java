@@ -1,5 +1,6 @@
 package com.example.rifat.bloodbankapps;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -68,6 +69,17 @@ public class MainActivity extends AppCompatActivity
         about=(CardView)findViewById(R.id.about_id);
         shareApp=(CardView)findViewById(R.id.share_id);
 
+        // set OnClick Listener.............................
+
+        beDonor.setOnClickListener(this);
+        searchBlood.setOnClickListener(this);
+        bloodBank.setOnClickListener(this);
+        ambulance.setOnClickListener(this);
+        postForBlood.setOnClickListener(this);
+        facts.setOnClickListener(this);
+        about.setOnClickListener(this);
+        shareApp.setOnClickListener(this);
+
 
     }
     @Override
@@ -75,19 +87,43 @@ public class MainActivity extends AppCompatActivity
 
         if(v.getId()==R.id.beADonor_id){
 
+            Intent intent = new Intent(MainActivity.this,BeDonorActivity.class);
+            startActivity(intent);
+
         }else if(v.getId()==R.id.searchBlood_id){
+
+            Intent intent = new Intent(MainActivity.this,SearchBloodActivity.class);
+            startActivity(intent);
 
         }else if(v.getId()==R.id.bloodBank_id){
 
+            Intent intent = new Intent(MainActivity.this,BloodBankActivity.class);
+            startActivity(intent);
+
         }else if(v.getId()==R.id.ambulance_id){
+
+            Intent intent = new Intent(MainActivity.this,AmbulanceActivity.class);
+            startActivity(intent);
 
         }else if(v.getId()==R.id.postForBlood_id){
 
+            Intent intent = new Intent(MainActivity.this,PostForBloodActivity.class);
+            startActivity(intent);
+
         }else if(v.getId()==R.id.facts_id){
+
+            Intent intent = new Intent(MainActivity.this,FactsActivity.class);
+            startActivity(intent);
 
         }else if(v.getId()==R.id.about_id){
 
+            Intent intent = new Intent(MainActivity.this,AboutActivity.class);
+            startActivity(intent);
+
         }else if(v.getId()==R.id.share_id){
+
+            Intent intent = new Intent(MainActivity.this,ShareActivity.class);
+            startActivity(intent);
 
         }
     }

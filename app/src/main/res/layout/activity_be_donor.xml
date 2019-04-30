@@ -1,9 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:weightSum="10"
     tools:context=".BeDonorActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:background="#f7f4f4"
+        android:layout_weight="3">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/registration"
+            android:scaleType="fitCenter"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:background="@drawable/pageborder"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/nameEditText_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your name"
+            android:inputType="text"
+            android:textColor="#000000"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1.4"
+                android:background="#b10808"
+                android:text="Select blood group"
+                android:textColor="#ffffff"
+                android:textSize="23sp" />
+
+            <Spinner
+                android:id="@+id/selectBloodGroup_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".6">
+
+            </Spinner>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <AutoCompleteTextView
+                android:id="@+id/district_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter district name"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/phoneNumberEditText_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter phone number"
+            android:inputType="phone"
+            android:textColor="#000000"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#b10808"
+                android:text="Gender"
+                android:textColor="#ffffff"
+                android:textSize="24sp" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/maleRadioButton_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:checked="true"
+                    android:textSize="23sp" />
+
+                <RadioButton
+                    android:id="@+id/femaleRadioButton_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:textSize="23sp" />
+
+            </RadioGroup>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/emailEditText_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter email address"
+            android:textColor="#000000"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/beDonorSubmitButton_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#780505"
+            android:text="Submit"
+            android:textColor="#ffffff"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -19,7 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BeDonorActivity"></activity>
+        <activity android:name=".BeDonorActivity" />
+        <activity android:name=".SearchBloodActivity" />
+        <activity android:name=".BloodBankActivity" />
+        <activity android:name=".AmbulanceActivity" />
+        <activity android:name=".PostForBloodActivity" />
+        <activity android:name=".FactsActivity" />
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".ShareActivity" />
+        <activity android:name=".SearchBloodResultShowActivity"></activity>
     </application>
 
 </manifest>
