@@ -49,7 +49,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Phone: 01554599456"
-        android:autoLink="phone"
         android:textColor="#000000"
         android:textSize="20sp"
         android:padding="5dp"/>

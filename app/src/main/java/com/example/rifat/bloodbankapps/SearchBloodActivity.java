@@ -56,6 +56,12 @@ public class SearchBloodActivity extends AppCompatActivity implements View.OnCli
 
             // now check validation for all item..............................
 
+            if(searchDistrict.isEmpty()){
+                districtName.setError("please enter district name!");
+                districtName.requestFocus();
+                return;
+            }
+
             if(!searchDistrict.isEmpty()){
 
                 int check=checkDistrictName(searchDistrict);

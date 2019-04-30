@@ -6,4 +6,12 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/justLogo_icon"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/varsitylogo"
+
+        />
 </menu>

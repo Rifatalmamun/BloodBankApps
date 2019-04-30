@@ -126,7 +126,7 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
 
             DonorClass donorClass = new DonorClass(donorName,donorBloodGroup,donorPhoneNumber,donorEmail,donorDistrict,donorGender);
 
-            databaseReference.child(key).setValue(donorClass);
+            databaseReference.child(donorBloodGroup).child(donorDistrict).push().setValue(donorClass);
 
             Toast.makeText(getApplicationContext(),"Donor Add Successfull !",Toast.LENGTH_SHORT).show();
 

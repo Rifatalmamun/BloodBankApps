@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.rifat.bloodbankapps">
 
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,7 +29,9 @@
         <activity android:name=".FactsActivity" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".ShareActivity" />
-        <activity android:name=".SearchBloodResultShowActivity"></activity>
+        <activity android:name=".SearchBloodResultShowActivity" />
     </application>
+
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
 
 </manifest>
