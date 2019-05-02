@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        android:src="@drawable/donoricon"
+        android:padding="10dp" />
+
+    <TextView
+        android:id="@+id/singleDonorNameTextViwsample_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name: Rifat al mamun"
+        android:textColor="#000000"
+        android:textSize="23sp"
+        android:padding="5dp"/>
+    <TextView
+        android:id="@+id/singleDonorBloodGroupTextViwsample_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Blood group: A+"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:padding="5dp"/>
+    <TextView
+        android:id="@+id/singleDonorDistrictTextViwsample_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="District: Rajshahi"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:padding="5dp"/>
+    <TextView
+        android:id="@+id/singleDonorEmailTextViwsample_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email: rifatalmamun.cse@gmail.com"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:padding="5dp"/>
+    <TextView
+        android:id="@+id/singleDonorPhoneNumberTextViwsample_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:padding="5dp"
+        android:text="Phone: " />
+    <TextView
+        android:id="@+id/singleDonorGendersample_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gender: Male"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:padding="5dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/singleDonorPhoneIcon_id"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_local_phone_black_24dp"
+            android:autoLink="phone"
+            android:layout_marginRight="20dp" />
+        <ImageView
+            android:id="@+id/singleDonorEmailIcon_id"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_mail_outline_black_24dp" />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</LinearLayout>

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.rifat.bloodbankapps">
 
-
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -30,8 +30,7 @@
         <activity android:name=".AboutActivity" />
         <activity android:name=".ShareActivity" />
         <activity android:name=".SearchBloodResultShowActivity" />
+        <activity android:name=".SingleResultShowActivity"></activity>
     </application>
-
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
 
 </manifest>

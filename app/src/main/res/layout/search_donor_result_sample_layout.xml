@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:text="Name: Rifat al mamun"
         android:textColor="#000000"
-        android:textSize="23sp"
+        android:textSize="20sp"
         android:padding="5dp"/>
     <TextView
         android:id="@+id/donorBloodGroupTextViwsample_id"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:text="Blood group: A+"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="17sp"
         android:padding="5dp"/>
     <TextView
         android:id="@+id/donorDistrictTextViwsample_id"
@@ -34,49 +34,19 @@
         android:layout_height="wrap_content"
         android:text="District: Rajshahi"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="17sp"
         android:padding="5dp"/>
     <TextView
-        android:id="@+id/donorEmailTextViwsample_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Email: rifatalmamun.cse@gmail.com"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:padding="5dp"/>
-    <TextView
-        android:id="@+id/donorPhoneNumberTextViwsample_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Phone: 01554599456"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:padding="5dp"/>
-    <TextView
-        android:id="@+id/donorGendersample_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Gender: Male"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:padding="5dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/donorPhoneIcon_id"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/phoneicon" />
-        <ImageView
-            android:id="@+id/donorEmailIcon_id"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/mailicon" />
+        android:text="Click for details"
+        android:textAlignment="center"
+        />
 
 
-    </LinearLayout>
+
+
+
+
 
 </LinearLayout>
