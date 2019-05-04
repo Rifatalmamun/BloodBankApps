@@ -38,6 +38,17 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
     public int countDonor=0;
     public String id="";
 
+    public String[] phoneString;
+    public ArrayList<String> phoneArrayList=new ArrayList<String>();
+    StringBuilder stringBuilder=new StringBuilder();
+    int length=0,i=0;
+    public String[] indexString;
+    public String ss;
+    public String tt;
+
+
+    private List<DonorClass>donorPhoneNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +70,7 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
 
         //query_BasedOnBloodGroup.addListenerForSingleValueEvent(valueEventListener);
 
-        final DatabaseReference myRef=FirebaseDatabase.getInstance().getReference("DonorList");
+        final DatabaseReference myRef=FirebaseDatabase.getInstance().getReference("DonorDetailsTable");
 
         myRef.child(catchBloodGroup).child(catchDistrictName).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -71,18 +82,27 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
                 {
                     DonorClass donorClass = dataSnapshot1.getValue(DonorClass.class);
 
+                    //phoneString[i++]=donorClass.getDonor_phone_number();
+
+                    stringBuilder.append(donorClass.getDonor_phone_number());
+
                     donorList.add(donorClass);
+
                 }
 
                 listView.setAdapter(resultShowCustomAdapter);
 
+                length=stringBuilder.length();
+
              // count total child
-                if(dataSnapshot.exists()){
+               /* if(dataSnapshot.exists()){
                     countDonor=(int) dataSnapshot.getChildrenCount();
-                }
+                }*/
 
-                Toast.makeText(SearchBloodResultShowActivity.this, "Total donor: "+countDonor, Toast.LENGTH_SHORT).show();
+                ss=stringBuilder.toString();
 
+
+             //Toast.makeText(SearchBloodResultShowActivity.this, "Total number: "+ss, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -96,21 +116,28 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 int pos=parent.getPositionForView(view);  // list item er position gulo find korlam
-                String posit=Integer.toString(pos);
 
-                //String selected=listView.getChildAt(pos).toString();
+                int s_index=(pos*11);
+                int e_index=((pos+1)*11);
+
+                tt=ss.substring(s_index,e_index);
+
+                //Toast.makeText(SearchBloodResultShowActivity.this, "Click number: "+tt, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(SearchBloodResultShowActivity.this,SingleResultShowActivity.class);
 
-
-                intent.putExtra("singleDonorPosition",posit);
+                intent.putExtra("singlePhoneNumber",tt);
                 intent.putExtra("singleBloodGroup",catchBloodGroup);
                 intent.putExtra("singleDistrictName",catchDistrictName);
+
+                String ref = myRef.child(catchBloodGroup).child(catchDistrictName).getKey();
+
+                Toast.makeText(getApplicationContext(),"Ref: "+ref,Toast.LENGTH_SHORT).toString();
 
                 startActivity(intent);
 
 
-                Toast.makeText(SearchBloodResultShowActivity.this, "Pos: "+position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SearchBloodResultShowActivity.this, "Pos: "+position, Toast.LENGTH_SHORT).show();
 
             }
         });

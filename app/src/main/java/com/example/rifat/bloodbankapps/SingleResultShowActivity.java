@@ -29,11 +29,11 @@ public class SingleResultShowActivity extends AppCompatActivity {
         setContentView(R.layout.activity_single_result_show);
 
         this.setTitle("Single Result");
-        String catchDonorPosition=getIntent().getExtras().getString("singleDonorPosition");
+
+        String catchSinglePhoneNumber=getIntent().getExtras().getString("singlePhoneNumber");
         String catchSingleBloodGroup=getIntent().getExtras().getString("singleBloodGroup");
         String catchSingleDistrictName=getIntent().getExtras().getString("singleDistrictName");
 
-        Toast.makeText(getApplicationContext(),"catchPosition"+catchDonorPosition,Toast.LENGTH_SHORT).show();
 
         listView=(ListView)findViewById(R.id.singleBloodResultShowListView_id);
         donorList = new ArrayList<>();
@@ -43,10 +43,11 @@ public class SingleResultShowActivity extends AppCompatActivity {
         //......................database access...............................
 
 
-        final DatabaseReference singlemyRef=FirebaseDatabase.getInstance().getReference("DonorList");
+        final DatabaseReference singlemyRef=FirebaseDatabase.getInstance().getReference("DonorDetailsTable");
 
         singlemyRef.child(catchSingleBloodGroup).child(catchSingleDistrictName)
-                .orderByChild("donor_position").equalTo(catchDonorPosition).addListenerForSingleValueEvent(new ValueEventListener() {
+                .orderByChild("donor_phone_number").equalTo(catchSinglePhoneNumber).
+               addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -61,7 +62,7 @@ public class SingleResultShowActivity extends AppCompatActivity {
 
                 listView.setAdapter(singleCustomAdapter);
 
-               /* if(dataSnapshot.exists()){
+               /* if(dataSnapshot.exists())
                     countDonor=(int) dataSnapshot.getChildrenCount();
                 }*/
 

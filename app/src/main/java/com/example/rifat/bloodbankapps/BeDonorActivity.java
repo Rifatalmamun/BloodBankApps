@@ -20,9 +20,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Random;
+
 public class BeDonorActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private DatabaseReference databaseReference; // for firebase
+    private DatabaseReference databaseReference,databaseReference1; // for firebase
 
     private EditText name,email,phoneNumber;
     private RadioGroup genderRadioGroup;
@@ -33,25 +35,19 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
     private String[] districtNameArray;
     private Button beDonorSubmitButton;
 
-    public int countDonor=0;
-    public int countDonorfor_ARaj=0;
-    public int getCountDonorfor_ORaj=0;
-    String countDonors="";
-    public String k="";
+    Random r;
+    public int min,max,output;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_be_donor);
 
-        databaseReference=FirebaseDatabase.getInstance().getReference("DonorList");
+        databaseReference=FirebaseDatabase.getInstance().getReference("DonorDetailsTable");
+        databaseReference1=FirebaseDatabase.getInstance().getReference("DonorIdTable");
         this.setTitle("Be a Donor page");
-        //..............................................................................................
 
-
-
-        //...............................................................................................
-
+        r=new Random();
         // finding all variables....................................................................
 
         name=(EditText)findViewById(R.id.nameEditText_id);
@@ -83,12 +79,35 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if(v.getId()==R.id.beDonorSubmitButton_id){
 
-            donorStoreInDatabase();
+        // first create 10 digit random number;.................
+            String random_number="";
+
+            String tempMin="100",temMax="1000000000";
+
+            if( !tempMin.equals("") && !temMax.equals("") )
+            {
+                min=Integer.parseInt(tempMin);
+                max=Integer.parseInt(temMax);
+
+               output=r.nextInt((max-min)+1)+min;
+
+              random_number=Integer.toString(output);
+            }
+
+            donorStoreInDatabase(random_number);
 
         }
     }
+
+
+
+
+
+
+
+
     // Donor Store in Database.............................................................
-    private void donorStoreInDatabase() {
+    private void donorStoreInDatabase(String rn) {
 
         String donorName=name.getText().toString();
         String donorBloodGroup=selectBloodGroup.getSelectedItem().toString();
@@ -139,12 +158,13 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
 
         //................................
 
-        if(donorBloodGroup.equals("A+") && donorDistrict.equals("Rajshahi")){
-            //countDonorfor_ARaj=countDonorfor_ARaj+1;
 
-            final DatabaseReference myRef=FirebaseDatabase.getInstance().getReference("DonorList");
 
-            myRef.child(donorBloodGroup).child(donorDistrict).addListenerForSingleValueEvent(new ValueEventListener() {
+            //final DatabaseReference myRef=FirebaseDatabase.getInstance().getReference("DonorList");
+
+            /*myRef.child(donorBloodGroup).child(donorDistrict)
+                    .orderByChild(donorBloodGroup).equalTo("A+")
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -154,71 +174,21 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
                             {
                                 DonorClass donorClass = dataSnapshot1.getValue(DonorClass.class);
                             }
-
-                            // count total child
-                            if(dataSnapshot.exists()){
-                                countDonorfor_ARaj=(int) dataSnapshot.getChildrenCount();
-                            }
-
-                            //Toast.makeText(SearchBloodResultShowActivity.this, "Total donor: "+countDonor, Toast.LENGTH_SHORT).show();
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
 
                         }
-                    });
-
-            //countDonorfor_ARaj=countDonorfor_ARaj;
-            countDonors=Integer.toString(countDonorfor_ARaj);
-
-        }
-        if(donorBloodGroup.equals("O+") && donorDistrict.equals("Rajshahi")){
-
-            final DatabaseReference myRef=FirebaseDatabase.getInstance().getReference("DonorList");
-
-            myRef.child(donorBloodGroup).child(donorDistrict).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                            //donorList.clear();
-
-                            for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
-                            {
-                                DonorClass donorClass = dataSnapshot1.getValue(DonorClass.class);
-                            }
-
-                            // count total child
-                            if(dataSnapshot.exists()){
-                                getCountDonorfor_ORaj=(int) dataSnapshot.getChildrenCount();
-                            }
-
-                            //Toast.makeText(SearchBloodResultShowActivity.this, "Total donor: "+countDonor, Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-
-           // getCountDonorfor_ORaj=getCountDonorfor_ORaj;
-            countDonors=Integer.toString(getCountDonorfor_ORaj);
-
-
-        }
-
-
-        //................................
-
-
+                    });*/
 
             String key=databaseReference.push().getKey();
 
 
-            DonorClass donorClass = new DonorClass(countDonors,key,donorName,donorBloodGroup,donorPhoneNumber,donorEmail,donorDistrict,donorGender);
+            DonorClass donorClass = new DonorClass(rn,key,donorName,donorBloodGroup,donorPhoneNumber,donorEmail,donorDistrict,donorGender);
+            DonorIdClass donorIdClass=new DonorIdClass(rn,key,donorPhoneNumber);
 
             databaseReference.child(donorBloodGroup).child(donorDistrict).push().setValue(donorClass);
+            databaseReference1.child(donorBloodGroup).child(donorDistrict).push().setValue(donorIdClass);
 
             Toast.makeText(getApplicationContext(),"Donor Add Successfull !",Toast.LENGTH_SHORT).show();
 

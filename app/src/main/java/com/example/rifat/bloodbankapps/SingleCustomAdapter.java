@@ -39,7 +39,6 @@ public class SingleCustomAdapter extends ArrayAdapter<DonorClass> implements Vie
     }
 
 
-
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -49,13 +48,12 @@ public class SingleCustomAdapter extends ArrayAdapter<DonorClass> implements Vie
 
         DonorClass donorClass = donorList.get(position);
 
-        // listView=(ListView)view.findViewById(R.id.searchBloodResultShowListView_id);
 
         TextView Name=view.findViewById(R.id.singleDonorNameTextViwsample_id);
         TextView BloodGroup=view.findViewById(R.id.singleDonorBloodGroupTextViwsample_id);
         TextView District=view.findViewById(R.id.singleDonorDistrictTextViwsample_id);
 
-       TextView PhoneNumber=view.findViewById(R.id.singleDonorPhoneNumberTextViwsample_id);
+        TextView PhoneNumber=view.findViewById(R.id.singleDonorPhoneNumberTextViwsample_id);
         TextView EmailAddress=view.findViewById(R.id.singleDonorEmailTextViwsample_id);
         TextView Gender=view.findViewById(R.id.singleDonorGendersample_id);
 
@@ -67,17 +65,6 @@ public class SingleCustomAdapter extends ArrayAdapter<DonorClass> implements Vie
         EmailAddress.setText("Email: "+donorClass.getDonor_email());
         Gender.setText("Gender: "+donorClass.getDonor_gender());
 
-
-        //sb.append(donorClass.getDonor_phone_number());
-        //sb.append("\n");
-
-
-
-        //Toast.makeText(context, sb, Toast.LENGTH_SHORT).show();
-
-
-
-        //callNumber=PhoneNumber.getText().toString().trim();
         callNumber=donorClass.getDonor_phone_number();
 
         ImageView PhoneIcon=view.findViewById(R.id.singleDonorPhoneIcon_id);
