@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Type District here"
-            android:text="Rajshahi"
+            android:text="Jessore"
             android:textColorHint="#c21616"
             android:textColor="#c21616" />
     </LinearLayout>

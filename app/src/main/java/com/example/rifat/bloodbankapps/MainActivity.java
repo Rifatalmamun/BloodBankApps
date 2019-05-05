@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity
     //Declaring all variables name...........................................
 
     private TextView userNumber,donorNumber;
-    private CardView beDonor,searchBlood,bloodBank,ambulance,postForBlood,facts,about,shareApp;
+    private CardView beDonor,searchBlood,bloodBank,ambulance,addDonor,facts,about,shareApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity
         searchBlood=(CardView)findViewById(R.id.searchBlood_id);
         bloodBank=(CardView)findViewById(R.id.bloodBank_id);
         ambulance=(CardView)findViewById(R.id.ambulance_id);
-        postForBlood=(CardView)findViewById(R.id.postForBlood_id);
+        addDonor=(CardView)findViewById(R.id.addDonor_id);
         facts=(CardView)findViewById(R.id.facts_id);
         about=(CardView)findViewById(R.id.about_id);
         shareApp=(CardView)findViewById(R.id.share_id);
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity
         searchBlood.setOnClickListener(this);
         bloodBank.setOnClickListener(this);
         ambulance.setOnClickListener(this);
-        postForBlood.setOnClickListener(this);
+        addDonor.setOnClickListener(this);
         facts.setOnClickListener(this);
         about.setOnClickListener(this);
         shareApp.setOnClickListener(this);
@@ -106,13 +106,11 @@ public class MainActivity extends AppCompatActivity
 
             Intent intent = new Intent(MainActivity.this,AmbulanceActivity.class);
             startActivity(intent);
-
-        }else if(v.getId()==R.id.postForBlood_id){
-
-            Intent intent = new Intent(MainActivity.this,PostForBloodActivity.class);
+        }else if(v.getId()==R.id.addDonor_id){
+            Intent intent = new Intent(MainActivity.this,BeDonorActivity.class);
             startActivity(intent);
-
-        }else if(v.getId()==R.id.facts_id){
+        }
+        else if(v.getId()==R.id.facts_id){
 
             Intent intent = new Intent(MainActivity.this,FactsActivity.class);
             startActivity(intent);
@@ -129,41 +127,6 @@ public class MainActivity extends AppCompatActivity
 
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

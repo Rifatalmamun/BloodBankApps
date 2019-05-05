@@ -3,6 +3,7 @@ package com.example.rifat.bloodbankapps;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ public class SingleResultShowActivity extends AppCompatActivity {
     private SingleCustomAdapter singleCustomAdapter;
 
     int countDonor=0;
+    private Button alertBuilderButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,5 +75,8 @@ public class SingleResultShowActivity extends AppCompatActivity {
 
             }
         });
+
+        // custom adapter find variable.............................................
+
     }
 }

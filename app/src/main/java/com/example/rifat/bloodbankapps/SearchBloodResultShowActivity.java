@@ -86,6 +86,7 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
 
                     stringBuilder.append(donorClass.getDonor_phone_number());
 
+
                     donorList.add(donorClass);
 
                 }
@@ -102,7 +103,7 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
                 ss=stringBuilder.toString();
 
 
-             //Toast.makeText(SearchBloodResultShowActivity.this, "Total number: "+ss, Toast.LENGTH_SHORT).show();
+             Toast.makeText(SearchBloodResultShowActivity.this, "Total number: "+ss, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -122,7 +123,7 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
 
                 tt=ss.substring(s_index,e_index);
 
-                //Toast.makeText(SearchBloodResultShowActivity.this, "Click number: "+tt, Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchBloodResultShowActivity.this, "Click number: "+tt, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(SearchBloodResultShowActivity.this,SingleResultShowActivity.class);
 
