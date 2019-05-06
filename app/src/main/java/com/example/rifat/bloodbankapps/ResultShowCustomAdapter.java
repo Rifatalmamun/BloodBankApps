@@ -72,7 +72,7 @@ public class ResultShowCustomAdapter extends ArrayAdapter<DonorClass> implements
 
 
         Name.setText("Name: "+donorClass.getDonor_name());
-        BloodGroup.setText("Blood Group: "+donorClass.getDonor_blood_group());
+        BloodGroup.setText("Blood Group: "+donorClass.getDonor_bloodGroup());
         District.setText("District: "+donorClass.getDonor_district());
         /*PhoneNumber.setText("Phone: +88"+donorClass.getDonor_phone_number());
         EmailAddress.setText("Email: "+donorClass.getDonor_email());
@@ -89,7 +89,7 @@ public class ResultShowCustomAdapter extends ArrayAdapter<DonorClass> implements
 
 
         //callNumber=PhoneNumber.getText().toString().trim();
-        callNumber=donorClass.getDonor_phone_number();
+        callNumber=donorClass.getDonor_phoneNumber();
 
         /*ImageView PhoneIcon=view.findViewById(R.id.donorPhoneIcon_id);
         ImageView EmailIcon=view.findViewById(R.id.donorEmailIcon_id);
