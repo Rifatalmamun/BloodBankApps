@@ -89,7 +89,7 @@ public class ResultShowCustomAdapter extends ArrayAdapter<DonorClass> implements
 
 
         //callNumber=PhoneNumber.getText().toString().trim();
-        callNumber=donorClass.getDonor_phoneNumber();
+       callNumber=donorClass.getDonor_phoneNumber();
 
         /*ImageView PhoneIcon=view.findViewById(R.id.donorPhoneIcon_id);
         ImageView EmailIcon=view.findViewById(R.id.donorEmailIcon_id);

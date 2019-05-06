@@ -107,8 +107,8 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this,AmbulanceActivity.class);
             startActivity(intent);
         }else if(v.getId()==R.id.addDonor_id){
-            Intent intent = new Intent(MainActivity.this,BeDonorActivity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(MainActivity.this,BeDonorActivity.class);
+           // startActivity(intent);
         }
         else if(v.getId()==R.id.facts_id){
 

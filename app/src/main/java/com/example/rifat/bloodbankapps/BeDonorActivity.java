@@ -80,6 +80,8 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if(v.getId()==R.id.beDonorSubmitButton_id){
 
+
+
         // first create 10 digit random number;.................
             String random_number="";
 
@@ -94,6 +96,8 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
 
               random_number=Integer.toString(output);
             }
+
+            Toast.makeText(getApplicationContext(), "clicked!!"+random_number, Toast.LENGTH_SHORT).show();
 
             donorStoreInDatabase(random_number);
 
