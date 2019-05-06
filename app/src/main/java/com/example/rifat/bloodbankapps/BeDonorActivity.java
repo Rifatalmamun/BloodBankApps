@@ -1,5 +1,6 @@
 package com.example.rifat.bloodbankapps;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -142,6 +143,11 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
             phoneNumber.requestFocus();
             return;
         }
+        if(donorPhoneNumber.length()!=11){
+            phoneNumber.setError("Invalid phone number(length must be 11)!");
+            phoneNumber.requestFocus();
+            return;
+        }
         if(donorEmail.isEmpty()){
             email.setError("please enter email address!");
             email.requestFocus();
@@ -156,31 +162,6 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
             return;
         }
 
-        //................................
-
-
-
-            //final DatabaseReference myRef=FirebaseDatabase.getInstance().getReference("DonorList");
-
-            /*myRef.child(donorBloodGroup).child(donorDistrict)
-                    .orderByChild(donorBloodGroup).equalTo("A+")
-                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                            //donorList.clear();
-
-                            for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
-                            {
-                                DonorClass donorClass = dataSnapshot1.getValue(DonorClass.class);
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });*/
-
             String key=databaseReference.push().getKey();
 
 
@@ -192,8 +173,16 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
 
             Toast.makeText(getApplicationContext(),"Donor Add Successfull !",Toast.LENGTH_SHORT).show();
 
+            clearAllFieldValue();
+
+            Intent intent = new Intent(BeDonorActivity.this,MainActivity.class);
+            startActivity(intent);
+
     }
-        // check District Name validation method......................................................
+
+
+
+    // check District Name validation method......................................................
     private int checkDistrictName(String donorDistrict) {
 
         int flag=0;
@@ -210,5 +199,15 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         return flag;
+    }
+
+    // clear all field value......................................................
+
+    private void clearAllFieldValue() {
+
+        name.setText("");
+        email.setText("");
+        phoneNumber.setText("");
+        districtName.setText("");
     }
 }

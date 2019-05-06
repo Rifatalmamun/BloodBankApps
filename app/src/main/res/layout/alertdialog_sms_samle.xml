@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Write your sms"
+        android:textAlignment="center"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        android:padding="5dp"
+        android:textSize="20sp" />
+    <EditText
+        android:id="@+id/alertDialogEditText_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="5"
+        android:hint="Type your sms here" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/alertdialogSendButton_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send"
+            android:layout_marginLeft="25dp"
+            android:background="#d10b0b"
+            android:textColor="#ffffff"
+            />
+        <Button
+            android:id="@+id/alertdialogCancleButton_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancle"
+            android:layout_marginLeft="150dp"
+            android:background="#d10b0b"
+            android:textColor="#ffffff"/>
+    </LinearLayout>
+
+</LinearLayout>

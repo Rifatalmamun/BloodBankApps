@@ -59,13 +59,13 @@ public class SingleCustomAdapter extends ArrayAdapter<DonorClass> implements Vie
 
 
         Name.setText("Name: "+donorClass.getDonor_name());
-        BloodGroup.setText("Blood Group: "+donorClass.getDonor_bloodGroup());
+        BloodGroup.setText("Blood Group: "+donorClass.getDonor_blood_group());
         District.setText("District: "+donorClass.getDonor_district());
-        PhoneNumber.setText("Phone: +88"+donorClass.getDonor_phoneNumber());
+        PhoneNumber.setText("Phone: +88"+donorClass.getDonor_phone_number());
         EmailAddress.setText("Email: "+donorClass.getDonor_email());
         Gender.setText("Gender: "+donorClass.getDonor_gender());
 
-        callNumber=donorClass.getDonor_phoneNumber();
+        callNumber=donorClass.getDonor_phone_number();
 
         ImageView PhoneIcon=view.findViewById(R.id.singleDonorPhoneIcon_id);
         ImageView EmailIcon=view.findViewById(R.id.singleDonorEmailIcon_id);

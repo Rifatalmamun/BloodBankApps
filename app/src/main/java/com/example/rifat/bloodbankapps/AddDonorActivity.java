@@ -3,11 +3,11 @@ package com.example.rifat.bloodbankapps;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class PostForBloodActivity extends AppCompatActivity {
+public class AddDonorActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post_for_blood);
+        setContentView(R.layout.activity_add_donor);
     }
 }
