@@ -15,7 +15,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
         android:background="#f7f4f4"
-        android:layout_weight="3">
+        android:layout_weight="2.5">
 
         <ImageView
             android:layout_width="match_parent"
@@ -25,14 +25,14 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
+        android:layout_weight="6.5"
         android:background="@drawable/pageborder"
         android:orientation="vertical"
         android:padding="10dp">
+
 
         <EditText
             android:id="@+id/nameEditText_id"
@@ -55,7 +55,7 @@
                 android:background="#b10808"
                 android:text="Select blood group"
                 android:textColor="#ffffff"
-                android:textSize="23sp" />
+                android:textSize="22sp" />
 
             <Spinner
                 android:id="@+id/selectBloodGroup_id"
@@ -88,51 +88,50 @@
             android:inputType="phone"
             android:textColor="#000000"/>
 
+        <EditText
+            android:id="@+id/departmentEditText_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter department name (optional)"
+            android:textColor="#000000"/>
+        <EditText
+            android:id="@+id/sessionEditText_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter session (optional)"
+            android:textColor="#000000"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="3">
 
             <TextView
+                android:id="@+id/lastDonationDateTextView_id"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:layout_height="match_parent"
+                android:text="Last donation date"
+                android:textAlignment="center"
+                android:gravity="center_vertical"
+                android:textColor="#000000" />
+            <Button
+                android:id="@+id/datePicker_id"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_date_range_black_24dp"/>
+            <TextView
+                android:id="@+id/iDontKnowTextView_id"
+                android:layout_width="0dp"
                 android:layout_weight="1"
-                android:background="#b10808"
-                android:text="Gender"
-                android:textColor="#ffffff"
-                android:textSize="24sp" />
+                android:layout_height="match_parent"
+                android:text="I don't know"
+                android:textAlignment="center"
+                android:gravity="center_vertical"
+                android:textColor="#000000"/>
 
-            <RadioGroup
-                android:id="@+id/radioGroup_id"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/maleRadioButton_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Male"
-                    android:checked="true"
-                    android:textSize="23sp" />
-
-                <RadioButton
-                    android:id="@+id/femaleRadioButton_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Female"
-                    android:textSize="23sp" />
-
-            </RadioGroup>
         </LinearLayout>
-
-        <EditText
-            android:id="@+id/emailEditText_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter email address"
-            android:textColor="#000000"/>
 
 
     </LinearLayout>
@@ -140,7 +139,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight=".8">
 
         <Button
             android:id="@+id/beDonorSubmitButton_id"
@@ -152,6 +151,8 @@
             android:textSize="23sp"
             android:textStyle="bold" />
     </LinearLayout>
+
+
 
 
 </LinearLayout>

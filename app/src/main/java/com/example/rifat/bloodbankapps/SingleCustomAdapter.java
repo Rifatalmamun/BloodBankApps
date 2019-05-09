@@ -54,16 +54,32 @@ public class SingleCustomAdapter extends ArrayAdapter<DonorClass> implements Vie
         TextView District=view.findViewById(R.id.singleDonorDistrictTextViwsample_id);
 
         TextView PhoneNumber=view.findViewById(R.id.singleDonorPhoneNumberTextViwsample_id);
-        TextView EmailAddress=view.findViewById(R.id.singleDonorEmailTextViwsample_id);
-        TextView Gender=view.findViewById(R.id.singleDonorGendersample_id);
+        //TextView EmailAddress=view.findViewById(R.id.singleDonorEmailTextViwsample_id);
+        //TextView Gender=view.findViewById(R.id.singleDonorGendersample_id);
+
+        TextView Department=view.findViewById(R.id.singleDonorDepartmentsample_id);
+        TextView Session=view.findViewById(R.id.singleDonorSessionsample_id);
+        TextView LastDonationDate=view.findViewById(R.id.singleDonorLastDonationsample_id);
+
 
 
         Name.setText("Name: "+donorClass.getDonor_name());
         BloodGroup.setText("Blood Group: "+donorClass.getDonor_bloodGroup());
         District.setText("District: "+donorClass.getDonor_district());
         PhoneNumber.setText("Phone: +88"+donorClass.getDonor_phoneNumber());
-        EmailAddress.setText("Email: "+donorClass.getDonor_email());
-        Gender.setText("Gender: "+donorClass.getDonor_gender());
+       // EmailAddress.setText("Email: "+donorClass.getDonor_email());
+        //Gender.setText("Gender: "+donorClass.getDonor_gender());
+
+        if(!donorClass.getDonor_department().equals("")){
+            Department.setVisibility(View.VISIBLE);
+        }
+        if(!donorClass.getDonor_session().equals("")){
+            Session.setVisibility(View.VISIBLE);
+        }
+
+        Department.setText("Departement: "+donorClass.getDonor_department());
+        Session.setText("Session: "+donorClass.getDonor_session());
+        LastDonationDate.setText("Last Donation Date: "+donorClass.getDonor_lastDonationDate());
 
         callNumber=donorClass.getDonor_phoneNumber();
 

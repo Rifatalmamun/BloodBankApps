@@ -3,24 +3,24 @@ package com.example.rifat.bloodbankapps;
 public class DonorClass {
 
 
-    private String Donor_rn,Donor_key,Donor_name,Donor_bloodGroup,Donor_phoneNumber,Donor_email,Donor_district,Donor_gender;
+    private String Donor_rn,Donor_key,Donor_name,Donor_bloodGroup,Donor_phoneNumber,Donor_district,Donor_department,Donor_session,Donor_lastDonationDate;
 
 
-    public DonorClass(String donor_rn, String donor_key, String donor_name, String donor_bloodGroup, String donor_phoneNumber, String donor_email, String donor_district, String donor_gender) {
+    public DonorClass(String donor_rn, String donor_key, String donor_name, String donor_bloodGroup, String donor_phoneNumber,String donor_district,String donor_department,String donor_session,String donor_lastDonationDate) {
 
         this.Donor_rn = donor_rn;
         this.Donor_key = donor_key;
         this.Donor_name = donor_name;
         this.Donor_bloodGroup = donor_bloodGroup;
         this.Donor_phoneNumber = donor_phoneNumber;
-        this.Donor_email = donor_email;
+        //this.Donor_email = donor_email;
         this.Donor_district = donor_district;
-        this.Donor_gender = donor_gender;
+        //this.Donor_gender = donor_gender;
+        this.Donor_department=donor_department;
+        this.Donor_session=donor_session;
+        this.Donor_lastDonationDate=donor_lastDonationDate;
     }
-    public DonorClass()
-    {
-
-    }
+    public DonorClass(){}
 
     public String getDonor_rn() {
         return Donor_rn;
@@ -62,14 +62,6 @@ public class DonorClass {
         Donor_phoneNumber = donor_phoneNumber;
     }
 
-    public String getDonor_email() {
-        return Donor_email;
-    }
-
-    public void setDonor_email(String donor_email) {
-        Donor_email = donor_email;
-    }
-
     public String getDonor_district() {
         return Donor_district;
     }
@@ -78,11 +70,29 @@ public class DonorClass {
         Donor_district = donor_district;
     }
 
-    public String getDonor_gender() {
-        return Donor_gender;
+
+
+    public String getDonor_department() {
+        return Donor_department;
     }
 
-    public void setDonor_gender(String donor_gender) {
-        Donor_gender = donor_gender;
+    public void setDonor_department(String donor_department) {
+        Donor_department = donor_department;
+    }
+
+    public String getDonor_session() {
+        return Donor_session;
+    }
+
+    public void setDonor_session(String donor_session) {
+        Donor_session = donor_session;
+    }
+
+    public String getDonor_lastDonationDate() {
+        return Donor_lastDonationDate;
+    }
+
+    public void setDonor_lastDonationDate(String donor_lastDonationDate) {
+        Donor_lastDonationDate = donor_lastDonationDate;
     }
 }

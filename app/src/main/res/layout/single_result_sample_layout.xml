@@ -36,14 +36,7 @@
         android:textColor="#000000"
         android:textSize="20sp"
         android:padding="5dp"/>
-    <TextView
-        android:id="@+id/singleDonorEmailTextViwsample_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Email: rifatalmamun.cse@gmail.com"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:padding="5dp"/>
+
     <TextView
         android:id="@+id/singleDonorPhoneNumberTextViwsample_id"
         android:layout_width="wrap_content"
@@ -52,14 +45,35 @@
         android:textSize="20sp"
         android:padding="5dp"
         android:text="Phone: " />
+
     <TextView
-        android:id="@+id/singleDonorGendersample_id"
+        android:id="@+id/singleDonorLastDonationsample_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Gender: Male"
+        android:text="Last Donation Date: Don't know"
         android:textColor="#000000"
         android:textSize="20sp"
         android:padding="5dp"/>
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/singleDonorDepartmentsample_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Department: CSE"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:padding="5dp"/>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/singleDonorSessionsample_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Session: 2015-16"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:padding="5dp"/>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

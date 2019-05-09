@@ -1,5 +1,6 @@
 package com.example.rifat.bloodbankapps;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -8,10 +9,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.internal.Objects;
@@ -27,7 +30,7 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
 
     private DatabaseReference databaseReference,databaseReference1; // for firebase
 
-    private EditText name,email,phoneNumber;
+    private EditText name,email,phoneNumber,department,session;
     private RadioGroup genderRadioGroup;
     private RadioButton selectButton;
     private Spinner selectBloodGroup;
@@ -35,6 +38,10 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
     private String[] bloodGroupArray;
     private String[] districtNameArray;
     private Button beDonorSubmitButton;
+    private Button datePickerButton;
+    private TextView lastDonationTextView,iDontKnowTextView;
+
+    private DatePickerDialog date_Picker_Dialog;
 
     Random r;
     public int min,max,output;
@@ -55,9 +62,14 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
         selectBloodGroup=(Spinner)findViewById(R.id.selectBloodGroup_id);
         districtName=(AutoCompleteTextView)findViewById(R.id.district_id);
         phoneNumber=(EditText)findViewById(R.id.phoneNumberEditText_id);
-        genderRadioGroup=(RadioGroup)findViewById(R.id.radioGroup_id);
-        email=(EditText)findViewById(R.id.emailEditText_id);
+        //genderRadioGroup=(RadioGroup)findViewById(R.id.radioGroup_id);
+        //email=(EditText)findViewById(R.id.emailEditText_id);
+        department=(EditText)findViewById(R.id.departmentEditText_id);
+        session=(EditText)findViewById(R.id.sessionEditText_id);
         beDonorSubmitButton=(Button)findViewById(R.id.beDonorSubmitButton_id);
+        datePickerButton=(Button)findViewById(R.id.datePicker_id);
+        lastDonationTextView=(TextView)findViewById(R.id.lastDonationDateTextView_id);
+        iDontKnowTextView=(TextView)findViewById(R.id.iDontKnowTextView_id);
 
         // Blood Group Spinner......................................................................
 
@@ -74,10 +86,17 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
 
         // set onclick listener...............................................................
         beDonorSubmitButton.setOnClickListener(this);
+        datePickerButton.setOnClickListener(this);
+        //iDontKnowTextView.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
+        if(v.getId()==R.id.datePicker_id){
+            openDatePicker();
+            //Toast.makeText(getApplicationContext(), "clicked button", Toast.LENGTH_SHORT).show();
+        }
+
         if(v.getId()==R.id.beDonorSubmitButton_id){
 
 
@@ -97,18 +116,39 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
               random_number=Integer.toString(output);
             }
 
-            Toast.makeText(getApplicationContext(), "clicked!!"+random_number, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "clicked!!"+random_number, Toast.LENGTH_SHORT).show();
 
             donorStoreInDatabase(random_number);
 
         }
     }
 
+    private void openDatePicker() {
 
+        DatePicker datePicker1=new DatePicker(this);
+        int currentDay = datePicker1.getDayOfMonth();
+        int currentMonth = (datePicker1.getMonth());
+        int currentYear = datePicker1.getYear();
 
+        date_Picker_Dialog=new DatePickerDialog(this,
 
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        String dayy=Integer.toString(dayOfMonth);
+                        String monthh=Integer.toString(month+1);
+                        String yearr=Integer.toString(year);
 
+                       /* currentDateDay.setText(dayy);
+                        currentDateMonth.setText(monthh);
+                        currentDateYear.setText(yearr);*/
 
+                        iDontKnowTextView.setText(dayy+"/"+monthh+"/"+yearr);
+                    }
+                },currentYear,currentMonth,currentDay);
+
+        date_Picker_Dialog.show();
+    }
 
 
     // Donor Store in Database.............................................................
@@ -120,8 +160,11 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
         String donorPhoneNumber=phoneNumber.getText().toString();
         String donorEmail=email.getText().toString();
         String donorGender="";
+        String donorDepartment=department.getText().toString();
+        String donorSession=session.getText().toString();
+        String donorLastDonationDate=iDontKnowTextView.getText().toString();
 
-        int selectableId=genderRadioGroup.getCheckedRadioButtonId();
+        /*int selectableId=genderRadioGroup.getCheckedRadioButtonId();
         selectButton=(RadioButton)findViewById(selectableId);
 
         if(genderRadioGroup.getCheckedRadioButtonId()==R.id.maleRadioButton_id){
@@ -129,7 +172,7 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
         }
         else if(genderRadioGroup.getCheckedRadioButtonId()==R.id.femaleRadioButton_id){
             donorGender="Female";
-        }
+        }*/
 
         //............validation all field.......................
         if(donorName.isEmpty()){
@@ -152,11 +195,11 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
             phoneNumber.requestFocus();
             return;
         }
-        if(donorEmail.isEmpty()){
+       /* if(donorEmail.isEmpty()){
             email.setError("please enter email address!");
             email.requestFocus();
             return;
-        }
+        }*/
 
         int check=checkDistrictName(donorDistrict);
 
@@ -169,7 +212,7 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
             String key=databaseReference.push().getKey();
 
 
-            DonorClass donorClass = new DonorClass(rn,key,donorName,donorBloodGroup,donorPhoneNumber,donorEmail,donorDistrict,donorGender);
+            DonorClass donorClass = new DonorClass(rn,key,donorName,donorBloodGroup,donorPhoneNumber,donorDistrict,donorDepartment,donorSession,donorLastDonationDate);
             DonorIdClass donorIdClass=new DonorIdClass(rn,key,donorPhoneNumber);
 
             databaseReference.child(donorBloodGroup).child(donorDistrict).push().setValue(donorClass);
