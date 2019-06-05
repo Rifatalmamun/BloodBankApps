@@ -2,13 +2,16 @@ package com.example.rifat.bloodbankapps;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +33,7 @@ public class SingleCustomAdapter extends ArrayAdapter<DonorClass> implements Vie
     private List<DonorClass> donorList;
 
     public static final int REQUEST_CALL=1;
+    public static final int SEND_SMS_REQUEST_PERMISSION_CODE=1;
     public String callNumber;
 
     public SingleCustomAdapter(Activity context, List<DonorClass> donorList) {
@@ -96,12 +100,47 @@ public class SingleCustomAdapter extends ArrayAdapter<DonorClass> implements Vie
     public void onClick(View v) {
 
         if(v.getId()==R.id.singleDonorPhoneIcon_id){
-            makeCall();
+            alertMethod("Are you really want to call?","1");
+        }
+        if(v.getId()==R.id.singleDonorEmailIcon_id){
+            alertMethod("Are you really want to sms?","2");
         }
     }
 
-    private void makeCall() {
+    private void alertMethod(String mess, final String flag) {
 
+
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+        builder1.setMessage(mess);
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        if(flag.equals("1")){
+                            makeCall();
+                        }
+                        if(flag.equals("2")){
+                            smsService();
+                        }
+                    }
+                });
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
+
+    }
+    public void makeCall()
+    {
         if(ContextCompat.checkSelfPermission(context,
                 Manifest.permission.CALL_PHONE)!=PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(context,
@@ -125,4 +164,25 @@ public class SingleCustomAdapter extends ArrayAdapter<DonorClass> implements Vie
             }
         }
     }
+
+    // sms method...............................
+
+    public void smsService()
+    {
+        int permissionCheck=ContextCompat.checkSelfPermission(context,Manifest.permission.SEND_SMS);
+
+        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+
+
+            String message="Need blood, A+ blood ";
+
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(callNumber,null,message,null,null);
+            Toast.makeText(context, "Sms Sent Successfully", Toast.LENGTH_SHORT).show();
+
+        }else{
+            ActivityCompat.requestPermissions(context,new String[]{Manifest.permission.SEND_SMS},0);
+        }
+    }
+
 }

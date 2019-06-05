@@ -46,9 +46,6 @@ public class ResultShowCustomAdapter extends ArrayAdapter<DonorClass> implements
         this.context = context;
         this.donorList = donorList;
 
-
-        // my test.......................
-
     }
 
     @NonNull

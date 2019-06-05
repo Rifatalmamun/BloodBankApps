@@ -3,6 +3,7 @@
     package="com.example.rifat.bloodbankapps">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:allowBackup="true"
@@ -30,7 +31,8 @@
         <activity android:name=".AboutActivity" />
         <activity android:name=".ShareActivity" />
         <activity android:name=".SearchBloodResultShowActivity" />
-        <activity android:name=".SingleResultShowActivity"></activity>
+        <activity android:name=".SingleResultShowActivity" />
+        <activity android:name=".currentLocation"></activity>
     </application>
 
 </manifest>

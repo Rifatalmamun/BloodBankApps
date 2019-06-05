@@ -6,21 +6,22 @@ public class DonorClass {
     private String Donor_rn,Donor_key,Donor_name,Donor_bloodGroup,Donor_phoneNumber,Donor_district,Donor_department,Donor_session,Donor_lastDonationDate;
 
 
-    public DonorClass(String donor_rn, String donor_key, String donor_name, String donor_bloodGroup, String donor_phoneNumber,String donor_district,String donor_department,String donor_session,String donor_lastDonationDate) {
-
-        this.Donor_rn = donor_rn;
-        this.Donor_key = donor_key;
-        this.Donor_name = donor_name;
-        this.Donor_bloodGroup = donor_bloodGroup;
-        this.Donor_phoneNumber = donor_phoneNumber;
-        //this.Donor_email = donor_email;
-        this.Donor_district = donor_district;
-        //this.Donor_gender = donor_gender;
-        this.Donor_department=donor_department;
-        this.Donor_session=donor_session;
-        this.Donor_lastDonationDate=donor_lastDonationDate;
+    public DonorClass(String donor_rn, String donor_key, String donor_name, String donor_bloodGroup, String donor_phoneNumber, String donor_district, String donor_department, String donor_session, String donor_lastDonationDate) {
+        Donor_rn = donor_rn;
+        Donor_key = donor_key;
+        Donor_name = donor_name;
+        Donor_bloodGroup = donor_bloodGroup;
+        Donor_phoneNumber = donor_phoneNumber;
+        Donor_district = donor_district;
+        Donor_department = donor_department;
+        Donor_session = donor_session;
+        Donor_lastDonationDate = donor_lastDonationDate;
     }
-    public DonorClass(){}
+
+    public DonorClass()
+    {
+
+    }
 
     public String getDonor_rn() {
         return Donor_rn;
@@ -69,8 +70,6 @@ public class DonorClass {
     public void setDonor_district(String donor_district) {
         Donor_district = donor_district;
     }
-
-
 
     public String getDonor_department() {
         return Donor_department;

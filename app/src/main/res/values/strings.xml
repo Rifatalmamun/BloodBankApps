@@ -19,6 +19,14 @@
         <item>O-</item>
 
     </string-array>
+    <string-array name="bloodbankDistrictArray">
+        <item>khulna</item>
+        <item>jessore</item>
+        <item>dhaka</item>
+        <item>shylet</item>
+        <item>rangpur</item>
+        <item>rajshahi</item>
+    </string-array>
 
     <string-array name="DistrictArray">
         <item>Dhaka</item>

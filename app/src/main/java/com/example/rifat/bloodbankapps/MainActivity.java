@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity
 
         }else if(v.getId()==R.id.about_id){
 
-            Intent intent = new Intent(MainActivity.this,AboutActivity.class);
+            Intent intent = new Intent(MainActivity.this,currentLocation.class);
             startActivity(intent);
 
         }else if(v.getId()==R.id.share_id){
