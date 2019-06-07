@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        android:src="@drawable/donoricon"
+        android:padding="10dp" />
+
+    <TextView
+        android:id="@+id/profileDonorNameTextViwsample_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name: Rifat al mamun"
+        android:textColor="#ffffff"
+        android:textSize="23sp"
+        android:padding="5dp"/>
+    <TextView
+        android:id="@+id/profileDonorBloodGroupTextViwsample_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Blood group: A+"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:padding="5dp"/>
+    <TextView
+        android:id="@+id/profileDonorDistrictTextViwsample_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="District: Rajshahi"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/profileDonorPhoneNumberTextViwsample_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:padding="5dp"
+        android:text="Phone: " />
+
+    <TextView
+        android:id="@+id/profileDonorLastDonationsample_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Last Donation Date: Don't know"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:padding="5dp"/>
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/profileDonorDepartmentsample_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Department: CSE"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:padding="5dp"/>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/profileDonorSessionsample_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Session: 2015-16"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:padding="5dp"/>
+
+
+</LinearLayout>

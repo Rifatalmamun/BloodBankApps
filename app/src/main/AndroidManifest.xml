@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.rifat.bloodbankapps">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
 
@@ -22,6 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AddDonorActivity" />
         <activity android:name=".BeDonorActivity" />
         <activity android:name=".SearchBloodActivity" />
         <activity android:name=".BloodBankActivity" />
@@ -32,7 +36,9 @@
         <activity android:name=".ShareActivity" />
         <activity android:name=".SearchBloodResultShowActivity" />
         <activity android:name=".SingleResultShowActivity" />
-        <activity android:name=".currentLocation"></activity>
+        <activity android:name=".currentLocation" />
+        <activity android:name=".currentlocation2" />
+        <activity android:name=".ProfileEditActivity"></activity>
     </application>
 
 </manifest>

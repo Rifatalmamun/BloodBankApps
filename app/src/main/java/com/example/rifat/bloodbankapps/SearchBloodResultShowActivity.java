@@ -86,9 +86,7 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
 
                     stringBuilder.append(donorClass.getDonor_phoneNumber());
 
-
                     donorList.add(donorClass);
-
                 }
 
                 listView.setAdapter(resultShowCustomAdapter);

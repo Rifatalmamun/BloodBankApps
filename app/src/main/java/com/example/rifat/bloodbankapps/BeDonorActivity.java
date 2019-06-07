@@ -1,7 +1,12 @@
 package com.example.rifat.bloodbankapps;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
@@ -30,24 +35,27 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Random;
 
 public class BeDonorActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private DatabaseReference databaseReference,databaseReference1; // for firebase
+    private Context ctx;
+    private DatabaseReference databaseReference,databaseReference1,databaseReference2; // for firebase
 
     private EditText name,phoneNumber,department,session;
     private Spinner selectBloodGroup;
     private ImageView selectCitySpinner;
-    private AutoCompleteTextView districtName;
+
     private String[] bloodGroupArray;
     private String[] districtNameArray;
     private Button beDonorSubmitButton;
     private Button datePickerButton;
     private TextView lastDonationTextView,iDontKnowTextView,select_city;
-
     private DatePickerDialog date_Picker_Dialog;
+
+    private String donorName,donorBloodGroup,donorDistrict,donorPhoneNumber,donorEmail,donorDepartment,donorSession,donorLastDonationDate;
 
     Random r;
     public int min,max,output;
     String catchSelectedCity="";
+    String catchDN="";
+    String catchBG="";
     Info in;
     static int flage=0;
 
@@ -60,6 +68,7 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
 
         databaseReference=FirebaseDatabase.getInstance().getReference("DonorDetailsTable");
         databaseReference1=FirebaseDatabase.getInstance().getReference("DonorIdTable");
+        databaseReference2=FirebaseDatabase.getInstance().getReference("MyProfileTable");
         this.setTitle("Be a Donor page");
 
         r=new Random();
@@ -105,6 +114,14 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
             try {
                 catchSelectedCity=getIntent().getExtras().getString("selectedCity");
                 select_city.setText(catchSelectedCity);
+
+                catchDN=getIntent().getExtras().getString("DN");
+                name.setText(catchDN);
+
+                catchBG=getIntent().getExtras().getString("P");
+                int posi = Integer.parseInt(catchBG);
+                selectBloodGroup.setSelection(posi);
+
                // Toast.makeText(this, "done", Toast.LENGTH_SHORT).show();
             }catch (Exception e){
 
@@ -119,6 +136,14 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
             // go to city name list page and select a city name..........
             Intent intent  = new Intent(BeDonorActivity.this,currentLocation.class);
             flage=1;
+
+            donorName = name.getText().toString();
+            donorBloodGroup=selectBloodGroup.getSelectedItem().toString();
+
+            intent.putExtra("sendName",donorName);
+            intent.putExtra("sendBloodGroup",donorBloodGroup);
+            Toast.makeText(this, "N: "+donorName, Toast.LENGTH_SHORT).show();
+
             startActivity(intent);
 
             finish();
@@ -186,15 +211,15 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
     // Donor Store in Database.............................................................
     private void donorStoreInDatabase(String rn) {
 
-        String donorName=name.getText().toString();
-        String donorBloodGroup=selectBloodGroup.getSelectedItem().toString();
-        String donorDistrict=select_city.getText().toString();
-        String donorPhoneNumber=phoneNumber.getText().toString();
+        donorName=name.getText().toString();
+        donorBloodGroup=selectBloodGroup.getSelectedItem().toString();
+        donorDistrict=select_city.getText().toString();
+        donorPhoneNumber=phoneNumber.getText().toString();
         //String donorEmail=email.getText().toString();
         //String donorGender="";
-        String donorDepartment=department.getText().toString();
-        String donorSession=session.getText().toString();
-        String donorLastDonationDate=iDontKnowTextView.getText().toString();
+        donorDepartment=department.getText().toString();
+        donorSession=session.getText().toString();
+        donorLastDonationDate=iDontKnowTextView.getText().toString();
 
        // Toast.makeText(this, "......"+donorDistrict, Toast.LENGTH_SHORT).show();
         //............validation all field.......................
@@ -204,8 +229,8 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
             return;
         }
         if(donorDistrict.isEmpty()){
-            districtName.setError("please select district name!");
-            districtName.requestFocus();
+            select_city.setError("empty!");
+            select_city.requestFocus();
             return;
         }
         if(donorPhoneNumber.isEmpty()){
@@ -220,33 +245,42 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
         }
 
 
-        int check=checkDistrictName(donorDistrict);
+       // int check=checkDistrictName(donorDistrict);
 
-        if(check==0){
+        /*if(check==0){
             districtName.setError("District Spelling error!!!");
             districtName.requestFocus();
             return;
-        }
+        }*/
 
+        /*if(isNetworkAvaliable(ctx)){
+
+            Toast.makeText(getApplicationContext(),"No Internet",Toast.LENGTH_LONG).show();
+        }else
+            Toast.makeText(getApplicationContext(),"No Internet No Internet",Toast.LENGTH_LONG).show();*/
+
+        // internet connection check;
+        if(!isConnected(BeDonorActivity.this)){
+            buildDialog(BeDonorActivity.this).show();
+        }else{
             String key=databaseReference.push().getKey();
-
 
             DonorClass donorClass = new DonorClass(rn,key,donorName,donorBloodGroup,donorPhoneNumber,donorDistrict,donorDepartment,donorSession,donorLastDonationDate);
             DonorIdClass donorIdClass=new DonorIdClass(rn,key,donorPhoneNumber);
+            DonorClass profileClass = new DonorClass(rn,key,donorName,donorBloodGroup,donorPhoneNumber,donorDistrict,donorDepartment,donorSession,donorLastDonationDate);
 
             databaseReference.child(donorBloodGroup).child(donorDistrict).push().setValue(donorClass);
             databaseReference1.child(donorBloodGroup).child(donorDistrict).push().setValue(donorIdClass);
+            databaseReference2.child(donorPhoneNumber).push().setValue(profileClass);
 
             Toast.makeText(getApplicationContext(),"Donor Add Successfull !",Toast.LENGTH_SHORT).show();
 
-            clearAllFieldValue();
+            clearAllFieldValue(); // clear method call..............
 
             Intent intent = new Intent(BeDonorActivity.this,MainActivity.class);
             startActivity(intent);
-
+        }
     }
-
-
 
     // check District Name validation method......................................................
     private int checkDistrictName(String donorDistrict) {
@@ -274,8 +308,45 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
         name.setText("");
         //email.setText("");
         phoneNumber.setText("");
-        districtName.setText("");
+        select_city.setText("");
         department.setText("");
         session.setText("");
+    }
+
+
+    //.................................... net conected check............................................
+
+    public boolean isConnected(Context context)
+    {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netinfo = cm.getActiveNetworkInfo();
+
+        if(netinfo !=null && netinfo.isConnectedOrConnecting()){
+            android.net.NetworkInfo wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            android.net.NetworkInfo mobile = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+            if((mobile !=null && mobile.isConnectedOrConnecting()) || (wifi !=null && wifi.isConnectedOrConnecting()) ){
+                return true;
+            }else{
+                return false;
+            }
+        }else
+            return false;
+    }
+
+    // alert dialog.....................
+    public AlertDialog.Builder buildDialog(Context c)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        builder.setTitle("No Internet Connection!");
+        builder.setMessage("You need to connect your device with internet ........");
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //finish();
+            }
+        });
+        return builder;
     }
 }
