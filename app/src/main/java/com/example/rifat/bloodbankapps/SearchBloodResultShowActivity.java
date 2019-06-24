@@ -24,7 +24,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.time.Month;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class SearchBloodResultShowActivity extends AppCompatActivity{
@@ -41,6 +43,7 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
     public String[] phoneString;
     public ArrayList<String> phoneArrayList=new ArrayList<String>();
     StringBuilder stringBuilder=new StringBuilder();
+    StringBuilder checkDonationDate=new StringBuilder();
     int length=0,i=0;
     public String[] indexString;
     public String ss;
@@ -84,9 +87,61 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
 
                     //phoneString[i++]=donorClass.getDonor_phone_number();
 
-                    stringBuilder.append(donorClass.getDonor_phoneNumber());
+                    String s = donorClass.getDonor_lastDonationDate();
 
-                    donorList.add(donorClass);
+                    if(s.equals("I don't know")){
+
+                        stringBuilder.append(donorClass.getDonor_phoneNumber());
+                        donorList.add(donorClass);
+
+                    }
+                    if(!s.equals("I don't know")){
+
+                        String dDay=s.substring(0,2);
+                        String dMonth=s.substring(3,5);
+                        String dYear=s.substring(6,10);
+
+                        // donation date in integer............
+
+                        int dd = Integer.parseInt(dDay);
+                        int dm = Integer.parseInt(dMonth);
+                        int dy = Integer.parseInt(dYear);
+
+                        // current date in integer..............
+
+                        Calendar c =Calendar.getInstance();
+                        int cd=c.get(Calendar.DAY_OF_MONTH);
+                        int cm=c.get(Calendar.MONTH)+1;
+                        int cy=c.get(Calendar.YEAR);
+
+                        // calculation start................
+
+                        int month_diff=cm-dm;
+                        int year_diff=cy-dy;
+
+                        if(month_diff<0){
+                            year_diff = year_diff - 1;
+                            month_diff = month_diff + 12;
+                        }
+                        int day_diff = cd - dd;
+                        if(day_diff<0){
+                            if(month_diff>0){
+                                month_diff = month_diff-1;
+                                day_diff = day_diff +MonthsToDays(cm-1,cy);
+                            }else{
+                                year_diff = year_diff - 1;
+                                month_diff = 11;
+                                day_diff = day_diff+MonthsToDays(cm-1,cy);
+                            }
+                        }
+                        int TD=day_diff+(month_diff*30)+(year_diff*365);
+
+                        if(TD>=30){
+                            stringBuilder.append(donorClass.getDonor_phoneNumber());
+                            donorList.add(donorClass);
+                        }
+                        Toast.makeText(SearchBloodResultShowActivity.this, "gap: "+TD, Toast.LENGTH_LONG).show();
+                    }
                 }
 
                 listView.setAdapter(resultShowCustomAdapter);
@@ -101,7 +156,7 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
                 ss=stringBuilder.toString();
 
 
-             Toast.makeText(SearchBloodResultShowActivity.this, "Total number: "+ss, Toast.LENGTH_SHORT).show();
+             //Toast.makeText(SearchBloodResultShowActivity.this, "Total number: "+ss, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -121,7 +176,7 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
 
                 tt=ss.substring(s_index,e_index);
 
-                Toast.makeText(SearchBloodResultShowActivity.this, "Click number: "+tt, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SearchBloodResultShowActivity.this, "Click number: "+tt, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(SearchBloodResultShowActivity.this,SingleResultShowActivity.class);
 
@@ -131,7 +186,7 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
 
                 String ref = myRef.child(catchBloodGroup).child(catchDistrictName).getKey();
 
-                Toast.makeText(getApplicationContext(),"Ref: "+ref,Toast.LENGTH_SHORT).toString();
+               // Toast.makeText(getApplicationContext(),"Ref: "+ref,Toast.LENGTH_SHORT).toString();
 
                 startActivity(intent);
 
@@ -141,5 +196,20 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
             }
         });
 
+    }
+// method to find dayofmonth for leapyear method.............................
+    public static int MonthsToDays(int tMonth, int tYear) {
+        if (tMonth == 1 || tMonth == 3 || tMonth == 5 || tMonth == 7
+                || tMonth == 8 || tMonth == 10 || tMonth == 12) {
+            return 31;
+        } else if (tMonth == 2) {
+            if (tYear % 4 == 0) {
+                return 29;
+            } else {
+                return 28;
+            }
+        } else {
+            return 30;
+        }
     }
 }

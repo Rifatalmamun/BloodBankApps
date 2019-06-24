@@ -76,11 +76,11 @@ public class ProfileCustomAdapter extends ArrayAdapter<DonorClass>  {
         /*intent.putExtra("SendBloodGroup",searchBloodGroup);
         intent.putExtra("SendDistrictName",searchDistrict);*/
 
-        if(!donorClass.getDonor_department().equals("")){
-            Department.setVisibility(View.VISIBLE);
+        if(donorClass.getDonor_department().equals("")){
+            Department.setVisibility(View.GONE);
         }
-        if(!donorClass.getDonor_session().equals("")){
-            Session.setVisibility(View.VISIBLE);
+        if(donorClass.getDonor_session().equals("")){
+            Session.setVisibility(View.GONE);
         }
 
         Department.setText("Departement: "+donorClass.getDonor_department());

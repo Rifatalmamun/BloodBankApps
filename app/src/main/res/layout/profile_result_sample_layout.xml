@@ -6,18 +6,12 @@
 
     android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="90dp"
-        android:src="@drawable/donoricon"
-        android:padding="10dp" />
-
     <TextView
         android:id="@+id/profileDonorNameTextViwsample_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Name: Rifat al mamun"
-        android:textColor="#ffffff"
+        android:textColor="#010000"
         android:textSize="23sp"
         android:padding="5dp"/>
     <TextView
@@ -25,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Blood group: A+"
-        android:textColor="#ffffff"
+        android:textColor="#040000"
         android:textSize="20sp"
         android:padding="5dp"/>
     <TextView
@@ -33,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="District: Rajshahi"
-        android:textColor="#ffffff"
+        android:textColor="#030000"
         android:textSize="20sp"
         android:padding="5dp"/>
 
@@ -41,7 +35,7 @@
         android:id="@+id/profileDonorPhoneNumberTextViwsample_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
+        android:textColor="#0d0000"
         android:textSize="20sp"
         android:padding="5dp"
         android:text="Phone: " />
@@ -51,25 +45,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Last Donation Date: Don't know"
-        android:textColor="#ffffff"
+        android:textColor="#090101"
         android:textSize="20sp"
         android:padding="5dp"/>
         <TextView
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/profileDonorDepartmentsample_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Department: CSE"
-            android:textColor="#ffffff"
+            android:textColor="#010000"
             android:textSize="20sp"
             android:padding="5dp"/>
     <TextView
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/profileDonorSessionsample_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Session: 2015-16"
-        android:textColor="#ffffff"
+        android:textColor="#120000"
         android:textSize="20sp"
         android:padding="5dp"/>
 

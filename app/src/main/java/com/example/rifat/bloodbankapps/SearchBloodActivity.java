@@ -91,7 +91,6 @@ public class SearchBloodActivity extends AppCompatActivity implements View.OnCli
 
             searchBloodGroup = selectBloodGroup.getSelectedItem().toString();
 
-
             intent.putExtra("sendBloodGroup",searchBloodGroup);
 
             startActivity(intent);

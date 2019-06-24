@@ -200,6 +200,13 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
                         currentDateMonth.setText(monthh);
                         currentDateYear.setText(yearr);*/
 
+                       if(dayy.equals("1") || dayy.equals("2") || dayy.equals("3") || dayy.equals("4") || dayy.equals("5") || dayy.equals("6") || dayy.equals("7") || dayy.equals("8") || dayy.equals("9")){
+                           dayy="0"+dayy;
+                       }
+                        if(monthh.equals("1") || monthh.equals("2") || monthh.equals("3") || monthh.equals("4") || monthh.equals("5") || monthh.equals("6") || monthh.equals("7") || monthh.equals("8") || monthh.equals("9")){
+                            monthh="0"+monthh;
+                        }
+
                         iDontKnowTextView.setText(dayy+"/"+monthh+"/"+yearr);
                     }
                 },currentYear,currentMonth,currentDay);
