@@ -171,20 +171,30 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
             showpart.setVisibility(View.VISIBLE);
 */
             if(!isConnected(AddDonorActivity.this)){
-                buildDialog(AddDonorActivity.this).show();
+                buildDialog(AddDonorActivity.this,"No Internet","Please Connect with Internet").show();
             }else{
 
                 phn = loginPhnNumber.getText().toString();
                 passw = loginPassword.getText().toString();
 
-                if(phn.isEmpty())
-                    Toast.makeText(this, "Please enter phn no!", Toast.LENGTH_SHORT).show();
-                if(passw.isEmpty())
-                    Toast.makeText(this, "Please enter password!", Toast.LENGTH_SHORT).show();
+                if(phn.isEmpty()){
+                    loginPhnNumber.setError("Please enter phone no!");
+                    loginPhnNumber.requestFocus();
+                    return;
+                }
+                if(passw.isEmpty()){
+                    loginPassword.setError("Please enter password!");
+                    loginPassword.requestFocus();
+                    return;
+                }
+                if(passw.length()<6){
+                    loginPassword.setError("Password length at lest 6!");
+                    loginPassword.requestFocus();
+                    return;
+                }
+
                 else{
-                    //progressbarInAddDonor.setVisibility(View.VISIBLE);
-                    //listViewProfile.setVisibility(View.VISIBLE);
-                    // for phone number sharedPreferences...................
+
                     SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -201,35 +211,20 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
                     editor1.commit();
 
                     loadUserProfileData(phn);
-                    //tempDialog();
-                   // progressbarInAddDonor.setVisibility(View.GONE);
-
-                   // tempDialog();
 
 
-                    Intent intent = new Intent(AddDonorActivity.this,ProfileEditActivity.class);
-                    startActivity(intent);
+
+                   /* Intent intent = new Intent(AddDonorActivity.this,ProfileEditActivity.class);
+                    startActivity(intent);*/
                 }
             }
         }
-      /*  else if(v.getId()==R.id.cancleButton_id){
-            editpart.setVisibility(View.GONE);
-            loginInputPart.setVisibility(View.VISIBLE);
-            showpart.setVisibility(View.VISIBLE);
-        }
-        else if(v.getId()==R.id.updateButton_id){
-
-            updateUserProfileDate(phn);
-
-            loginInputPart.setVisibility(View.VISIBLE);
-            editpart.setVisibility(View.GONE);
-            showpart.setVisibility(View.VISIBLE);
-        }*/
 
     }
 
     private void loadUserProfileData(String phn)
     {
+        final int check = 0;
         //......................database access...............................
 
         final DatabaseReference profileRef = FirebaseDatabase.getInstance().getReference("MyProfileTable");
@@ -243,7 +238,7 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                 {
                     DonorClass donorClass = dataSnapshot1.getValue(DonorClass.class);
-                    donorProfileList.add(donorClass);
+
 
                     // getting information......................
                     getName = donorClass.getDonor_name();
@@ -255,9 +250,30 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
                     getSession = donorClass.getDonor_session();
                     getKey = donorClass.getDonor_key();
                     getrn = donorClass.getDonor_rn();
+
+                   // donorProfileList.add(donorClass);
+                }
+                if(getBloodGroup==null){
+                    buildDialog(AddDonorActivity.this,"Login Failed","Phone number or password don't match!").show();
+
+                }else{
+                    //Toast.makeText(AddDonorActivity.this, ""+getName+"\n"+getBloodGroup+"\n"+getDistrict, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(AddDonorActivity.this,ProfileEditActivity.class);
+                    intent.putExtra("catchDonorName",getName);
+                    intent.putExtra("catchDonorBloodGroup",getBloodGroup);
+                    intent.putExtra("catchDonorDistrict",getDistrict);
+                    intent.putExtra("catchDonorNumber",getNumber);
+                    intent.putExtra("catchDonorDepartment",getDepartmetn);
+                    intent.putExtra("catchDonorSession",getSession);
+                    intent.putExtra("catchDonorDonationDate",getDonationDate);
+
+                    ProfileEditActivity.flag=0;
+
+                    startActivity(intent);
+                    //finish();
                 }
 
-                Toast.makeText(AddDonorActivity.this, ""+getName+"\n"+getBloodGroup+"\n"+getDistrict, Toast.LENGTH_SHORT).show();
+
 
                 //listViewProfile.setAdapter(profileCustomAdapter);
 
@@ -290,7 +306,6 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
         });
         //imgPart.setVisibility(View.GONE);
         //floatingActionButton.show();
-
     }
 //...............data update method.....................................
 
@@ -358,11 +373,11 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
             return false;
     }
     // alert dialog.....................
-    public AlertDialog.Builder buildDialog(Context c)
+    public AlertDialog.Builder buildDialog(Context c,String title,String message)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
-        builder.setTitle("No Internet Connection!");
-        builder.setMessage("You need to connect your device with internet ........");
+        builder.setTitle(title);
+        builder.setMessage(message);
 
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override

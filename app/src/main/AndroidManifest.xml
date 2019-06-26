@@ -25,8 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddDonorActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity
+            android:name=".AddDonorActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".BeDonorActivity" />
         <activity android:name=".SearchBloodActivity" />
         <activity android:name=".BloodBankActivity" />
@@ -39,7 +40,9 @@
         <activity android:name=".SingleResultShowActivity" />
         <activity android:name=".currentLocation" />
         <activity android:name=".currentlocation2" />
-        <activity android:name=".ProfileEditActivity"></activity>
+        <activity android:name=".currentlocation3" />
+        <activity android:name=".ProfileEditActivity" />
+        <activity android:name=".departmentList"></activity>
     </application>
 
 </manifest>

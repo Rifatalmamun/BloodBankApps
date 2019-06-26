@@ -35,14 +35,24 @@
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
-        <EditText
+        <TextView
             android:drawableLeft="@drawable/ic_person_black_24dp"
             android:drawablePadding="15dp"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".3"
+            android:text="Name "
+            android:textColor="#000000"
+            android:gravity="fill_vertical"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/updateNameEditText_id"
+            android:layout_weight=".7"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:hint="Enter Name"
-            android:text="Rifat al mamun"
+            android:textColor="#a70b0b"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -62,6 +72,7 @@
             android:gravity="fill_vertical"
             android:textSize="20sp" />
         <Spinner
+            android:id="@+id/updateBloodGroupSpinner_id"
             android:layout_marginLeft="20dp"
             android:layout_weight=".3"
             android:layout_width="0dp"
@@ -80,16 +91,27 @@
             android:drawablePadding="15dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight=".6"
-            android:text="Selected City"
+            android:layout_weight=".3"
+            android:text="District"
             android:textColor="#000000"
             android:gravity="fill_vertical"
             android:textSize="20sp" />
-        <Spinner
-            android:layout_marginLeft="20dp"
-            android:layout_weight=".3"
+        <TextView
+            android:id="@+id/updateDistrictFieldTextView_id"
             android:layout_width="0dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight=".3"
+            android:textColor="#a70b0b"
+            android:gravity="center"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/updateDistrictSpinner_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_weight=".1"
+            android:src="@drawable/ic_arrow_drop_down_black_24dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -107,11 +129,13 @@
             android:gravity="fill_vertical"
             android:textSize="20sp" />
         <EditText
+            android:id="@+id/updatePhoneNumbeEditText_id"
             android:layout_marginLeft="20dp"
             android:layout_weight=".6"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:hint="Enter phone no"
+            android:textColor="#a70b0b"
             android:inputType="number"
             android:textSize="20sp" />
 
@@ -120,7 +144,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1">
-
         <TextView
             android:drawableLeft="@drawable/ic_school_black_24dp"
             android:drawablePadding="15dp"
@@ -131,13 +154,21 @@
             android:textColor="#000000"
             android:gravity="fill_vertical"
             android:textSize="20sp" />
-        <Spinner
-            android:layout_marginLeft="20dp"
-            android:layout_weight=".3"
+        <TextView
+            android:id="@+id/updateDepartmentFieldTextView_id"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-
-            android:textSize="20sp" />
+            android:layout_weight=".4"
+            android:textColor="#a70b0b"
+            android:gravity="center"
+            android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/updateDepartmentSpinner_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight=".1"
+            android:src="@drawable/ic_arrow_drop_down_black_24dp"/>
 
     </LinearLayout>
     <LinearLayout
@@ -155,9 +186,18 @@
             android:textColor="#000000"
             android:gravity="fill_vertical"
             android:textSize="20sp" />
+        <TextView
+            android:id="@+id/updateSessionFieldTextView_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".6"
+            android:textColor="#a70b0b"
+            android:gravity="fill_vertical"
+            android:textSize="20sp" />
         <Spinner
+            android:id="@+id/updateSessionSpinner_id"
             android:layout_marginLeft="20dp"
-            android:layout_weight=".3"
+            android:layout_weight=".1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
 
@@ -170,6 +210,7 @@
         android:layout_weight="1">
 
         <TextView
+            android:id="@+id/updateLastDonationTextView_id"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".4"
@@ -185,13 +226,13 @@
             android:background="@drawable/ic_date_range_black_24dp"/>
 
         <TextView
+            android:id="@+id/updateIDontKnowTextView_id"
             android:layout_marginLeft="20dp"
             android:layout_weight=".3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="I don't know"
-            android:textColor="#000000"
+            android:textColor="#a70b0b"
             android:textSize="17sp" />
     </LinearLayout>
     <LinearLayout
@@ -200,6 +241,7 @@
         android:layout_weight="1">
 
         <Button
+            android:id="@+id/updateButton_id"
             android:background="@drawable/buttonbackground"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -209,6 +251,7 @@
             android:textColor="#000000"
             android:textSize="18sp" />
         <Button
+            android:id="@+id/cancleButton_id"
             android:background="@drawable/buttonbackground"
             android:layout_marginLeft="20dp"
             android:layout_weight=".3"

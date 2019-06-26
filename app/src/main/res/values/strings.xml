@@ -75,4 +75,22 @@
         <item>Sherpur</item>
         <item>Tangail</item>
     </string-array>
+
+
+    <string-array name="DepartmentArray">
+        <item>CSE</item>
+        <item>EEE</item>
+        <item>CHE</item>
+        <item>PME</item>
+        <item>IPE</item>
+        <item>BME</item>
+        <item>TEXTILE</item>
+        <item>FMB</item>
+        <item>MB</item>
+        <item>ENGLISH</item>
+        <item>EST</item>
+        <item>PHYSICS</item>
+        <item>CHEMISTRY</item>
+
+    </string-array>
 </resources>
