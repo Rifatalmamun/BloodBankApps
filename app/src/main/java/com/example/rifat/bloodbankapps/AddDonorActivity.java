@@ -51,7 +51,8 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
     private DonorClass donorClass;
     private String phn="",passw="";
 
-    private String getName,getNumber,getBloodGroup,getDistrict,getDonationDate,getDepartmetn,getSession,getKey,getrn;
+    private String getName,getNumber,getDonationDate,getDepartmetn,getSession,getKey,getrn;
+    public String getBloodGroup,getDistrict;
     private LinearLayout loginInputPart,showpart,editpart,imgPart;
 
     private EditText updateNameEditText,updateBloodGrouopEditText,updateDistrictEditText,updatePhoneEditText,updateDepartmentEditText,updateSessionEditText,updateDonationDateEditText;

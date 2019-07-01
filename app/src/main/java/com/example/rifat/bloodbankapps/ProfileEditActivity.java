@@ -2,6 +2,7 @@ package com.example.rifat.bloodbankapps;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,8 +15,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ProfileEditActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -48,7 +52,8 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
     private String catchLastDate="";
     private String catchKEY="";
     private String catchRN="";
-
+    private String parentGroup="";
+    private String parentDist="";
 
 
     String name="";
@@ -59,6 +64,8 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
     String session="";
     String lastDate="";
     String kEy="";
+
+
 
 
 
@@ -96,7 +103,9 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             try{
                 final String catchName=getIntent().getExtras().getString("catchDonorName");
                 final String catchBgroup=getIntent().getExtras().getString("catchDonorBloodGroup");
+                parentGroup=catchBgroup;
                 final String catchDistrict=getIntent().getExtras().getString("catchDonorDistrict");
+                parentDist=catchDistrict;
                 final String catchPNumber=getIntent().getExtras().getString("catchDonorNumber");
                 final String catchDept=getIntent().getExtras().getString("catchDonorDepartment");
                 final String catchSession=getIntent().getExtras().getString("catchDonorSession");
@@ -156,6 +165,8 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
 
             catchKEY=getIntent().getExtras().getString("KEY");
             catchRN=getIntent().getExtras().getString("RANDOM");
+            parentGroup=getIntent().getExtras().getString("PARENTGROUP");
+            parentDist=getIntent().getExtras().getString("PARENTDISTRICT");
 
         }catch (Exception e){
            // Toast.makeText(this, "exception"+e, Toast.LENGTH_LONG).show();
@@ -194,6 +205,8 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             intent.putExtra("sendLastDate",lastDate);
             intent.putExtra("sendKEY",catchKEY);
             intent.putExtra("sendRANDOM",catchRN);
+            intent.putExtra("sendPARENTGROUP",parentGroup);
+            intent.putExtra("sendPARENTDISTRICT",parentDist);
 
             startActivity(intent);
             finish();
@@ -223,6 +236,8 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             intent.putExtra("sendLastDate",lastDate);
             intent.putExtra("sendKEY",catchKEY);
             intent.putExtra("sendRANDOM",catchRN);
+            intent.putExtra("sendPARENTGROUP",parentGroup);
+            intent.putExtra("sendPARENTDISTRICT",parentDist);
 
             startActivity(intent);
             finish();
@@ -249,6 +264,8 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             intent.putExtra("sendLastDate",lastDate);
             intent.putExtra("sendKEY",catchKEY);
             intent.putExtra("sendRANDOM",catchRN);
+            intent.putExtra("sendPARENTGROUP",parentGroup);
+            intent.putExtra("sendPARENTDISTRICT",parentDist);
 
             startActivity(intent);
             finish();
@@ -259,14 +276,18 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
         }
         if(v.getId()==R.id.updateButton_id){
 
+            /*AddDonorActivity addDonorActivity=new AddDonorActivity();
+            String parentBloodGroup= addDonorActivity.getBloodGroup;
+            String parentDistrict=addDonorActivity.getDistrict;*/
+
            /* Toast.makeText(this, "key: "+catchKEY, Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "Random: "+catchRN, Toast.LENGTH_SHORT).show();*/
 
             // now take all field value to update this.....................................
 
             String takeName=updateName.getText().toString();
-            String takeBloodGroup=updateBloodgroupSpinner.getSelectedItem().toString();
-            String takeDistrict=updateDistrictNameTextView.getText().toString();
+            final String takeBloodGroup=updateBloodgroupSpinner.getSelectedItem().toString();
+            final String takeDistrict=updateDistrictNameTextView.getText().toString();
             String takePhone=updatePhone.getText().toString();
             String takeDepartment=updateDepartmentNameTextView.getText().toString();
             String takeSession=updateSessionFieldTextView.getText().toString();
@@ -275,8 +296,10 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             Toast.makeText(this, "Key : "+catchKEY, Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "Random : "+catchRN, Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "Name : "+takeName, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Previous BG: "+parentGroup, Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "BloodGroup : "+takeBloodGroup, Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "District : "+takeDistrict, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Previous District: "+parentDist, Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "Phone : "+takePhone, Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "Department : "+takeDepartment, Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "Session : "+takeSession, Toast.LENGTH_SHORT).show();
@@ -285,7 +308,21 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             //........................................................................................
 
             updateDatabaseReference=FirebaseDatabase.getInstance().getReference("DonorDetailsTable");
-            //updateDatabaseReference.child(t)
+            updateDatabaseReference.child(parentGroup).child(parentDist).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    /*dataSnapshot.getRef().child("donor_bloodGroup").setValue(takeBloodGroup);
+                    dataSnapshot.getRef().child("donor_district").setValue(takeDistrict);*/
+                    updateDatabaseReference.child(parentGroup).child(parentDist).child(catchKEY).child("Donor_bloodGroup").setValue(takeBloodGroup);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
             //........................................................................................
 
 

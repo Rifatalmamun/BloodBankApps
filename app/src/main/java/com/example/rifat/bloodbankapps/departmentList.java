@@ -18,7 +18,7 @@ public class departmentList extends AppCompatActivity {
     private String[] departmentNameArray;
     private String pos;
 
-    public String catchName,catchBloodGroup,catchPhone,catchDist,catchSess,catchLastDate,catchkeY,catchRanD;
+    public String catchName,catchBloodGroup,catchPhone,catchDist,catchSess,catchLastDate,catchkeY,catchRanD,catchParentBG,catchParentDis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,8 @@ public class departmentList extends AppCompatActivity {
             catchLastDate=getIntent().getExtras().getString("sendLastDate");
             catchkeY=getIntent().getExtras().getString("sendKEY");
             catchRanD=getIntent().getExtras().getString("sendRANDOM");
+            catchParentBG=getIntent().getExtras().getString("sendPARENTGROUP");
+            catchParentDis=getIntent().getExtras().getString("sendPARENTDISTRICT");
 
             if(catchBloodGroup.equals("A+")){
                 pos = "0";
@@ -94,6 +96,8 @@ public class departmentList extends AppCompatActivity {
                     intent.putExtra("LAST",catchLastDate);
                     intent.putExtra("KEY",catchkeY);
                     intent.putExtra("RANDOM",catchRanD);
+                    intent.putExtra("PARENTGROUP",catchParentBG);
+                    intent.putExtra("PARENTDISTRICT",catchParentDis);
                     startActivity(intent);
                     finish();
 
