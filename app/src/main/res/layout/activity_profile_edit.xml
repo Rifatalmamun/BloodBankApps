@@ -40,7 +40,7 @@
             android:drawablePadding="15dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight=".3"
+            android:layout_weight=".4"
             android:text="Name "
             android:textColor="#000000"
             android:gravity="fill_vertical"
@@ -194,14 +194,14 @@
             android:textColor="#a70b0b"
             android:gravity="fill_vertical"
             android:textSize="20sp" />
-        <Spinner
+
+        <ImageView
             android:id="@+id/updateSessionSpinner_id"
-            android:layout_marginLeft="20dp"
-            android:layout_weight=".1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-
-            android:textSize="20sp" />
+            android:layout_marginLeft="10dp"
+            android:layout_weight=".1"
+            android:src="@drawable/ic_arrow_drop_down_black_24dp"/>
 
     </LinearLayout>
     <LinearLayout

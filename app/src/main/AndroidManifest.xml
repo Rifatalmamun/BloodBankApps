@@ -42,7 +42,8 @@
         <activity android:name=".currentlocation2" />
         <activity android:name=".currentlocation3" />
         <activity android:name=".ProfileEditActivity" />
-        <activity android:name=".departmentList"></activity>
+        <activity android:name=".departmentList" />
+        <activity android:name=".SessionList"></activity>
     </application>
 
 </manifest>

@@ -1,26 +1,37 @@
 package com.example.rifat.bloodbankapps;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class ProfileEditActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private DatabaseReference updateDatabaseReference;
 
     public static int flag = 0;
     static int flag2=0;
 
     private EditText updateName,updatePhone;
-    private Spinner updateBloodgroupSpinner,updateSessionSpinner;
-    private ImageView updateDistrictSpinner,updateDepartmentSpinner;
+    private Spinner updateBloodgroupSpinner;
+    private ImageView updateDistrictSpinner,updateDepartmentSpinner,updateSessionSpinner;
     private TextView updateLastDonationDateTextVeiw,updateIdontKnowTextVeiw;
     private TextView updateDistrictNameTextView,updateDepartmentNameTextView,updateSessionFieldTextView;
+    private Button datePickerButton;
+    private DatePickerDialog date_Picker_Dialog;
+    private Button updateButton,cancleButton;
 
     private String[] bloodGroupArray;
     private int bloodPosition;
@@ -35,6 +46,8 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
     private String catchDP="";
     private String catchSES="";
     private String catchLastDate="";
+    private String catchKEY="";
+    private String catchRN="";
 
 
 
@@ -45,6 +58,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
     String departmetn="";
     String session="";
     String lastDate="";
+    String kEy="";
 
 
 
@@ -52,6 +66,8 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_edit);
+
+
 
         //flag=0;
 
@@ -66,12 +82,14 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
         updateDepartmentNameTextView=(TextView)findViewById(R.id.updateDepartmentFieldTextView_id);
         updateDepartmentSpinner=(ImageView)findViewById(R.id.updateDepartmentSpinner_id);
         updateSessionFieldTextView=(TextView)findViewById(R.id.updateSessionFieldTextView_id);
-        updateSessionSpinner=(Spinner)findViewById(R.id.updateSessionSpinner_id);
+        updateSessionSpinner=(ImageView)findViewById(R.id.updateSessionSpinner_id);
 
         updateLastDonationDateTextVeiw=(TextView)findViewById(R.id.updateLastDonationTextView_id);
         updateIdontKnowTextVeiw=(TextView)findViewById(R.id.updateIDontKnowTextView_id);
 
-
+        datePickerButton=(Button)findViewById(R.id.datePicker_id);
+        updateButton=(Button)findViewById(R.id.updateButton_id);
+        cancleButton=(Button)findViewById(R.id.cancleButton_id);
 
         // first step: ............................................................
 
@@ -83,6 +101,10 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
                 final String catchDept=getIntent().getExtras().getString("catchDonorDepartment");
                 final String catchSession=getIntent().getExtras().getString("catchDonorSession");
                 final String catchLastDdate=getIntent().getExtras().getString("catchDonorDonationDate");
+                String catchDonorKey=getIntent().getExtras().getString("catchDonorKey");
+                catchKEY=catchDonorKey;
+                String catchRandomNumbeR=getIntent().getExtras().getString("catchRandomNumber");
+                catchRN=catchRandomNumbeR;
 
                 updateName.setText(catchName);
                 updateDistrictNameTextView.setText(catchDistrict);
@@ -132,6 +154,9 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             catchLastDate=getIntent().getExtras().getString("LAST");
             updateIdontKnowTextVeiw.setText(catchLastDate);
 
+            catchKEY=getIntent().getExtras().getString("KEY");
+            catchRN=getIntent().getExtras().getString("RANDOM");
+
         }catch (Exception e){
            // Toast.makeText(this, "exception"+e, Toast.LENGTH_LONG).show();
             }
@@ -140,6 +165,11 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
 
         updateDistrictSpinner.setOnClickListener(this);
         updateDepartmentSpinner.setOnClickListener(this);
+        updateSessionSpinner.setOnClickListener(this);
+        datePickerButton.setOnClickListener(this);
+
+        updateButton.setOnClickListener(this);
+        cancleButton.setOnClickListener(this);
     }
 
     @Override
@@ -162,8 +192,11 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             intent.putExtra("sendDept",departmetn);
             intent.putExtra("sendSession",session);
             intent.putExtra("sendLastDate",lastDate);
+            intent.putExtra("sendKEY",catchKEY);
+            intent.putExtra("sendRANDOM",catchRN);
 
             startActivity(intent);
+            finish();
         }
         if(v.getId()==R.id.updateDepartmentSpinner_id){
 
@@ -188,8 +221,112 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             intent.putExtra("sendDist",district);
             intent.putExtra("sendSession",session);
             intent.putExtra("sendLastDate",lastDate);
+            intent.putExtra("sendKEY",catchKEY);
+            intent.putExtra("sendRANDOM",catchRN);
 
             startActivity(intent);
+            finish();
         }
+        if(v.getId()==R.id.updateSessionSpinner_id){
+
+            name=updateName.getText().toString();
+            bloodGroup=updateBloodgroupSpinner.getSelectedItem().toString();
+            phone=updatePhone.getText().toString();
+            district=updateDistrictNameTextView.getText().toString();
+            departmetn=updateDepartmentNameTextView.getText().toString();
+            //session=updateSessionFieldTextView.getText().toString();
+            lastDate=updateIdontKnowTextVeiw.getText().toString();
+
+            flag=flag+1;
+
+            Intent intent = new Intent(ProfileEditActivity.this,SessionList.class);
+
+            intent.putExtra("sendName",name);
+            intent.putExtra("sendBloodGroup",bloodGroup);
+            intent.putExtra("sendPhone",phone);
+            intent.putExtra("sendDist",district);
+            intent.putExtra("sendDept",departmetn);
+            intent.putExtra("sendLastDate",lastDate);
+            intent.putExtra("sendKEY",catchKEY);
+            intent.putExtra("sendRANDOM",catchRN);
+
+            startActivity(intent);
+            finish();
+        }
+        if(v.getId()==R.id.datePicker_id){
+            openDatePicker();
+            //Toast.makeText(getApplicationContext(), "clicked button", Toast.LENGTH_SHORT).show();
+        }
+        if(v.getId()==R.id.updateButton_id){
+
+           /* Toast.makeText(this, "key: "+catchKEY, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Random: "+catchRN, Toast.LENGTH_SHORT).show();*/
+
+            // now take all field value to update this.....................................
+
+            String takeName=updateName.getText().toString();
+            String takeBloodGroup=updateBloodgroupSpinner.getSelectedItem().toString();
+            String takeDistrict=updateDistrictNameTextView.getText().toString();
+            String takePhone=updatePhone.getText().toString();
+            String takeDepartment=updateDepartmentNameTextView.getText().toString();
+            String takeSession=updateSessionFieldTextView.getText().toString();
+            String takeLastDonation=updateIdontKnowTextVeiw.getText().toString();
+
+            Toast.makeText(this, "Key : "+catchKEY, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Random : "+catchRN, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Name : "+takeName, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "BloodGroup : "+takeBloodGroup, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "District : "+takeDistrict, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Phone : "+takePhone, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Department : "+takeDepartment, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Session : "+takeSession, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "LastDate : "+takeLastDonation, Toast.LENGTH_SHORT).show();
+
+            //........................................................................................
+
+            updateDatabaseReference=FirebaseDatabase.getInstance().getReference("DonorDetailsTable");
+            //updateDatabaseReference.child(t)
+            //........................................................................................
+
+
+        }
+        if(v.getId()==R.id.cancleButton_id){
+
+            Intent intent = new Intent(ProfileEditActivity.this,AddDonorActivity.class);
+            startActivity(intent);
+        }
+    }
+    private void openDatePicker() {
+
+        DatePicker datePicker1=new DatePicker(this);
+        int currentDay = datePicker1.getDayOfMonth();
+        int currentMonth = (datePicker1.getMonth());
+        int currentYear = datePicker1.getYear();
+
+        date_Picker_Dialog=new DatePickerDialog(this,
+
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        String dayy=Integer.toString(dayOfMonth);
+                        String monthh=Integer.toString(month+1);
+                        String yearr=Integer.toString(year);
+
+                       /* currentDateDay.setText(dayy);
+                        currentDateMonth.setText(monthh);
+                        currentDateYear.setText(yearr);*/
+
+                        if(dayy.equals("1") || dayy.equals("2") || dayy.equals("3") || dayy.equals("4") || dayy.equals("5") || dayy.equals("6") || dayy.equals("7") || dayy.equals("8") || dayy.equals("9")){
+                            dayy="0"+dayy;
+                        }
+                        if(monthh.equals("1") || monthh.equals("2") || monthh.equals("3") || monthh.equals("4") || monthh.equals("5") || monthh.equals("6") || monthh.equals("7") || monthh.equals("8") || monthh.equals("9")){
+                            monthh="0"+monthh;
+                        }
+
+                        updateIdontKnowTextVeiw.setText(dayy+"/"+monthh+"/"+yearr);
+                    }
+                },currentYear,currentMonth,currentDay);
+
+        date_Picker_Dialog.show();
     }
 }

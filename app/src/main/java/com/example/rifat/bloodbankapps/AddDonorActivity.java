@@ -123,27 +123,13 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
         loginButton.setOnClickListener(this);
 
         progressbarInAddDonor=(ProgressBar)findViewById(R.id.progressbarAddDonor_id);
-
         read();
 
-        //listViewProfile = (ListView)findViewById(R.id.profileListView_id);
         donorProfileList = new ArrayList<>();
-       // profileCustomAdapter = new ProfileCustomAdapter(AddDonorActivity.this,donorProfileList);
 
 
-       /* updateNameEditText=(EditText)findViewById(R.id.updateNameEditText_id);
-        updateBloodGrouopEditText=(EditText)findViewById(R.id.updateBloodGroupEditText_id);
-        updateDistrictEditText=(EditText)findViewById(R.id.updateDistrictEditText_id);
-        updatePhoneEditText=(EditText)findViewById(R.id.updatePhoneEditText_id);
-        updateDepartmentEditText=(EditText)findViewById(R.id.updateDepartmentEditText_id);
-        updateSessionEditText=(EditText)findViewById(R.id.updateSessionEditText_id);
-        updateDonationDateEditText=(EditText)findViewById(R.id.updateDonationDateEditText_id);
 
-        cancleButton=(Button)findViewById(R.id.cancleButton_id);
-        updateButton=(Button)findViewById(R.id.updateButton_id);
 
-        cancleButton.setOnClickListener(this);
-        updateButton.setOnClickListener(this);*/
     }
 
     private void read()
@@ -154,7 +140,7 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
             String userPhn = sharedPreferences.getString("userPhnNumber","Not found");
             loginPhnNumber.setText(userPhn);
 
-            Toast.makeText(this, "show phone number", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "show phone number", Toast.LENGTH_SHORT).show();
         }
         if(sharedPreferences1.contains("userPassNumber")){
             String userPass = sharedPreferences1.getString("userPassNumber","Not found");
@@ -200,7 +186,7 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
 
                     editor.putString("userPhnNumber",phn);
                     editor.commit();
-                    Toast.makeText(this, "save phone number", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, "save phone number", Toast.LENGTH_SHORT).show();
 
 
                     // for password sharedPreferences.......................
@@ -266,6 +252,8 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
                     intent.putExtra("catchDonorDepartment",getDepartmetn);
                     intent.putExtra("catchDonorSession",getSession);
                     intent.putExtra("catchDonorDonationDate",getDonationDate);
+                    intent.putExtra("catchDonorKey",getKey);
+                    intent.putExtra("catchRandomNumber",getrn);
 
                     ProfileEditActivity.flag=0;
 

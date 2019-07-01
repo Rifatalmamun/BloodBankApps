@@ -8,29 +8,28 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
-public class departmentList extends AppCompatActivity {
+public class SessionList extends AppCompatActivity {
 
     private SearchView searchView;
 
     private ListView listView;
-    private String[] departmentNameArray;
+    private String[] sessionNameArray;
     private String pos;
 
-    public String catchName,catchBloodGroup,catchPhone,catchDist,catchSess,catchLastDate,catchkeY,catchRanD;
+    public String catchName,catchBloodGroup,catchPhone,catchDist,catchDepart,catchLastDate,catchkeY,catchRanD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_department_list);
+        setContentView(R.layout.activity_session_list);
 
         try{
             catchName=getIntent().getExtras().getString("sendName");
             catchBloodGroup=getIntent().getExtras().getString("sendBloodGroup");
             catchPhone=getIntent().getExtras().getString("sendPhone");
             catchDist=getIntent().getExtras().getString("sendDist");
-            catchSess=getIntent().getExtras().getString("sendSession");
+            catchDepart=getIntent().getExtras().getString("sendDept");
             catchLastDate=getIntent().getExtras().getString("sendLastDate");
             catchkeY=getIntent().getExtras().getString("sendKEY");
             catchRanD=getIntent().getExtras().getString("sendRANDOM");
@@ -57,10 +56,10 @@ public class departmentList extends AppCompatActivity {
         }
 
         searchView=(SearchView)findViewById(R.id.searchView_id);
-        listView=(ListView)findViewById(R.id.departmentListView_id);
-        departmentNameArray=getResources().getStringArray(R.array.DepartmentArray);
+        listView=(ListView)findViewById(R.id.sessionListView_id);
+        sessionNameArray=getResources().getStringArray(R.array.SessionArray);
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(departmentList.this,R.layout.departmentlistsmaplelayout,R.id.departmentlistSampleTextView_id,departmentNameArray);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(SessionList.this,R.layout.sessionlistsamplelayout,R.id.sessionListSampleTextView_id,sessionNameArray);
         listView.setAdapter(adapter);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -83,14 +82,14 @@ public class departmentList extends AppCompatActivity {
 
                 if(!value.isEmpty()){
 
-                    Intent intent = new Intent(departmentList.this,ProfileEditActivity.class);
+                    Intent intent = new Intent(SessionList.this,ProfileEditActivity.class);
                     intent.putExtra("selectedCity",catchDist);
                     intent.putExtra("UN",catchName);
                     intent.putExtra("BG",catchBloodGroup);
                     intent.putExtra("P",pos);
                     intent.putExtra("PN",catchPhone);
-                    intent.putExtra("DEPT",value);
-                    intent.putExtra("SESS",catchSess);
+                    intent.putExtra("DEPT",catchDepart);
+                    intent.putExtra("SESS",value);
                     intent.putExtra("LAST",catchLastDate);
                     intent.putExtra("KEY",catchkeY);
                     intent.putExtra("RANDOM",catchRanD);
