@@ -17,7 +17,7 @@ public class SessionList extends AppCompatActivity {
     private String[] sessionNameArray;
     private String pos;
 
-    public String catchName,catchBloodGroup,catchPhone,catchDist,catchDepart,catchLastDate,catchkeY,catchRanD,catchParentBG,catchParentDis;
+    public String catchName,catchBloodGroup,catchPhone,catchDist,catchDepart,catchLastDate,catchkeY,catchRanD,catchParentBG,catchParentDis,catchParentPHN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class SessionList extends AppCompatActivity {
             catchRanD=getIntent().getExtras().getString("sendRANDOM");
             catchParentBG=getIntent().getExtras().getString("sendPARENTGROUP");
             catchParentDis=getIntent().getExtras().getString("sendPARENTDISTRICT");
+            catchParentPHN=getIntent().getExtras().getString("sendPARENTPHONENUMBER");
 
             if(catchBloodGroup.equals("A+")){
                 pos = "0";
@@ -97,6 +98,7 @@ public class SessionList extends AppCompatActivity {
                     intent.putExtra("RANDOM",catchRanD);
                     intent.putExtra("PARENTGROUP",catchParentBG);
                     intent.putExtra("PARENTDISTRICT",catchParentDis);
+                    intent.putExtra("PARENTPHONENUMBER",catchParentPHN);
                     startActivity(intent);
                     finish();
 

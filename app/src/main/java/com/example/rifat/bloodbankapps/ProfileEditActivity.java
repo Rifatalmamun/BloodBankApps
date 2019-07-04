@@ -19,11 +19,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProfileEditActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private DatabaseReference updateDatabaseReference;
+    private DatabaseReference updateDonorDetailsTableReference,updateMyProfileTableReference,profileRef,queryRef;
 
     public static int flag = 0;
     static int flag2=0;
@@ -54,6 +58,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
     private String catchRN="";
     private String parentGroup="";
     private String parentDist="";
+    private String parentPhoneNumber="";
 
 
     String name="";
@@ -107,6 +112,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
                 final String catchDistrict=getIntent().getExtras().getString("catchDonorDistrict");
                 parentDist=catchDistrict;
                 final String catchPNumber=getIntent().getExtras().getString("catchDonorNumber");
+                parentPhoneNumber=catchPNumber;
                 final String catchDept=getIntent().getExtras().getString("catchDonorDepartment");
                 final String catchSession=getIntent().getExtras().getString("catchDonorSession");
                 final String catchLastDdate=getIntent().getExtras().getString("catchDonorDonationDate");
@@ -167,6 +173,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             catchRN=getIntent().getExtras().getString("RANDOM");
             parentGroup=getIntent().getExtras().getString("PARENTGROUP");
             parentDist=getIntent().getExtras().getString("PARENTDISTRICT");
+            parentPhoneNumber=getIntent().getExtras().getString("PARENTPHONENUMBER");
 
         }catch (Exception e){
            // Toast.makeText(this, "exception"+e, Toast.LENGTH_LONG).show();
@@ -207,6 +214,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             intent.putExtra("sendRANDOM",catchRN);
             intent.putExtra("sendPARENTGROUP",parentGroup);
             intent.putExtra("sendPARENTDISTRICT",parentDist);
+            intent.putExtra("sendPARENTPHONENUMBER",parentPhoneNumber);
 
             startActivity(intent);
             finish();
@@ -238,6 +246,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             intent.putExtra("sendRANDOM",catchRN);
             intent.putExtra("sendPARENTGROUP",parentGroup);
             intent.putExtra("sendPARENTDISTRICT",parentDist);
+            intent.putExtra("sendPARENTPHONENUMBER",parentPhoneNumber);
 
             startActivity(intent);
             finish();
@@ -266,6 +275,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             intent.putExtra("sendRANDOM",catchRN);
             intent.putExtra("sendPARENTGROUP",parentGroup);
             intent.putExtra("sendPARENTDISTRICT",parentDist);
+            intent.putExtra("sendPARENTPHONENUMBER",parentPhoneNumber);
 
             startActivity(intent);
             finish();
@@ -293,7 +303,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             String takeSession=updateSessionFieldTextView.getText().toString();
             String takeLastDonation=updateIdontKnowTextVeiw.getText().toString();
 
-            Toast.makeText(this, "Key : "+catchKEY, Toast.LENGTH_SHORT).show();
+            /*Toast.makeText(this, "Key : "+catchKEY, Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "Random : "+catchRN, Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "Name : "+takeName, Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "Previous BG: "+parentGroup, Toast.LENGTH_SHORT).show();
@@ -303,29 +313,177 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             Toast.makeText(this, "Phone : "+takePhone, Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "Department : "+takeDepartment, Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "Session : "+takeSession, Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, "LastDate : "+takeLastDonation, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "LastDate : "+takeLastDonation, Toast.LENGTH_SHORT).show();*/
+
+            //Toast.makeText(this, "parent Phone : "+parentPhoneNumber, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Update Phone : "+takePhone, Toast.LENGTH_SHORT).show();
 
             //........................................................................................
 
-            updateDatabaseReference=FirebaseDatabase.getInstance().getReference("DonorDetailsTable");
-            updateDatabaseReference.child(parentGroup).child(parentDist).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+           updateDonorDetailsTableReference=FirebaseDatabase.getInstance().getReference("DonorDetailsTable");
+           updateMyProfileTableReference=FirebaseDatabase.getInstance().getReference("MyProfileTable");
+             /*profileRef=FirebaseDatabase.getInstance().getReference("DonorIdTable");
+            // remove first then
+            updateDatabaseReference.child(takeBloodGroup).child(takeDistrict).child(catchKEY).removeValue();
+            // insert this new data
+            DonorClass donorClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
 
-                    /*dataSnapshot.getRef().child("donor_bloodGroup").setValue(takeBloodGroup);
-                    dataSnapshot.getRef().child("donor_district").setValue(takeDistrict);*/
-                    updateDatabaseReference.child(parentGroup).child(parentDist).child(catchKEY).child("Donor_bloodGroup").setValue(takeBloodGroup);
-                }
+            updateDatabaseReference.child(takeBloodGroup).child(takeDistrict).push().setValue(donorClass);
+            profileRef.child(takePhone).push().setValue(donorClass);*/
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+            Map<String,Object> updatedvalue = new HashMap<>();
+            Map<String,Object> updatedvalue1 = new HashMap<>();
 
-                }
-            });
+            //Condition 1: bg same, dist same, phone same..................
+            if(parentGroup.equals(takeBloodGroup) && parentDist.equals(takeDistrict) && parentPhoneNumber.equals(takePhone)){
 
-            //........................................................................................
+                updatedvalue.put(parentGroup+"/"+parentDist+"/"+catchKEY+"/donor_name",takeName);
+                updatedvalue.put(parentGroup+"/"+parentDist+"/"+catchKEY+"/donor_bloodGroup",takeBloodGroup);
+                updatedvalue.put(parentGroup+"/"+parentDist+"/"+catchKEY+"/donor_district",takeDistrict);
+                updatedvalue.put(parentGroup+"/"+parentDist+"/"+catchKEY+"/donor_phoneNumber",takePhone);
+                updatedvalue.put(parentGroup+"/"+parentDist+"/"+catchKEY+"/donor_department",takeDepartment);
+                updatedvalue.put(parentGroup+"/"+parentDist+"/"+catchKEY+"/donor_session",takeSession);
+                updatedvalue.put(parentGroup+"/"+parentDist+"/"+catchKEY+"/donor_lastDonationDate",takeLastDonation);
+
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_name",takeName);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_bloodGroup",takeBloodGroup);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_district",takeDistrict);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_phoneNumber",takePhone);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_department",takeDepartment);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_session",takeSession);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_lastDonationDate",takeLastDonation);
+
+                updateDonorDetailsTableReference.updateChildren(updatedvalue);
+                updateMyProfileTableReference.updateChildren(updatedvalue1);
+
+                Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
+            }
+            //Condition 2: bg same, dist not same, phone same....
+            else if(parentGroup.equals(takeBloodGroup) && !parentDist.equals(takeDistrict) && parentPhoneNumber.equals(takePhone)){
+
+                // remove first then insert
+                updateDonorDetailsTableReference.child(parentGroup).child(parentDist).child(catchKEY).removeValue();
+                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                updateDonorDetailsTableReference.child(parentGroup).child(takeDistrict).child(catchKEY).setValue(dClass);
+
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_name",takeName);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_bloodGroup",takeBloodGroup);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_district",takeDistrict);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_phoneNumber",takePhone);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_department",takeDepartment);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_session",takeSession);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_lastDonationDate",takeLastDonation);
+
+                updateMyProfileTableReference.updateChildren(updatedvalue1);
+
+                Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
+            }
+            //Condition 3: bg not same, dist same, phone same....
+            else if(!parentGroup.equals(takeBloodGroup) && parentDist.equals(takeDistrict) && parentPhoneNumber.equals(takePhone)){
+                // remove first then insert
+                updateDonorDetailsTableReference.child(parentGroup).child(parentDist).child(catchKEY).removeValue();
+                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                updateDonorDetailsTableReference.child(takeBloodGroup).child(parentDist).child(catchKEY).setValue(dClass);
+
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_name",takeName);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_bloodGroup",takeBloodGroup);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_district",takeDistrict);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_phoneNumber",takePhone);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_department",takeDepartment);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_session",takeSession);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_lastDonationDate",takeLastDonation);
+
+                updateMyProfileTableReference.updateChildren(updatedvalue1);
+                Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
+            }
+            //Condition 4: bg not same, dist not same, phone same....
+            else if(!parentGroup.equals(takeBloodGroup) && !parentDist.equals(takeDistrict) && parentPhoneNumber.equals(takePhone)){
+                // remove first then insert
+                updateDonorDetailsTableReference.child(parentGroup).child(parentDist).child(catchKEY).removeValue();
+                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                updateDonorDetailsTableReference.child(takeBloodGroup).child(takeDistrict).child(catchKEY).setValue(dClass);
+
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_name",takeName);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_bloodGroup",takeBloodGroup);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_district",takeDistrict);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_phoneNumber",takePhone);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_department",takeDepartment);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_session",takeSession);
+                updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_lastDonationDate",takeLastDonation);
+
+                updateMyProfileTableReference.updateChildren(updatedvalue1);
+                Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
+            }
+            //Condition 5: bg  same, dist  same, phone not same....
+            else if(parentGroup.equals(takeBloodGroup) && parentDist.equals(takeDistrict) && !parentPhoneNumber.equals(takePhone)){
+
+                updatedvalue.put(parentGroup+"/"+parentDist+"/"+catchKEY+"/donor_name",takeName);
+                updatedvalue.put(parentGroup+"/"+parentDist+"/"+catchKEY+"/donor_bloodGroup",takeBloodGroup);
+                updatedvalue.put(parentGroup+"/"+parentDist+"/"+catchKEY+"/donor_district",takeDistrict);
+                updatedvalue.put(parentGroup+"/"+parentDist+"/"+catchKEY+"/donor_phoneNumber",takePhone);
+                updatedvalue.put(parentGroup+"/"+parentDist+"/"+catchKEY+"/donor_department",takeDepartment);
+                updatedvalue.put(parentGroup+"/"+parentDist+"/"+catchKEY+"/donor_session",takeSession);
+                updatedvalue.put(parentGroup+"/"+parentDist+"/"+catchKEY+"/donor_lastDonationDate",takeLastDonation);
+
+                updateDonorDetailsTableReference.updateChildren(updatedvalue);
+
+                // remove first then insert
+                updateMyProfileTableReference.child(parentPhoneNumber).child(catchKEY).removeValue();
+                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                updateMyProfileTableReference.child(takePhone).child(catchKEY).setValue(dClass);
+
+                Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
+            }
+            //Condition 6: bg  same, dist not same, phone not same....
+            else if(parentGroup.equals(takeBloodGroup) && !parentDist.equals(takeDistrict) && !parentPhoneNumber.equals(takePhone)){
+                // remove first then insert
+                updateDonorDetailsTableReference.child(parentGroup).child(parentDist).child(catchKEY).removeValue();
+                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                updateDonorDetailsTableReference.child(parentGroup).child(takeDistrict).child(catchKEY).setValue(dClass);
 
 
+
+                // remove first then insert
+                updateMyProfileTableReference.child(parentPhoneNumber).child(catchKEY).removeValue();
+                DonorClass ddClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                updateMyProfileTableReference.child(takePhone).child(catchKEY).setValue(ddClass);
+
+                Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
+            }
+            //Condition 7: bg not same, dist same, phone not same....
+            else if(!parentGroup.equals(takeBloodGroup) && parentDist.equals(takeDistrict) && !parentPhoneNumber.equals(takePhone)){
+                // remove first then insert
+                updateDonorDetailsTableReference.child(parentGroup).child(parentDist).child(catchKEY).removeValue();
+                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                updateDonorDetailsTableReference.child(takeBloodGroup).child(parentDist).child(catchKEY).setValue(dClass);
+
+
+                // remove first then insert
+                updateMyProfileTableReference.child(parentPhoneNumber).child(catchKEY).removeValue();
+                DonorClass ddClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                updateMyProfileTableReference.child(takePhone).child(catchKEY).setValue(ddClass);
+
+                Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
+            }
+            //Condition 8: bg not same, dist same, phone not same....
+            else if(!parentGroup.equals(takeBloodGroup) && !parentDist.equals(takeDistrict) && !parentPhoneNumber.equals(takePhone)){
+                // remove first then insert
+                updateDonorDetailsTableReference.child(parentGroup).child(parentDist).child(catchKEY).removeValue();
+                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                updateDonorDetailsTableReference.child(takeBloodGroup).child(takeDistrict).child(catchKEY).setValue(dClass);
+
+
+                // remove first then insert
+                updateMyProfileTableReference.child(parentPhoneNumber).child(catchKEY).removeValue();
+                DonorClass ddClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                updateMyProfileTableReference.child(takePhone).child(catchKEY).setValue(ddClass);
+
+                Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
+            }
+
+
+            Intent intent = new Intent(ProfileEditActivity.this,MainActivity.class);
+            startActivity(intent);
         }
         if(v.getId()==R.id.cancleButton_id){
 

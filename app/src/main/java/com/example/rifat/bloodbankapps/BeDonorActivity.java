@@ -32,11 +32,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.security.Key;
 import java.util.Random;
 
 public class BeDonorActivity extends AppCompatActivity implements View.OnClickListener {
     private Context ctx;
-    private DatabaseReference databaseReference,databaseReference1,databaseReference2; // for firebase
+    private DatabaseReference databaseReference,databaseReference1; // for firebase
 
     private EditText name,phoneNumber,department,session;
     private Spinner selectBloodGroup;
@@ -67,8 +68,8 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
 
 
         databaseReference=FirebaseDatabase.getInstance().getReference("DonorDetailsTable");
-        databaseReference1=FirebaseDatabase.getInstance().getReference("DonorIdTable");
-        databaseReference2=FirebaseDatabase.getInstance().getReference("MyProfileTable");
+
+        databaseReference1=FirebaseDatabase.getInstance().getReference("MyProfileTable");
         this.setTitle("Be a Donor page");
 
         r=new Random();
@@ -273,12 +274,12 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
             String key=databaseReference.push().getKey();
 
             DonorClass donorClass = new DonorClass(rn,key,donorName,donorBloodGroup,donorPhoneNumber,donorDistrict,donorDepartment,donorSession,donorLastDonationDate);
-            DonorIdClass donorIdClass=new DonorIdClass(rn,key,donorPhoneNumber);
+            //DonorIdClass donorIdClass=new DonorIdClass(rn,key,donorPhoneNumber);
             DonorClass profileClass = new DonorClass(rn,key,donorName,donorBloodGroup,donorPhoneNumber,donorDistrict,donorDepartment,donorSession,donorLastDonationDate);
 
-            databaseReference.child(donorBloodGroup).child(donorDistrict).push().setValue(donorClass);
-            databaseReference1.child(donorBloodGroup).child(donorDistrict).push().setValue(donorIdClass);
-            databaseReference2.child(donorPhoneNumber).push().setValue(profileClass);
+            databaseReference.child(donorBloodGroup).child(donorDistrict).child(key).setValue(donorClass);
+            //databaseReference1.child(donorBloodGroup).child(donorDistrict).child(key).setValue(donorIdClass);
+            databaseReference1.child(donorPhoneNumber).child(key).setValue(profileClass);
 
             Toast.makeText(getApplicationContext(),"Donor Add Successfull !",Toast.LENGTH_SHORT).show();
 
