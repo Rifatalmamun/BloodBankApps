@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
@@ -39,26 +41,43 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
     private Context ctx;
     private DatabaseReference databaseReference,databaseReference1; // for firebase
 
-    private EditText name,phoneNumber,department,session;
+    private EditText name,phoneNumber;
     private Spinner selectBloodGroup;
-    private ImageView selectCitySpinner;
+    private ImageView selectCitySpinner,departmentSpinner,sessionSpinner;
 
     private String[] bloodGroupArray;
     private String[] districtNameArray;
-    private Button beDonorSubmitButton;
+    private Button beDonorSubmitButton,beDonorCancleButton;
     private Button datePickerButton;
-    private TextView lastDonationTextView,iDontKnowTextView,select_city;
+    private TextView lastDonationTextView,iDontKnowTextView,select_city,department,session;
     private DatePickerDialog date_Picker_Dialog;
 
     private String donorName,donorBloodGroup,donorDistrict,donorPhoneNumber,donorEmail,donorDepartment,donorSession,donorLastDonationDate;
 
     Random r;
     public int min,max,output;
-    String catchSelectedCity="";
+   /* String catchSelectedCity="";
     String catchDN="";
-    String catchBG="";
+    String catchBG="";*/
     Info in;
     static int flage=0;
+
+    private String catchName="";
+    private String catchPositionString="";
+    private int catchPosition;
+    private String catchDistrict="";
+    private String catchPhoneNumber="";
+    private String catchDepartment="";
+    private String catchSession="";
+    private String catchDonationDate="";
+
+    private String takeName="";
+    private String takePosition="";
+    private String takeDistrict="";
+    private String takePhoneNumber="";
+    private String takeDepartment="";
+    private String takeSession="";
+    private String takeDonationDate="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,19 +97,18 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
         name=(EditText)findViewById(R.id.nameEditText_id);
         selectBloodGroup=(Spinner)findViewById(R.id.selectBloodGroup_id);
         selectCitySpinner=(ImageView) findViewById(R.id.selectCitySpinner_id);
-        //districtName=(AutoCompleteTextView)findViewById(R.id.district_id);
+        departmentSpinner=(ImageView)findViewById(R.id.departmentSpinner_id);
         phoneNumber=(EditText)findViewById(R.id.phoneNumberEditText_id);
-        //genderRadioGroup=(RadioGroup)findViewById(R.id.radioGroup_id);
-        //email=(EditText)findViewById(R.id.emailEditText_id);
-        department=(EditText)findViewById(R.id.departmentEditText_id);
-        session=(EditText)findViewById(R.id.sessionEditText_id);
+        department=(TextView) findViewById(R.id.departmentTextView_id);
+        sessionSpinner=(ImageView)findViewById(R.id.sessionSpinner_id);
+        session=(TextView) findViewById(R.id.sessionTextView_id);
         beDonorSubmitButton=(Button)findViewById(R.id.beDonorSubmitButton_id);
+        beDonorCancleButton=(Button)findViewById(R.id.beDonorCancleButton_id);
         datePickerButton=(Button)findViewById(R.id.datePicker_id);
-        lastDonationTextView=(TextView)findViewById(R.id.lastDonationDateTextView_id);
         iDontKnowTextView=(TextView)findViewById(R.id.iDontKnowTextView_id);
         select_city=(TextView)findViewById(R.id.selectCity_id);
 
-        select_city.setText(catchSelectedCity);
+        select_city.setText(catchDistrict);
 
         // Blood Group Spinner......................................................................
 
@@ -98,36 +116,40 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
         ArrayAdapter<String> adapter1=new ArrayAdapter<String>(this,R.layout.bloodgroupsamplelayout,R.id.TextViewSample_id,bloodGroupArray);
         selectBloodGroup.setAdapter(adapter1);
 
-        // District Name Autocomplete TextView......................................................
-
-        /*districtNameArray=getResources().getStringArray(R.array.DistrictArray);
-        final ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,districtNameArray);
-        districtName.setThreshold(1);
-        districtName.setAdapter(adapter2);*/
 
         // set onclick listener...............................................................
         beDonorSubmitButton.setOnClickListener(this);
+        beDonorCancleButton.setOnClickListener(this);
         datePickerButton.setOnClickListener(this);
         selectCitySpinner.setOnClickListener(this);
+        departmentSpinner.setOnClickListener(this);
+        sessionSpinner.setOnClickListener(this);
         //iDontKnowTextView.setOnClickListener(this);
 
-        if(flage > 0){
+       // if(flage > 0){
             try {
-                catchSelectedCity=getIntent().getExtras().getString("selectedCity");
-                select_city.setText(catchSelectedCity);
+                catchName=getIntent().getExtras().getString("Name");
+                catchPositionString=getIntent().getExtras().getString("Position");
+                catchPosition=Integer.parseInt(catchPositionString);
+                catchDistrict=getIntent().getExtras().getString("District");
+                catchPhoneNumber=getIntent().getExtras().getString("PhoneNumber");
+                catchDepartment=getIntent().getExtras().getString("Department");
+                catchSession=getIntent().getExtras().getString("Session");
+                catchDonationDate=getIntent().getExtras().getString("DonationDate");
 
-                catchDN=getIntent().getExtras().getString("DN");
-                name.setText(catchDN);
+                name.setText(catchName);
+                selectBloodGroup.setSelection(catchPosition);
+                select_city.setText(catchDistrict);
+                phoneNumber.setText(catchPhoneNumber);
+                department.setText(catchDepartment);
+                session.setText(catchSession);
+                iDontKnowTextView.setText(catchDonationDate);
 
-                catchBG=getIntent().getExtras().getString("P");
-                int posi = Integer.parseInt(catchBG);
-                selectBloodGroup.setSelection(posi);
-
-               // Toast.makeText(this, "done", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(this, "done", Toast.LENGTH_SHORT).show();
             }catch (Exception e){
 
             }
-        }
+        //}
     }
 
     @Override
@@ -138,16 +160,87 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
             Intent intent  = new Intent(BeDonorActivity.this,currentLocation.class);
             flage=1;
 
-            donorName = name.getText().toString();
-            donorBloodGroup=selectBloodGroup.getSelectedItem().toString();
 
-            intent.putExtra("sendName",donorName);
-            intent.putExtra("sendBloodGroup",donorBloodGroup);
-            Toast.makeText(this, "N: "+donorName, Toast.LENGTH_SHORT).show();
+            takeName=name.getText().toString();
+            takePosition=selectBloodGroup.getSelectedItem().toString();
+            takeDistrict=select_city.getText().toString();
+            takePhoneNumber=phoneNumber.getText().toString();
+            takeDepartment=department.getText().toString();
+            takeSession=session.getText().toString();
+            takeDonationDate=iDontKnowTextView.getText().toString();
+
+            intent.putExtra("_name",takeName);
+            intent.putExtra("_bloodgroup",takePosition);
+            intent.putExtra("_district",takeDistrict);
+            intent.putExtra("_phone",takePhoneNumber);
+            intent.putExtra("_department",takeDepartment);
+            intent.putExtra("_session",takeSession);
+            intent.putExtra("_donationdate",takeDonationDate);
+
+            /*donorName = name.getText().toString();
+            donorBloodGroup=selectBloodGroup.getSelectedItem().toString();*/
+
+            /*intent.putExtra("sendName",takeName);
+            intent.putExtra("sendBloodGroup",takePosition);*/
+            //Toast.makeText(this, "N: "+donorName, Toast.LENGTH_SHORT).show();
 
             startActivity(intent);
 
             finish();
+        }
+        if(v.getId()==R.id.departmentSpinner_id){
+            flage=1;
+            Intent intent  = new Intent(BeDonorActivity.this,departmentlist_For_BEDONOR.class);
+
+            takeName=name.getText().toString();
+            takePosition=selectBloodGroup.getSelectedItem().toString();
+            takeDistrict=select_city.getText().toString();
+            takePhoneNumber=phoneNumber.getText().toString();
+            takeDepartment=department.getText().toString();
+            takeSession=session.getText().toString();
+            takeDonationDate=iDontKnowTextView.getText().toString();
+
+            intent.putExtra("_name",takeName);
+            intent.putExtra("_bloodgroup",takePosition);
+            intent.putExtra("_district",takeDistrict);
+            intent.putExtra("_phone",takePhoneNumber);
+            intent.putExtra("_department",takeDepartment);
+            intent.putExtra("_session",takeSession);
+            intent.putExtra("_donationdate",takeDonationDate);
+
+
+
+            startActivity(intent);
+            finish();
+        }
+        if(v.getId()==R.id.sessionSpinner_id){
+
+            flage=1;
+            Intent intent  = new Intent(BeDonorActivity.this,sessionlist_For_BEDONOR.class);
+
+            takeName=name.getText().toString();
+            takePosition=selectBloodGroup.getSelectedItem().toString();
+            takeDistrict=select_city.getText().toString();
+            takePhoneNumber=phoneNumber.getText().toString();
+            takeDepartment=department.getText().toString();
+            takeSession=session.getText().toString();
+            takeDonationDate=iDontKnowTextView.getText().toString();
+
+            intent.putExtra("_name",takeName);
+            intent.putExtra("_bloodgroup",takePosition);
+            intent.putExtra("_district",takeDistrict);
+            intent.putExtra("_phone",takePhoneNumber);
+            intent.putExtra("_department",takeDepartment);
+            intent.putExtra("_session",takeSession);
+            intent.putExtra("_donationdate",takeDonationDate);
+
+
+
+            startActivity(intent);
+            finish();
+
+
+
         }
 
         if(v.getId()==R.id.datePicker_id){
@@ -157,9 +250,7 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
 
         if(v.getId()==R.id.beDonorSubmitButton_id){
 
-
-
-        // first create 10 digit random number;.................
+            // first create 10 digit random number;.................
             String random_number="";
 
             String tempMin="100",temMax="1000000000";
@@ -169,15 +260,20 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
                 min=Integer.parseInt(tempMin);
                 max=Integer.parseInt(temMax);
 
-               output=r.nextInt((max-min)+1)+min;
+                output=r.nextInt((max-min)+1)+min;
 
-              random_number=Integer.toString(output);
+                random_number=Integer.toString(output);
             }
 
             //Toast.makeText(getApplicationContext(), "clicked!!"+random_number, Toast.LENGTH_SHORT).show();
 
             donorStoreInDatabase(random_number);
 
+        }
+        if(v.getId()==R.id.beDonorCancleButton_id){
+            Intent intent = new Intent(BeDonorActivity.this,MainActivity.class);
+            beDonorCancleButton.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            startActivity(intent);
         }
     }
 
@@ -201,9 +297,9 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
                         currentDateMonth.setText(monthh);
                         currentDateYear.setText(yearr);*/
 
-                       if(dayy.equals("1") || dayy.equals("2") || dayy.equals("3") || dayy.equals("4") || dayy.equals("5") || dayy.equals("6") || dayy.equals("7") || dayy.equals("8") || dayy.equals("9")){
-                           dayy="0"+dayy;
-                       }
+                        if(dayy.equals("1") || dayy.equals("2") || dayy.equals("3") || dayy.equals("4") || dayy.equals("5") || dayy.equals("6") || dayy.equals("7") || dayy.equals("8") || dayy.equals("9")){
+                            dayy="0"+dayy;
+                        }
                         if(monthh.equals("1") || monthh.equals("2") || monthh.equals("3") || monthh.equals("4") || monthh.equals("5") || monthh.equals("6") || monthh.equals("7") || monthh.equals("8") || monthh.equals("9")){
                             monthh="0"+monthh;
                         }
@@ -229,7 +325,7 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
         donorSession=session.getText().toString();
         donorLastDonationDate=iDontKnowTextView.getText().toString();
 
-       // Toast.makeText(this, "......"+donorDistrict, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "......"+donorDistrict, Toast.LENGTH_SHORT).show();
         //............validation all field.......................
         if(donorName.isEmpty()){
             name.setError("please enter name!");
@@ -253,7 +349,7 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
         }
 
 
-       // int check=checkDistrictName(donorDistrict);
+        // int check=checkDistrictName(donorDistrict);
 
         /*if(check==0){
             districtName.setError("District Spelling error!!!");
@@ -262,7 +358,6 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
         }*/
 
         /*if(isNetworkAvaliable(ctx)){
-
             Toast.makeText(getApplicationContext(),"No Internet",Toast.LENGTH_LONG).show();
         }else
             Toast.makeText(getApplicationContext(),"No Internet No Internet",Toast.LENGTH_LONG).show();*/

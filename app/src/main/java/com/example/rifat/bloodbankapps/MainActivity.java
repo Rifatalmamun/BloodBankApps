@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        BeDonorActivity.flage=0;
+
         // internet connection check;
         if(!isConnected(MainActivity.this)){
             buildDialog(MainActivity.this).show();

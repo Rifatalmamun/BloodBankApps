@@ -3,6 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:padding="20dp"
     android:orientation="vertical">
 
     <TextView
@@ -10,22 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="JUST BLOOD DONATION ORGANIZATION"
-        android:textSize="22sp"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:padding="10dp" />
+        android:textSize="18sp"
+        android:textColor="#080808" />
     <TextView
         android:id="@+id/bloodBankSampleAddress_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Address: Jessore University of Science and Technology"
-        android:textSize="20sp"/>
-    <TextView
-        android:id="@+id/bloodBankSampleOpen_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Open: 24 H"
-        android:textSize="20sp"/>
+        android:text="Address: Jessore"
+        android:textSize="18sp"
+        android:textColor="#776e6e" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,7 +32,10 @@
             android:layout_weight="1.3"
             android:layout_height="wrap_content"
             android:text="Phone: 01554599456"
-            android:textSize="20sp"/>
+            android:textSize="18sp"
+
+            android:textColor="#776e6e"
+            />
         <ImageView
             android:id="@+id/bloodBankSamplePhoneImg_id"
             android:layout_width="0dp"
@@ -45,7 +43,6 @@
             android:layout_height="match_parent"
             android:src="@drawable/ic_local_phone_black_24dp"
             android:scaleType="fitCenter"/>
-
     </LinearLayout>
 
 

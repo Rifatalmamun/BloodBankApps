@@ -11,7 +11,5 @@
         android:id="@+id/justLogo_icon"
         android:orderInCategory="100"
         app:showAsAction="always"
-        android:icon="@drawable/varsitylogo"
-
-        />
+        android:icon="@drawable/varsitylogo" />
 </menu>

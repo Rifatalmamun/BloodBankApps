@@ -6,174 +6,261 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
+    android:padding="25dp"
     android:weightSum="10"
-
+    android:background="#ffffff"
     tools:context=".BeDonorActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        android:background="#f7f4f4"
-        android:layout_weight="2.3">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
-        <ImageView
+        <TextView
+            android:background="@drawable/seeprofilebordershape"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/registration"
-            android:scaleType="fitCenter"/>
+            android:layout_height="match_parent"
+            android:text="Be Donor"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:gravity="center"/>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="6.7"
-        android:background="@drawable/pageborder"
-        android:orientation="vertical"
-        android:padding="10dp">
 
-
-        <EditText
-            android:id="@+id/nameEditText_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your name"
-            android:inputType="text"
-            android:textColor="#000000"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="2">
-
+            android:layout_weight="1">
             <TextView
+                android:drawableLeft="@drawable/ic_person_black_24dp"
+                android:drawablePadding="15dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1.4"
-                android:background="#b10808"
-                android:text="Select blood group"
-                android:textColor="#ffffff"
-                android:textSize="22sp" />
-
-            <Spinner
-                android:id="@+id/selectBloodGroup_id"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".6">
-
-            </Spinner>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="2">
-            <TextView
+                android:layout_height="match_parent"
+                android:layout_weight=".4"
+                android:text="Name "
+                android:textColor="#000000"
+                android:gravity="fill_vertical"
+                android:textSize="20sp" />
+            <EditText
+                android:id="@+id/nameEditText_id"
                 android:layout_weight=".7"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Select City "
-                android:textSize="20sp"
-                android:padding="5dp"
-                android:textColor="#000000"
-                />
-            <TextView
-                android:id="@+id/selectCity_id"
-                android:layout_weight=".9"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="21sp"
-                android:padding="5dp"
-                android:textColor="#e60404"
-                />
-
-            <ImageView
-                android:id="@+id/selectCitySpinner_id"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight=".4"
-                android:backgroundTint="#e60404"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp" />
-
-
+                android:layout_height="match_parent"
+                android:hint="Enter Name"
+                android:textColor="#a70b0b"
+                android:textSize="20sp" />
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/phoneNumberEditText_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter phone number"
-            android:inputType="phone"
-            android:textColor="#000000"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
-        <EditText
-            android:id="@+id/departmentEditText_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter department name (optional)"
-            android:textColor="#000000"/>
-        <EditText
-            android:id="@+id/sessionEditText_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter session (optional)"
-            android:textColor="#000000"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="3">
+        <TextView
+            android:drawableLeft="@drawable/ic_bubble_chart_black_24dp"
+            android:drawablePadding="15dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".6"
+            android:text="Blood Group"
+            android:textColor="#000000"
+            android:gravity="fill_vertical"
+            android:textSize="20sp" />
+        <Spinner
+            android:id="@+id/selectBloodGroup_id"
+            android:layout_marginLeft="20dp"
+            android:layout_weight=".3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
 
-            <TextView
-                android:id="@+id/lastDonationDateTextView_id"
-                android:layout_width="0dp"
-                android:layout_weight="1.5"
-                android:layout_height="match_parent"
-                android:text="Last donation date"
-                android:textAlignment="center"
-                android:gravity="center_vertical"
-                android:textColor="#000000" />
-            <Button
-                android:id="@+id/datePicker_id"
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_date_range_black_24dp"/>
-            <TextView
-                android:id="@+id/iDontKnowTextView_id"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="I don't know"
-                android:textAlignment="center"
-                android:gravity="center_vertical"
-                android:textColor="#000000"/>
-
-
-        </LinearLayout>
-
+            android:textSize="20sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:drawableLeft="@drawable/ic_edit_location_black_24dp"
+            android:drawablePadding="15dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".4"
+            android:text="District"
+            android:textColor="#000000"
+            android:gravity="fill_vertical"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/selectCity_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".4"
+            android:textColor="#a70b0b"
+            android:gravity="center"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/selectCitySpinner_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_weight=".1"
+            android:src="@drawable/ic_arrow_drop_down_black_24dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:drawableLeft="@drawable/ic_local_phone_black_24dp"
+            android:drawablePadding="15dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".3"
+            android:text="Phone"
+            android:textColor="#000000"
+            android:gravity="fill_vertical"
+            android:textSize="20sp" />
+        <EditText
+            android:id="@+id/phoneNumberEditText_id"
+            android:layout_marginLeft="20dp"
+            android:layout_weight=".6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="Enter phone no"
+            android:textColor="#a70b0b"
+            android:inputType="number"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:drawableLeft="@drawable/ic_school_black_24dp"
+                android:drawablePadding="15dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:text="Department"
+                android:textColor="#000000"
+                android:gravity="fill_vertical"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/departmentTextView_id"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".4"
+                android:textColor="#a70b0b"
+                android:gravity="center"
+                android:textSize="18sp" />
+            <ImageView
+                android:id="@+id/departmentSpinner_id"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight=".1"
+                android:src="@drawable/ic_arrow_drop_down_black_24dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:drawableLeft="@drawable/ic_assignment_black_24dp"
+                android:drawablePadding="15dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:text="Session"
+                android:textColor="#000000"
+                android:gravity="fill_vertical"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/sessionTextView_id"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".4"
+                android:textColor="#a70b0b"
+                android:gravity="center"
+                android:textSize="18sp" />
+            <ImageView
+                android:id="@+id/sessionSpinner_id"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight=".1"
+                android:src="@drawable/ic_arrow_drop_down_black_24dp"/>
+
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".4"
+            android:text="Last Donation date"
+            android:textColor="#000000"
+            android:gravity="fill_vertical"
+            android:textSize="17sp" />
+        <Button
+            android:id="@+id/datePicker_id"
+            android:layout_width="0dp"
+            android:layout_weight="0.1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_date_range_black_24dp"/>
+
+        <TextView
+            android:id="@+id/iDontKnowTextView_id"
+            android:layout_marginLeft="20dp"
+            android:layout_weight=".3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="I don't know"
+            android:gravity="center"
+            android:textColor="#a70b0b"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1">
 
         <Button
             android:id="@+id/beDonorSubmitButton_id"
-            android:layout_width="match_parent"
+            android:background="@drawable/buttonbackground"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#780505"
+            android:layout_weight=".3"
             android:text="Submit"
-            android:textColor="#ffffff"
-            android:textSize="23sp"
-            android:textStyle="bold" />
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+        <Button
+            android:id="@+id/beDonorCancleButton_id"
+            android:background="@drawable/buttonbackground"
+            android:layout_marginLeft="20dp"
+            android:layout_weight=".3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancle"
+            android:textAllCaps="false"
+            android:textSize="18sp" />
+
     </LinearLayout>
+
+
 
 </LinearLayout>

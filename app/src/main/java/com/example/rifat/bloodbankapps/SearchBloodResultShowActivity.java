@@ -148,7 +148,7 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
 
                 length=stringBuilder.length();
 
-             // count total child
+                // count total child
                /* if(dataSnapshot.exists()){
                     countDonor=(int) dataSnapshot.getChildrenCount();
                 }*/
@@ -156,7 +156,7 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
                 ss=stringBuilder.toString();
 
 
-             //Toast.makeText(SearchBloodResultShowActivity.this, "Total number: "+ss, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SearchBloodResultShowActivity.this, "Total number: "+ss, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -186,7 +186,7 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
 
                 String ref = myRef.child(catchBloodGroup).child(catchDistrictName).getKey();
 
-               // Toast.makeText(getApplicationContext(),"Ref: "+ref,Toast.LENGTH_SHORT).toString();
+                // Toast.makeText(getApplicationContext(),"Ref: "+ref,Toast.LENGTH_SHORT).toString();
 
                 startActivity(intent);
 
@@ -197,7 +197,7 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
         });
 
     }
-// method to find dayofmonth for leapyear method.............................
+    // method to find dayofmonth for leapyear method.............................
     public static int MonthsToDays(int tMonth, int tYear) {
         if (tMonth == 1 || tMonth == 3 || tMonth == 5 || tMonth == 7
                 || tMonth == 8 || tMonth == 10 || tMonth == 12) {

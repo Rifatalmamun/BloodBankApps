@@ -57,7 +57,7 @@ public class ResultShowCustomAdapter extends ArrayAdapter<DonorClass> implements
 
         DonorClass donorClass = donorList.get(position);
 
-       // listView=(ListView)view.findViewById(R.id.searchBloodResultShowListView_id);
+        // listView=(ListView)view.findViewById(R.id.searchBloodResultShowListView_id);
 
         TextView Name=view.findViewById(R.id.donorNameTextViwsample_id);
         TextView BloodGroup=view.findViewById(R.id.donorBloodGroupTextViwsample_id);
@@ -86,11 +86,10 @@ public class ResultShowCustomAdapter extends ArrayAdapter<DonorClass> implements
 
 
         //callNumber=PhoneNumber.getText().toString().trim();
-       callNumber=donorClass.getDonor_phoneNumber();
+        callNumber=donorClass.getDonor_phoneNumber();
 
         /*ImageView PhoneIcon=view.findViewById(R.id.donorPhoneIcon_id);
         ImageView EmailIcon=view.findViewById(R.id.donorEmailIcon_id);
-
         PhoneIcon.setOnClickListener(this);
         EmailIcon.setOnClickListener(this);
 */
@@ -101,10 +100,6 @@ public class ResultShowCustomAdapter extends ArrayAdapter<DonorClass> implements
     public void onClick(View v) {
 
        /*if(v.getId()==R.id.donorPhoneIcon_id){
-
-
-
-
        }*/
     }
 

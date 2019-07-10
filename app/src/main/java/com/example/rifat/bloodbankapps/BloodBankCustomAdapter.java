@@ -36,15 +36,15 @@ public class BloodBankCustomAdapter extends ArrayAdapter<BloodBankClass> {
 
         TextView OrganizationName=view.findViewById(R.id.bloodBankSampleOrganization_id);
         TextView Address=view.findViewById(R.id.bloodBankSampleAddress_id);
-        TextView Open=view.findViewById(R.id.bloodBankSampleOpen_id);
+        //TextView Open=view.findViewById(R.id.bloodBankSampleOpen_id);
         TextView Phone=view.findViewById(R.id.bloodBankSamplePhone_id);
 
-        ImageView PhoneImg=view.findViewById(R.id.bloodBankSamplePhoneImg_id);
+       // ImageView PhoneImg=view.findViewById(R.id.bloodBankSamplePhoneImg_id);
 
-        OrganizationName.setText(bloodBankClass.getOrganizationName());
-        Address.setText(bloodBankClass.getAddress());
-        Open.setText(bloodBankClass.getOpen());
-        Phone.setText(bloodBankClass.getPhone());
+        OrganizationName.setText("Organization: "+bloodBankClass.getOrganizationName());
+        Address.setText("Phone: "+bloodBankClass.getAddress());
+        //Open.setText(bloodBankClass.getOpen());
+        Phone.setText("Location: "+bloodBankClass.getPhone());
 
 
         return view;

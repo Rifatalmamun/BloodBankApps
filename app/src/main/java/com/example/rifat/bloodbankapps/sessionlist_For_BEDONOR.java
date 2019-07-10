@@ -8,23 +8,30 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
-public class currentLocation extends AppCompatActivity  {
+public class sessionlist_For_BEDONOR extends AppCompatActivity {
 
     private SearchView searchView;
 
     private ListView listView;
-    private String[] cityName;
+    private String[] sessionNameArray;
+
     private String pos;
 
-    public String catchName,catchBloodGroup;
     public String cN,cB,cD,cP,cDept,cS,cDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_current_location);
+        setContentView(R.layout.activity_sessionlist__for__bedonor);
+
+        searchView=(SearchView)findViewById(R.id.searchView_id);
+        listView=(ListView)findViewById(R.id.sessionlistForBenorListView_id);
+        sessionNameArray=getResources().getStringArray(R.array.SessionArray);
+
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(sessionlist_For_BEDONOR.this,R.layout.sessionlistsamplelayout,R.id.sessionListSampleTextView_id,sessionNameArray);
+        listView.setAdapter(adapter);
+
         try{
             cN=getIntent().getExtras().getString("_name");
             cB=getIntent().getExtras().getString("_bloodgroup");
@@ -33,9 +40,6 @@ public class currentLocation extends AppCompatActivity  {
             cDept=getIntent().getExtras().getString("_department");
             cS=getIntent().getExtras().getString("_session");
             cDate=getIntent().getExtras().getString("_donationdate");
-
-            /*catchName=getIntent().getExtras().getString("sendName");
-            catchBloodGroup=getIntent().getExtras().getString("sendBloodGroup");*/
 
             if(cB.equals("A+")){
                 pos = "0";
@@ -58,18 +62,6 @@ public class currentLocation extends AppCompatActivity  {
 
         }
 
-
-
-        searchView=(SearchView)findViewById(R.id.searchView_id);
-
-
-        listView=(ListView)findViewById(R.id.currentLocationListView_id);
-        cityName=getResources().getStringArray(R.array.DistrictArray);
-
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(currentLocation.this,R.layout.currentlocationsamplelistview,R.id.currentLocationSampleTextView_id,cityName);
-        listView.setAdapter(adapter);
-
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -82,7 +74,6 @@ public class currentLocation extends AppCompatActivity  {
                 return false;
             }
         });
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -91,26 +82,19 @@ public class currentLocation extends AppCompatActivity  {
 
                 if(!value.isEmpty()){
 
-                    Intent intent = new Intent(currentLocation.this,BeDonorActivity.class);
-
-                    /*intent.putExtra("selectedCity",value);
-                    intent.putExtra("DN",catchName);
-                    intent.putExtra("BG",catchBloodGroup);
-                    intent.putExtra("P",pos);*/
-
+                    Intent intent = new Intent(sessionlist_For_BEDONOR.this,BeDonorActivity.class);
 
                     intent.putExtra("Name",cN);
                     intent.putExtra("Position",pos);
-                    intent.putExtra("District",value);
+                    intent.putExtra("District",cD);
                     intent.putExtra("PhoneNumber",cP);
                     intent.putExtra("Department",cDept);
-                    intent.putExtra("Session",cS);
+                    intent.putExtra("Session",value);
                     intent.putExtra("DonationDate",cDate);
 
-
                     startActivity(intent);
-                    Toast.makeText(currentLocation.this, "city: "+value, Toast.LENGTH_SHORT).show();
                     finish();
+
                 }
             }
         });

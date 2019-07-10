@@ -4,24 +4,16 @@ public class BloodBankClass {
 
     private String District,OrganizationName,Address,Open,Phone;
 
-    public BloodBankClass(String district, String organizationName, String address, String open, String phone) {
-        District = district;
+    public BloodBankClass(String organizationName, String address, String phone) {
+        //District = district;
         OrganizationName = organizationName;
         Address = address;
-        Open = open;
+        //Open = open;
         Phone = phone;
     }
     public BloodBankClass()
     {
 
-    }
-
-    public String getDistrict() {
-        return District;
-    }
-
-    public void setDistrict(String district) {
-        District = district;
     }
 
     public String getOrganizationName() {
@@ -38,14 +30,6 @@ public class BloodBankClass {
 
     public void setAddress(String address) {
         Address = address;
-    }
-
-    public String getOpen() {
-        return Open;
-    }
-
-    public void setOpen(String open) {
-        Open = open;
     }
 
     public String getPhone() {

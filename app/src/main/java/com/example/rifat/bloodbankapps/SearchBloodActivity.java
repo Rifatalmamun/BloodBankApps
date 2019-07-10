@@ -112,9 +112,7 @@ public class SearchBloodActivity extends AppCompatActivity implements View.OnCli
             }
 
             /*if(!searchDistrict.isEmpty()){
-
                 int check=checkDistrictName(searchDistrict);
-
                 if(check==0){
                     districtName.setError("District Spelling error!!!");
                     districtName.requestFocus();

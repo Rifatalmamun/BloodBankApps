@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".currentLocation">
+    tools:context=".departmentlist_For_BEDONOR">
 
     <SearchView
-        android:id="@+id/searchView_id"
+        android:id="@+id/searchViewForBedor_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:queryHint="Search city here"
         android:background="#f9f8f8">
 
     </SearchView>
-
     <ListView
-        android:id="@+id/currentLocationListView_id"
+        android:id="@+id/departmentlistForBenorListView_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="4dp"
