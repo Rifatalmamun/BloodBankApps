@@ -29,16 +29,26 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
+    private Menu menu;
+
     ActionBar actionBar;
     //Declaring all variables name...........................................
 
     private TextView userNumber,donorNumber;
     private CardView beDonor,searchBlood,bloodBank,ambulance,addDonor,facts,about,shareApp;
 
+    public static String checkPoint="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        try{
+            checkPoint=getIntent().getExtras().getString("checkPoint");
+        }catch(Exception e){
+
+        }
 
         BeDonorActivity.flage=0;
 
@@ -73,10 +83,10 @@ public class MainActivity extends AppCompatActivity
         // Project OnCreate Method starts Here......................................................
         // Find all variable........................................................................
 
-        userNumber=(TextView)findViewById(R.id.userNumberTextView_id);
+        //userNumber=(TextView)findViewById(R.id.userNumberTextView_id);
         donorNumber=(TextView)findViewById(R.id.donorNumberTextView_id);
 
-        beDonor=(CardView)findViewById(R.id.beADonor_id);
+       // beDonor=(CardView)findViewById(R.id.beADonor_id);
         searchBlood=(CardView)findViewById(R.id.searchBlood_id);
         bloodBank=(CardView)findViewById(R.id.bloodBank_id);
         ambulance=(CardView)findViewById(R.id.ambulance_id);
@@ -87,7 +97,7 @@ public class MainActivity extends AppCompatActivity
 
         // set OnClick Listener.............................
 
-        beDonor.setOnClickListener(this);
+        //beDonor.setOnClickListener(this);
         searchBlood.setOnClickListener(this);
         bloodBank.setOnClickListener(this);
         ambulance.setOnClickListener(this);
@@ -99,12 +109,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
 
-        if(v.getId()==R.id.beADonor_id){
+        /*if(v.getId()==R.id.beADonor_id){
 
             Intent intent = new Intent(MainActivity.this,BeDonorActivity.class);
             startActivity(intent);
 
-        }else if(v.getId()==R.id.searchBlood_id){
+        }*/ if(v.getId()==R.id.searchBlood_id){
 
             Intent intent = new Intent(MainActivity.this,SearchBloodActivity.class);
             startActivity(intent);
@@ -120,8 +130,13 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         }else if(v.getId()==R.id.addDonor_id){
             try{
-                Intent intent = new Intent(MainActivity.this,AddDonorActivity.class);
-                startActivity(intent);
+               if(checkPoint.equals("finish")){
+                   Intent intent = new Intent(MainActivity.this,AddDonorActivity.class);
+                   startActivity(intent);
+                }else{
+                   Toast.makeText(this, "Please sign in  to use the feature!", Toast.LENGTH_SHORT).show();
+               }
+
             }catch (Exception e){
                 Toast.makeText(this, ""+e, Toast.LENGTH_SHORT).show();
             }
@@ -166,24 +181,39 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.main, menu);
+        this.menu = menu;
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_signIn_id) {
+
+            Intent intent = new Intent(MainActivity.this,BeDonorActivity.class);
+            startActivity(intent);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem menuItem = menu.findItem(R.id.action_signIn_id);
+        if(checkPoint.equals("finish")){
+            menuItem.setTitle("");
+            menuItem.setVisible(false);
+            this.invalidateOptionsMenu();
+        }else{
+            menuItem.setTitle("Sing_up");
+        }
+
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

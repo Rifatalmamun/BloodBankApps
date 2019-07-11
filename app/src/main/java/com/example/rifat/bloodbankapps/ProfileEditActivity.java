@@ -357,6 +357,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
                 updateMyProfileTableReference.updateChildren(updatedvalue1);
 
                 Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
+                AddDonorActivity.appsUserMobileNumber=takePhone;
             }
             //Condition 2: bg same, dist not same, phone same....
             else if(parentGroup.equals(takeBloodGroup) && !parentDist.equals(takeDistrict) && parentPhoneNumber.equals(takePhone)){
@@ -377,6 +378,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
                 updateMyProfileTableReference.updateChildren(updatedvalue1);
 
                 Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
+                AddDonorActivity.appsUserMobileNumber=takePhone;
             }
             //Condition 3: bg not same, dist same, phone same....
             else if(!parentGroup.equals(takeBloodGroup) && parentDist.equals(takeDistrict) && parentPhoneNumber.equals(takePhone)){
@@ -395,6 +397,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
 
                 updateMyProfileTableReference.updateChildren(updatedvalue1);
                 Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
+                AddDonorActivity.appsUserMobileNumber=takePhone;
             }
             //Condition 4: bg not same, dist not same, phone same....
             else if(!parentGroup.equals(takeBloodGroup) && !parentDist.equals(takeDistrict) && parentPhoneNumber.equals(takePhone)){
@@ -413,6 +416,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
 
                 updateMyProfileTableReference.updateChildren(updatedvalue1);
                 Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
+                AddDonorActivity.appsUserMobileNumber=takePhone;
             }
             //Condition 5: bg  same, dist  same, phone not same....
             else if(parentGroup.equals(takeBloodGroup) && parentDist.equals(takeDistrict) && !parentPhoneNumber.equals(takePhone)){
@@ -433,6 +437,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
                 updateMyProfileTableReference.child(takePhone).child(catchKEY).setValue(dClass);
 
                 Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
+                AddDonorActivity.appsUserMobileNumber=takePhone;
             }
             //Condition 6: bg  same, dist not same, phone not same....
             else if(parentGroup.equals(takeBloodGroup) && !parentDist.equals(takeDistrict) && !parentPhoneNumber.equals(takePhone)){
@@ -449,6 +454,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
                 updateMyProfileTableReference.child(takePhone).child(catchKEY).setValue(ddClass);
 
                 Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
+                AddDonorActivity.appsUserMobileNumber=takePhone;
             }
             //Condition 7: bg not same, dist same, phone not same....
             else if(!parentGroup.equals(takeBloodGroup) && parentDist.equals(takeDistrict) && !parentPhoneNumber.equals(takePhone)){
@@ -464,6 +470,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
                 updateMyProfileTableReference.child(takePhone).child(catchKEY).setValue(ddClass);
 
                 Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
+                AddDonorActivity.appsUserMobileNumber=takePhone;
             }
             //Condition 8: bg not same, dist same, phone not same....
             else if(!parentGroup.equals(takeBloodGroup) && !parentDist.equals(takeDistrict) && !parentPhoneNumber.equals(takePhone)){
@@ -479,16 +486,20 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
                 updateMyProfileTableReference.child(takePhone).child(catchKEY).setValue(ddClass);
 
                 Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
+
+                AddDonorActivity.appsUserMobileNumber=takePhone;
             }
 
 
             Intent intent = new Intent(ProfileEditActivity.this,MainActivity.class);
             startActivity(intent);
+            finish();
         }
         if(v.getId()==R.id.cancleButton_id){
 
             Intent intent = new Intent(ProfileEditActivity.this,AddDonorActivity.class);
             startActivity(intent);
+            finish();
         }
     }
     private void openDatePicker() {

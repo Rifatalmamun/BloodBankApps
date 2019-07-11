@@ -39,7 +39,7 @@ import java.util.Random;
 
 public class BeDonorActivity extends AppCompatActivity implements View.OnClickListener {
     private Context ctx;
-    private DatabaseReference databaseReference,databaseReference1; // for firebase
+    //private DatabaseReference databaseReference,databaseReference1; // for firebase
 
     private EditText name,phoneNumber;
     private Spinner selectBloodGroup;
@@ -47,9 +47,10 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
 
     private String[] bloodGroupArray;
     private String[] districtNameArray;
-    private Button beDonorSubmitButton,beDonorCancleButton;
+    private Button beDonorNextButton,beDonorCancleButton;
     private Button datePickerButton;
     private TextView lastDonationTextView,iDontKnowTextView,select_city,department,session;
+    private TextView alreadyRegistered;
     private DatePickerDialog date_Picker_Dialog;
 
     private String donorName,donorBloodGroup,donorDistrict,donorPhoneNumber,donorEmail,donorDepartment,donorSession,donorLastDonationDate;
@@ -79,6 +80,8 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
     private String takeSession="";
     private String takeDonationDate="";
 
+    private int dateFlag=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,9 +89,9 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
 
 
 
-        databaseReference=FirebaseDatabase.getInstance().getReference("DonorDetailsTable");
+        /*databaseReference=FirebaseDatabase.getInstance().getReference("DonorDetailsTable");
 
-        databaseReference1=FirebaseDatabase.getInstance().getReference("MyProfileTable");
+        databaseReference1=FirebaseDatabase.getInstance().getReference("MyProfileTable");*/
         this.setTitle("Be a Donor page");
 
         r=new Random();
@@ -102,13 +105,15 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
         department=(TextView) findViewById(R.id.departmentTextView_id);
         sessionSpinner=(ImageView)findViewById(R.id.sessionSpinner_id);
         session=(TextView) findViewById(R.id.sessionTextView_id);
-        beDonorSubmitButton=(Button)findViewById(R.id.beDonorSubmitButton_id);
-        beDonorCancleButton=(Button)findViewById(R.id.beDonorCancleButton_id);
+        beDonorNextButton=(Button)findViewById(R.id.beDonorNextButton_id);
+        //beDonorCancleButton=(Button)findViewById(R.id.beDonorCancleButton_id);
         datePickerButton=(Button)findViewById(R.id.datePicker_id);
         iDontKnowTextView=(TextView)findViewById(R.id.iDontKnowTextView_id);
+        lastDonationTextView=(TextView)findViewById(R.id.lastDonationDate_id);
         select_city=(TextView)findViewById(R.id.selectCity_id);
-
         select_city.setText(catchDistrict);
+
+        alreadyRegistered=(TextView)findViewById(R.id.beDonorAlreadyRegisteredTextView_id);
 
         // Blood Group Spinner......................................................................
 
@@ -118,13 +123,15 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
 
 
         // set onclick listener...............................................................
-        beDonorSubmitButton.setOnClickListener(this);
-        beDonorCancleButton.setOnClickListener(this);
+        beDonorNextButton.setOnClickListener(this);
+       // beDonorCancleButton.setOnClickListener(this);
         datePickerButton.setOnClickListener(this);
         selectCitySpinner.setOnClickListener(this);
         departmentSpinner.setOnClickListener(this);
         sessionSpinner.setOnClickListener(this);
         //iDontKnowTextView.setOnClickListener(this);
+        lastDonationTextView.setOnClickListener(this);
+        alreadyRegistered.setOnClickListener(this);
 
        // if(flage > 0){
             try {
@@ -150,6 +157,8 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
 
             }
         //}
+
+
     }
 
     @Override
@@ -247,8 +256,15 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
             openDatePicker();
             //Toast.makeText(getApplicationContext(), "clicked button", Toast.LENGTH_SHORT).show();
         }
+        if(v.getId()==R.id.lastDonationDate_id){
+            if(!lastDonationTextView.getText().toString().equals("Last Donation date")){
+                lastDonationTextView.setText("Last Donation date");
+                iDontKnowTextView.setText("I don't know");
+            }
 
-        if(v.getId()==R.id.beDonorSubmitButton_id){
+        }
+
+        if(v.getId()==R.id.beDonorNextButton_id){
 
             // first create 10 digit random number;.................
             String random_number="";
@@ -270,11 +286,15 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
             donorStoreInDatabase(random_number);
 
         }
-        if(v.getId()==R.id.beDonorCancleButton_id){
-            Intent intent = new Intent(BeDonorActivity.this,MainActivity.class);
-            beDonorCancleButton.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+        if(v.getId()==R.id.beDonorAlreadyRegisteredTextView_id){
+            Intent intent =new Intent(BeDonorActivity.this,LoginActivity.class);
             startActivity(intent);
         }
+        /*if(v.getId()==R.id.beDonorCancleButton_id){
+            Intent intent = new Intent(BeDonorActivity.this,BeDonor2Activity.class);
+            beDonorCancleButton.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+            startActivity(intent);
+        }*/
     }
 
     private void openDatePicker() {
@@ -305,6 +325,7 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
                         }
 
                         iDontKnowTextView.setText(dayy+"/"+monthh+"/"+yearr);
+                        lastDonationTextView.setText("I don't know");
                     }
                 },currentYear,currentMonth,currentDay);
 
@@ -348,25 +369,25 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
             return;
         }
 
-
-        // int check=checkDistrictName(donorDistrict);
-
-        /*if(check==0){
-            districtName.setError("District Spelling error!!!");
-            districtName.requestFocus();
-            return;
-        }*/
-
-        /*if(isNetworkAvaliable(ctx)){
-            Toast.makeText(getApplicationContext(),"No Internet",Toast.LENGTH_LONG).show();
-        }else
-            Toast.makeText(getApplicationContext(),"No Internet No Internet",Toast.LENGTH_LONG).show();*/
-
         // internet connection check;
         if(!isConnected(BeDonorActivity.this)){
             buildDialog(BeDonorActivity.this).show();
         }else{
-            String key=databaseReference.push().getKey();
+
+            Intent intent = new Intent(BeDonorActivity.this,BeDonor2Activity.class);
+
+            intent.putExtra("rn",rn);
+            intent.putExtra("name",donorName);
+            intent.putExtra("bloodGroup",donorBloodGroup);
+            intent.putExtra("district",donorDistrict);
+            intent.putExtra("phone",donorPhoneNumber);
+            intent.putExtra("department",donorDepartment);
+            intent.putExtra("session",donorSession);
+            intent.putExtra("lastDonationDate",donorLastDonationDate);
+
+            startActivity(intent);
+
+            /*String key=databaseReference.push().getKey();
 
             DonorClass donorClass = new DonorClass(rn,key,donorName,donorBloodGroup,donorPhoneNumber,donorDistrict,donorDepartment,donorSession,donorLastDonationDate);
             //DonorIdClass donorIdClass=new DonorIdClass(rn,key,donorPhoneNumber);
@@ -381,7 +402,13 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
             clearAllFieldValue(); // clear method call..............
 
             Intent intent = new Intent(BeDonorActivity.this,MainActivity.class);
-            startActivity(intent);
+            intent.putExtra("checkPoint","finish");
+
+            AddDonorActivity.appsUserMobileNumber=donorPhoneNumber;*/
+
+           // startActivity(intent);
+
+
         }
     }
 

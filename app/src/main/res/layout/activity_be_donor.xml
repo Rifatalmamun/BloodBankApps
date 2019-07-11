@@ -20,11 +20,10 @@
             android:background="@drawable/seeprofilebordershape"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Be Donor"
+            android:text="please fill up"
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:gravity="center"/>
-
     </LinearLayout>
 
 
@@ -42,7 +41,7 @@
                 android:text="Name "
                 android:textColor="#000000"
                 android:gravity="fill_vertical"
-                android:textSize="20sp" />
+                android:textSize="17sp" />
             <EditText
                 android:id="@+id/nameEditText_id"
                 android:layout_weight=".7"
@@ -67,7 +66,7 @@
             android:text="Blood Group"
             android:textColor="#000000"
             android:gravity="fill_vertical"
-            android:textSize="20sp" />
+            android:textSize="17sp" />
         <Spinner
             android:id="@+id/selectBloodGroup_id"
             android:layout_marginLeft="20dp"
@@ -93,7 +92,7 @@
             android:text="District"
             android:textColor="#000000"
             android:gravity="fill_vertical"
-            android:textSize="20sp" />
+            android:textSize="17sp" />
         <TextView
             android:id="@+id/selectCity_id"
             android:layout_width="0dp"
@@ -125,7 +124,7 @@
             android:text="Phone"
             android:textColor="#000000"
             android:gravity="fill_vertical"
-            android:textSize="20sp" />
+            android:textSize="17sp" />
         <EditText
             android:id="@+id/phoneNumberEditText_id"
             android:layout_marginLeft="20dp"
@@ -152,7 +151,7 @@
                 android:text="Department"
                 android:textColor="#000000"
                 android:gravity="fill_vertical"
-                android:textSize="20sp" />
+                android:textSize="17sp" />
             <TextView
                 android:id="@+id/departmentTextView_id"
                 android:layout_width="0dp"
@@ -183,7 +182,7 @@
                 android:text="Session"
                 android:textColor="#000000"
                 android:gravity="fill_vertical"
-                android:textSize="20sp" />
+                android:textSize="17sp" />
             <TextView
                 android:id="@+id/sessionTextView_id"
                 android:layout_width="0dp"
@@ -207,12 +206,13 @@
         android:layout_weight="1">
 
         <TextView
+            android:id="@+id/lastDonationDate_id"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".4"
+            android:gravity="fill_vertical"
             android:text="Last Donation date"
             android:textColor="#000000"
-            android:gravity="fill_vertical"
             android:textSize="17sp" />
         <Button
             android:id="@+id/datePicker_id"
@@ -233,33 +233,35 @@
             android:textSize="17sp" />
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_weight="1">
 
         <Button
-            android:id="@+id/beDonorSubmitButton_id"
+            android:id="@+id/beDonorNextButton_id"
             android:background="@drawable/buttonbackground"
-            android:layout_width="wrap_content"
+            android:layout_width="230dp"
+            android:gravity="center"
             android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:text="Submit"
+            android:text="Next"
             android:textAllCaps="false"
             android:textColor="#000000"
             android:textSize="18sp" />
-        <Button
-            android:id="@+id/beDonorCancleButton_id"
-            android:background="@drawable/buttonbackground"
-            android:layout_marginLeft="20dp"
-            android:layout_weight=".3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancle"
-            android:textAllCaps="false"
-            android:textSize="18sp" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/beDonorAlreadyRegisteredTextView_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Are you already registered? Login..."
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:textColor="#ad0404"
+        />
 
 
 

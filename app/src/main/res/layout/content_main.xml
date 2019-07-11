@@ -22,40 +22,19 @@
             android:weightSum="2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/border"
+            android:background="#ffffff"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/userNumberTextView_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="User: 0000"
-                    android:textColor="#840909"
-                    android:textSize="24sp"
-                    android:padding="10dp" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-
                 <TextView
                     android:id="@+id/donorNumberTextView_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Donor: 0000"
+                    android:text="Donate Blood..Save Life"
                     android:textColor="#840909"
-                    android:textSize="24sp"
+                    android:textSize="18sp"
+                    android:textAlignment="center"
+                    android:textStyle="italic"
                     android:padding="10dp" />
-
-            </LinearLayout>
 
         </LinearLayout>
 
@@ -67,7 +46,7 @@
             android:orientation="horizontal">
 
             <android.support.v7.widget.CardView
-                android:id="@+id/beADonor_id"
+                android:id="@+id/addDonor_id"
                 android:padding="10dp"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
@@ -76,17 +55,16 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                     <ImageView
+                        android:padding="5dp"
                         android:layout_width="100dp"
                         android:layout_height="70dp"
-                        android:padding="5dp"
-                        android:src="@drawable/s" />
-
+                        android:src="@drawable/ic_verified_user_black_24dp" />
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -94,17 +72,22 @@
                         android:background="#18492b" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:padding="10dp"
-                        android:text="Be Donor"
                         android:textAppearance="?android:textAppearanceLarge"
+                        android:text="My Account"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:padding="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
                 </LinearLayout>
 
+
+
             </android.support.v7.widget.CardView>
+
+
             <android.support.v7.widget.CardView
                 android:id="@+id/searchBlood_id"
                 android:padding="10dp"
@@ -194,6 +177,58 @@
 
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
+                android:id="@+id/ordanization_id"
+                android:padding="10dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:padding="5dp"
+                        android:layout_width="100dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/ic_home_black_24dp"  />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_margin="10dp"
+                        android:background="#18492b" />
+
+                    <TextView
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:text="Organization"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:padding="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+
+
+            <android.support.v7.widget.CardView
                 android:id="@+id/ambulance_id"
                 android:padding="10dp"
                 android:clickable="true"
@@ -230,56 +265,6 @@
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/addDonor_id"
-                android:padding="10dp"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:padding="5dp"
-                        android:layout_width="100dp"
-                        android:layout_height="70dp"
-                        android:src="@drawable/ic_verified_user_black_24dp" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_margin="10dp"
-                        android:background="#18492b" />
-
-                    <TextView
-                        android:textAppearance="?android:textAppearanceLarge"
-                        android:text="My Account"
-                        android:layout_marginTop="5dp"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
-                        android:padding="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-
-
-
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
                 android:id="@+id/facts_id"
@@ -318,8 +303,7 @@
                         android:textStyle="bold" />
 
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
+            </android.support.v7.widget.CardView>        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

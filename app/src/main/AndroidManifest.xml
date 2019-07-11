@@ -48,7 +48,9 @@
         <activity android:name=".sessionlist_For_BEDONOR" />
         <activity android:name=".districtListAlertDialogBloodBank" />
         <activity android:name=".districtList_For_BloodBankSearch" />
-        <activity android:name=".AddBloodBankActivity"></activity>
+        <activity android:name=".AddBloodBankActivity" />
+        <activity android:name=".BeDonor2Activity" />
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>

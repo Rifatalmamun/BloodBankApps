@@ -32,6 +32,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +44,7 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
     int i =5;
 
     private FloatingActionButton floatingActionButton;
-    private EditText loginPhnNumber,loginPassword;
+    private TextView loginPhnNumber,loginPassword;
     private Button loginButton;
 
     private ListView listViewProfile;
@@ -57,80 +59,85 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
 
     private EditText updateNameEditText,updateBloodGrouopEditText,updateDistrictEditText,updatePhoneEditText,updateDepartmentEditText,updateSessionEditText,updateDonationDateEditText;
     private Button cancleButton,updateButton;
-
     private ProgressBar progressbarInAddDonor;
+
+    private TextView myAcName,myAcBloodGroup,myAcLocation,myAcLastDate;
+
+    private String acN,acBg,acDis,acDD;
+
+    public static String appsUserMobileNumber="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_donor);
 
-
-        //..................................................................
-
-
-
-
-        //////////////////////////////////////////////////////
-
-        //floatingActionButton=(FloatingActionButton)findViewById(R.id.fab);
-
         imgPart=(LinearLayout)findViewById(R.id.imgSection_id);
         loginInputPart=(LinearLayout)findViewById(R.id.loginInputLinearlayout_id);
-        //showpart=(LinearLayout)findViewById(R.id.showPart_id);
-        //editpart=(LinearLayout)findViewById(R.id.editPart_id);
-        //editpart.setVisibility(View.GONE);
 
-        /*floatingActionButton.hide();
+        loginPhnNumber=(TextView)findViewById(R.id.loginPhoneNumber_id);
+        loginPassword=(TextView)findViewById(R.id.loginPassword_id);
+
+        myAcName=(TextView)findViewById(R.id.myAccoutnName_id);
+        myAcBloodGroup=(TextView)findViewById(R.id.myAccoutnBloodGroup_id);
+        myAcLocation=(TextView)findViewById(R.id.myAccoutnLocation_id);
+        myAcLastDate=(TextView)findViewById(R.id.myAccoutnLastDonatDate_id);
 
         //.............. Floating action Button..............................
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab = findViewById(R.id.fab_id);
+        fab.setOnClickListener(this);
+        fab.setVerticalScrollbarPosition(0);
+
+        //.............. Floating action Button...............................
+
+        progressbarInAddDonor=(ProgressBar)findViewById(R.id.progressbarAddDonor_id);
+        loginPhnNumber.setText(appsUserMobileNumber);
+        donorProfileList = new ArrayList<>();
+
+        //if(!loginPhnNumber.equals("")){
+           // String loginP=loginPhnNumber.getText().toString();
+            loadUserProfileDataForFirstPage(appsUserMobileNumber);
+       // }
+
+
+    }
+
+    private void loadUserProfileDataForFirstPage(String loginP) {
+
+        final DatabaseReference profileRefForFirstPage = FirebaseDatabase.getInstance().getReference("MyProfileTable");
+
+        profileRefForFirstPage.child(loginP).orderByChild("donor_phoneNumber")
+                .equalTo(loginP).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-               *//* Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*//*
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                donorProfileList.clear();
 
-                if(!isConnected(AddDonorActivity.this)){
-                    buildDialog(AddDonorActivity.this).show();
-                }
-                else{
+                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
+                {
+                    DonorClass donorClass = dataSnapshot1.getValue(DonorClass.class);
 
-                    if(updateNameEditText.getText().toString().isEmpty()){
+                    String acN = donorClass.getDonor_name();
+                    String acBg = donorClass.getDonor_bloodGroup();
+                    String acDis = donorClass.getDonor_district();
+                    String acDD = donorClass.getDonor_lastDonationDate();
 
-                        editpart.setVisibility(view.GONE);
-                        showpart.setVisibility(View.VISIBLE);
-                        loginInputPart.setVisibility(View.VISIBLE);
-                    }else{
-                        editpart.setVisibility(View.VISIBLE);
-                        showpart.setVisibility(View.GONE);
-                        loginInputPart.setVisibility(View.GONE);
-                    }
+                    myAcName.setText("Name: "+acN);
+                    myAcBloodGroup.setText("Blood Group: "+acBg);
+                    myAcLocation.setText("Location: "+acDis);
+                    myAcLastDate.setText("Last Donation Date: "+acDD);
+
+                    progressbarInAddDonor.setVisibility(View.GONE);
+
                 }
 
 
             }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
         });
-*/
-        //.............. Floating action Button...............................
-
-        loginPhnNumber=(EditText)findViewById(R.id.loginPhoneNumber_id);
-        loginPassword=(EditText)findViewById(R.id.loginPassword_id);
-
-
-        loginButton=(Button)findViewById(R.id.loginButton_id);
-
-        loginButton.setOnClickListener(this);
-
-        progressbarInAddDonor=(ProgressBar)findViewById(R.id.progressbarAddDonor_id);
-        read();
-
-        donorProfileList = new ArrayList<>();
-
-
-
-
     }
 
     private void read()
@@ -151,7 +158,7 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.loginButton_id){
+        if(v.getId()==R.id.fab_id){
 
             /*loginInputPart.setVisibility(View.VISIBLE);
             editpart.setVisibility(View.GONE);

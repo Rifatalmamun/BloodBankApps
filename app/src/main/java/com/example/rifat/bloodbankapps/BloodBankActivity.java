@@ -40,7 +40,7 @@ public class BloodBankActivity extends AppCompatActivity implements View.OnClick
     private EditText bloodbankName,bloodBankLocation,bloodBankPhonenumber;
 
     private String final_district_selection="";
-
+    private int exceptionFlag=0;
 
 
     @Override
@@ -57,10 +57,13 @@ public class BloodBankActivity extends AppCompatActivity implements View.OnClick
 
         try{
             final_district_selection=getIntent().getExtras().getString("districtNameCatch");
+            exceptionFlag=0;
 
            // districtTextView.setText(final_district_selection);
         }catch(Exception e){
            // Toast.makeText(this, ""+e, Toast.LENGTH_SHORT).show();
+
+            exceptionFlag=1;
 
             final_district_selection="Jessore";
         }
@@ -162,9 +165,18 @@ public class BloodBankActivity extends AppCompatActivity implements View.OnClick
             finish();
 
         }
-
-
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        if(!final_district_selection.equals("") && exceptionFlag!=1){
+            MenuItem menuItem = menu.findItem(R.id.action_selectLocation_id);
+
+            menuItem.setTitle(final_district_selection);
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     private void updateMenuTitles(String menuName){

@@ -9,6 +9,7 @@
     android:gravity="fill_vertical"
     android:orientation="vertical"
     android:weightSum="5"
+    android:padding="10dp"
     tools:context=".AddDonorActivity">
 
 
@@ -16,7 +17,7 @@
         android:id="@+id/imgSection_id"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.5">
+        android:layout_weight="1">
 
         <ImageView
             android:layout_width="match_parent"
@@ -31,68 +32,101 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginTop="30dp"
-        android:layout_weight="2.5"
-        android:background="#fbffffff"
+        android:layout_weight="2"
         android:orientation="vertical"
+
         android:padding="20dp">
 
-        <EditText
+        <TextView
             android:drawableLeft="@drawable/ic_local_phone_black_24dp"
             android:drawablePadding="10dp"
             android:id="@+id/loginPhoneNumber_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/buttonbackground"
             android:hint="Enter Phone number here"
             android:inputType="phone"
-            android:padding="7dp"
+            android:textSize="17dp"
             android:textColor="#a20303"
             android:textColorHint="#a20303" />
 
-        <EditText
+        <TextView
             android:drawableLeft="@drawable/ic_lock_black_24dp"
             android:drawablePadding="10dp"
             android:id="@+id/loginPassword_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/buttonbackground"
-            android:hint="Enter password here"
+            android:text="Enter password here"
             android:inputType="textPassword"
-            android:padding="7dp"
+            android:textSize="17dp"
             android:textColor="#a20303"
             android:textColorHint="#a20303" />
 
-        <Button
-            android:id="@+id/loginButton_id"
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/seeprofilebordershape"
-            android:padding="15dp"
-            android:text="Login to see profile"
-            android:textAllCaps="false"
-            android:textColor="#ffffff"
-            android:textSize="16sp" />
+            android:background="@drawable/background1" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background1" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="1.5">
 
         <ProgressBar
             android:id="@+id/progressbarAddDonor_id"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center" />
+        <TextView
+            android:id="@+id/myAccoutnName_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-            />
+            android:gravity="center"
+            android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/myAccoutnBloodGroup_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/myAccoutnLocation_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:gravity="center"
+            android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/myAccoutnLastDonatDate_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:gravity="center"
+            android:textSize="18sp"/>
 
     </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_edit_black_24dp"
+        app:backgroundTint="@color/colorAccent" />
 
 
 </LinearLayout>
