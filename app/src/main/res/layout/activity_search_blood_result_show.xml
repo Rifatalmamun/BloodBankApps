@@ -6,18 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:padding="5dp"
     tools:context=".SearchBloodResultShowActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBarSearchBloodResultShow_id"
+        android:visibility="visible"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <ListView
+        android:visibility="visible"
         android:id="@+id/searchBloodResultShowListView_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:dividerHeight="2dp"
         android:divider="#000000">
-
     </ListView>
+
+
 
 
 

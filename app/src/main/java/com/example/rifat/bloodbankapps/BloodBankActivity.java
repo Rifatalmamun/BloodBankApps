@@ -50,21 +50,13 @@ public class BloodBankActivity extends AppCompatActivity implements View.OnClick
 
         this.setTitle("Blood Bank");
 
-        //districtTextView=(TextView)findViewById(R.id.districtNameTextView_id) ;
-        //districtSpinner=(ImageView)findViewById(R.id.bloodBankDistrictSpinner_id);
-
-        //districtSpinner.setOnClickListener(this);
 
         try{
             final_district_selection=getIntent().getExtras().getString("districtNameCatch");
             exceptionFlag=0;
 
-           // districtTextView.setText(final_district_selection);
         }catch(Exception e){
-           // Toast.makeText(this, ""+e, Toast.LENGTH_SHORT).show();
-
             exceptionFlag=1;
-
             final_district_selection="Jessore";
         }
 
@@ -72,33 +64,12 @@ public class BloodBankActivity extends AppCompatActivity implements View.OnClick
         FloatingActionButton fab = findViewById(R.id.fab_id);
         fab.setOnClickListener(this);
         fab.setVerticalScrollbarPosition(0);
-        /*fab.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-               *//* Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*//*
-
-               // jodi floating button a click kore tahole ja hobe......
-
-
-            }
-        });*/
 
         //..................................................................
-
-
-
-
-
 
         listView=(ListView)findViewById(R.id.bloodBankListView_id);
         bloodBankList=new ArrayList<>();
         bloodBankCustomAdapter = new BloodBankCustomAdapter(BloodBankActivity.this,bloodBankList);
-
-      // String selectedDistrict=districtTextView.getText().toString();
-       // Toast.makeText(this, ""+selectedDistrict, Toast.LENGTH_SHORT).show();
 
         final DatabaseReference myRefBB=FirebaseDatabase.getInstance().getReference("BloodBankTable");
 
@@ -131,10 +102,6 @@ public class BloodBankActivity extends AppCompatActivity implements View.OnClick
             Intent intent = new Intent(BloodBankActivity.this,AddBloodBankActivity.class);
             startActivity(intent);
         }
-       /* if(v.getId()==R.id.bloodBankDistrictSpinner_id){
-
-        }*/
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -185,10 +152,4 @@ public class BloodBankActivity extends AppCompatActivity implements View.OnClick
         menuItem.setTitle(menuName);
     }
 
-    /* @Override
-    public void applyTexts(String name, String phone) {
-
-        Toast.makeText(this, "Name "+name, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "Phone "+phone, Toast.LENGTH_SHORT).show();
-    }*/
 }

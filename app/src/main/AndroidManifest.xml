@@ -50,7 +50,14 @@
         <activity android:name=".districtList_For_BloodBankSearch" />
         <activity android:name=".AddBloodBankActivity" />
         <activity android:name=".BeDonor2Activity" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".OrganizationActivity" />
+        <activity android:name=".districtList_For_OrganizationSearch" />
+        <activity android:name=".AddOrganizatoinActivity" />
+        <activity android:name=".districtListAlertDialogOrganization" />
+        <activity android:name=".AddAmbulanceActivity" />
+        <activity android:name=".districtList_For_AmbulanceSearch" />
+        <activity android:name=".districtListAlertDialogAmbulance"></activity>
     </application>
 
 </manifest>

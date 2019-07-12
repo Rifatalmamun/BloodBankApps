@@ -1,6 +1,8 @@
 package com.example.rifat.bloodbankapps;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -73,6 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(LoginActivity.this, "Fail !! ", Toast.LENGTH_SHORT).show();
                     Toast.makeText(LoginActivity.this, "chk: "+chk, Toast.LENGTH_SHORT).show();
                 }else{
+                    loginInformationSaveInSharedPreference(findPhone);
                     MainActivity.checkPoint="finish";
                     AddDonorActivity.appsUserMobileNumber=findPhone;
 
@@ -90,5 +93,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
 
 
+    }
+
+    public void loginInformationSaveInSharedPreference(String phone) {
+        AddDonorActivity.appsUserMobileNumber=phone;
+
+        SharedPreferences sharedPreferences=getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("userLoginPhoneNumber",phone);
+
+        editor.commit();
+        Toast.makeText(LoginActivity.this,"login info stored Successfully ",Toast.LENGTH_SHORT).show();
     }
 }

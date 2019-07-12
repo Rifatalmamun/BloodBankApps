@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +52,8 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
 
 
     private List<DonorClass>donorPhoneNumber;
+    private ProgressBar progressBar;
+    private String checkDataEmptyOrNot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,7 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
         setContentView(R.layout.activity_search_blood_result_show);
 
         this.setTitle("Search Result");
+        progressBar=(ProgressBar)findViewById(R.id.progressBarSearchBloodResultShow_id);
 
         // 2 ta string k catch korlam....................
         final String catchBloodGroup=getIntent().getExtras().getString("SendBloodGroup");
@@ -73,6 +77,8 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
 
         //query_BasedOnBloodGroup.addListenerForSingleValueEvent(valueEventListener);
 
+        progressBar.setVisibility(View.VISIBLE);
+        listView.setVisibility(View.VISIBLE);
         final DatabaseReference myRef=FirebaseDatabase.getInstance().getReference("DonorDetailsTable");
 
         myRef.child(catchBloodGroup).child(catchDistrictName).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -136,15 +142,24 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
                         }
                         int TD=day_diff+(month_diff*30)+(year_diff*365);
 
-                        if(TD>=30){
+                        if(TD>=90){
                             stringBuilder.append(donorClass.getDonor_phoneNumber());
                             donorList.add(donorClass);
                         }
                         Toast.makeText(SearchBloodResultShowActivity.this, "gap: "+TD, Toast.LENGTH_LONG).show();
                     }
+                    checkDataEmptyOrNot=donorClass.getDonor_bloodGroup();
                 }
 
                 listView.setAdapter(resultShowCustomAdapter);
+                progressBar.setVisibility(View.VISIBLE);
+                if( checkDataEmptyOrNot==null){
+                    Toast.makeText(SearchBloodResultShowActivity.this, "Empty !!", Toast.LENGTH_LONG).show();
+
+                }else{
+                    progressBar.setVisibility(View.GONE);
+                    listView.setVisibility(View.VISIBLE);
+                }
 
                 length=stringBuilder.length();
 

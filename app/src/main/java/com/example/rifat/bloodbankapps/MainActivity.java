@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
@@ -26,6 +27,13 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
@@ -35,20 +43,29 @@ public class MainActivity extends AppCompatActivity
     //Declaring all variables name...........................................
 
     private TextView userNumber,donorNumber;
-    private CardView beDonor,searchBlood,bloodBank,ambulance,addDonor,facts,about,shareApp;
+    private CardView beDonor,searchBlood,bloodBank,organization,ambulance,addDonor,facts,about,shareApp;
 
     public static String checkPoint="";
+    public  String phonePass="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+       try{
+
+           readLoginInformationFromSharedPreference();
+
+       }catch(Exception e){}
+
         try{
             checkPoint=getIntent().getExtras().getString("checkPoint");
-        }catch(Exception e){
 
-        }
+           // writeToFile(checkPoint);
+
+        }catch(Exception e){}
+
 
         BeDonorActivity.flage=0;
 
@@ -89,6 +106,7 @@ public class MainActivity extends AppCompatActivity
        // beDonor=(CardView)findViewById(R.id.beADonor_id);
         searchBlood=(CardView)findViewById(R.id.searchBlood_id);
         bloodBank=(CardView)findViewById(R.id.bloodBank_id);
+        organization=(CardView)findViewById(R.id.organization_id);
         ambulance=(CardView)findViewById(R.id.ambulance_id);
         addDonor=(CardView)findViewById(R.id.addDonor_id);
         facts=(CardView)findViewById(R.id.facts_id);
@@ -100,12 +118,31 @@ public class MainActivity extends AppCompatActivity
         //beDonor.setOnClickListener(this);
         searchBlood.setOnClickListener(this);
         bloodBank.setOnClickListener(this);
+        organization.setOnClickListener(this);
         ambulance.setOnClickListener(this);
         addDonor.setOnClickListener(this);
         facts.setOnClickListener(this);
         about.setOnClickListener(this);
         shareApp.setOnClickListener(this);
     }
+
+    private void readLoginInformationFromSharedPreference() {
+        // For Read Data from sharePreferences...................write this code
+        SharedPreferences sharedPreferences=getSharedPreferences("userDetails",Context.MODE_PRIVATE);
+        if(sharedPreferences.contains("userLoginPhoneNumber")){
+            String getPreviousPhoneNumber=sharedPreferences.getString("userLoginPhoneNumber","userName not found");
+
+            AddDonorActivity.appsUserMobileNumber=getPreviousPhoneNumber;
+
+            checkPoint="finish";
+
+            Toast.makeText(this, "pre Phone:  "+getPreviousPhoneNumber, Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(MainActivity.this,"not found",Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @Override
     public void onClick(View v) {
 
@@ -122,6 +159,11 @@ public class MainActivity extends AppCompatActivity
         }else if(v.getId()==R.id.bloodBank_id){
 
             Intent intent = new Intent(MainActivity.this,BloodBankActivity.class);
+            startActivity(intent);
+
+        }else if(v.getId()==R.id.organization_id){
+
+            Intent intent = new Intent(MainActivity.this,OrganizationActivity.class);
             startActivity(intent);
 
         }else if(v.getId()==R.id.ambulance_id){
@@ -158,16 +200,6 @@ public class MainActivity extends AppCompatActivity
 
         }
     }
-
-
-
-
-
-
-
-
-
-
 
     @Override
     public void onBackPressed() {
@@ -277,5 +309,55 @@ public class MainActivity extends AppCompatActivity
         return builder;
     }
 
+
+
+
+
+
+
+
+
+
+
+    // write into file.......................
+
+    public void writeToFile(String chk) {
+
+        try {
+            FileOutputStream fileOutputStream = openFileOutput("phone.text",Context.MODE_PRIVATE);
+            try {
+                fileOutputStream.write(chk.getBytes()); // Text k Bytes a convert korte hoy
+                fileOutputStream.close();
+                Toast.makeText(getApplicationContext(),"Phone no save...",Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public String readFromFile()
+    {
+        String output="";
+        try {
+            FileInputStream fileInputStream = openFileInput("phone.text");
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String line;
+            StringBuffer stringBuffer = new StringBuffer();
+
+            while ((line=bufferedReader.readLine())!=null){
+                stringBuffer.append(line+"\n");
+            }
+            output=stringBuffer.toString();
+
+            AddDonorActivity.appsUserMobileNumber=stringBuffer.toString();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return output;
+    }
 
 }

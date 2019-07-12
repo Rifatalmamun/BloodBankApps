@@ -284,11 +284,11 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
             //Toast.makeText(getApplicationContext(), "clicked!!"+random_number, Toast.LENGTH_SHORT).show();
 
             donorStoreInDatabase(random_number);
-
         }
         if(v.getId()==R.id.beDonorAlreadyRegisteredTextView_id){
             Intent intent =new Intent(BeDonorActivity.this,LoginActivity.class);
             startActivity(intent);
+            finish();
         }
         /*if(v.getId()==R.id.beDonorCancleButton_id){
             Intent intent = new Intent(BeDonorActivity.this,BeDonor2Activity.class);
@@ -386,6 +386,7 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
             intent.putExtra("lastDonationDate",donorLastDonationDate);
 
             startActivity(intent);
+            finish();
 
             /*String key=databaseReference.push().getKey();
 

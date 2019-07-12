@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,12 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Random;
 
 public class BeDonor2Activity extends AppCompatActivity implements View.OnClickListener {
@@ -98,16 +105,28 @@ public class BeDonor2Activity extends AppCompatActivity implements View.OnClickL
 
             Toast.makeText(getApplicationContext(),"Donor Add Successfull !",Toast.LENGTH_SHORT).show();
 
-           // clearAllFieldValue(); // clear method call..............
+            loginInformationSaveInSharedPreference(phone);
 
             Intent intent = new Intent(BeDonor2Activity.this,MainActivity.class);
             intent.putExtra("checkPoint","finish");
-
-            AddDonorActivity.appsUserMobileNumber=phone;
+            //intent.putExtra("phonePass",phone);
             startActivity(intent);
             finish();
         }
     }
+
+    public void loginInformationSaveInSharedPreference(String phone) {
+        AddDonorActivity.appsUserMobileNumber=phone;
+
+        SharedPreferences  sharedPreferences=getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("userLoginPhoneNumber",phone);
+
+        editor.commit();
+        Toast.makeText(BeDonor2Activity.this,"login info stored Successfully ",Toast.LENGTH_SHORT).show();
+    }
+
+
     // clear all field value......................................................
 
  /*   private void clearAllFieldValue() {
@@ -156,4 +175,7 @@ public class BeDonor2Activity extends AppCompatActivity implements View.OnClickL
         });
         return builder;
     }
+
+
+
 }

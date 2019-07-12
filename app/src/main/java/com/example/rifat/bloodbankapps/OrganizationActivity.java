@@ -21,13 +21,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AmbulanceActivity extends AppCompatActivity implements View.OnClickListener {
+public class OrganizationActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Menu menu;
 
     private ListView listView;
-    private List<AmbulanceClass> ambulanceList;
-    private AmbulanceCustomAdapter ambulanceCustomAdapter;
+    private List<OrganizationClass> organizationList;
+    private OrganizationCustomAdapter organizationCustomAdapter;
 
     private String final_district_selection="";
     private int exceptionFlag=0;
@@ -35,9 +35,10 @@ public class AmbulanceActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ambulance);
+        setContentView(R.layout.activity_organization);
 
-        this.setTitle("Ambulance");
+        this.setTitle("Organization");
+
 
         try{
             final_district_selection=getIntent().getExtras().getString("districtNameCatch");
@@ -52,24 +53,24 @@ public class AmbulanceActivity extends AppCompatActivity implements View.OnClick
         fab.setOnClickListener(this);
         fab.setVerticalScrollbarPosition(0);
 
-        listView=(ListView)findViewById(R.id.ambulanceListView_id);
-        ambulanceList=new ArrayList<>();
-        ambulanceCustomAdapter = new AmbulanceCustomAdapter(AmbulanceActivity.this,ambulanceList);
+        listView=(ListView)findViewById(R.id.organizationListView_id);
+        organizationList=new ArrayList<>();
+        organizationCustomAdapter = new OrganizationCustomAdapter(OrganizationActivity.this,organizationList);
 
-        final DatabaseReference myRefBB=FirebaseDatabase.getInstance().getReference("AmbulanceTable");
+        final DatabaseReference myRefBB=FirebaseDatabase.getInstance().getReference("OrganizationTable");
 
         myRefBB.child(final_district_selection).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ambulanceList.clear();
+                organizationList.clear();
 
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                 {
-                    AmbulanceClass ambulanceClass = dataSnapshot1.getValue(AmbulanceClass.class);
+                    OrganizationClass organizationClass = dataSnapshot1.getValue(OrganizationClass.class);
 
-                    ambulanceList.add(ambulanceClass);
+                    organizationList.add(organizationClass);
                 }
-                listView.setAdapter(ambulanceCustomAdapter);
+                listView.setAdapter(organizationCustomAdapter);
             }
 
             @Override
@@ -77,11 +78,14 @@ public class AmbulanceActivity extends AppCompatActivity implements View.OnClick
 
             }
         });
+
+
     }
+
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.fab_id){
-            Intent intent = new Intent(AmbulanceActivity.this,AddAmbulanceActivity.class);
+            Intent intent = new Intent(OrganizationActivity.this,AddOrganizatoinActivity.class);
             startActivity(intent);
         }
     }
@@ -89,7 +93,7 @@ public class AmbulanceActivity extends AppCompatActivity implements View.OnClick
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.ambulance_page_menu_layout,menu);
+        menuInflater.inflate(R.menu.organization_page_menu_layout,menu);
 
         this.menu = menu;
         return true;
@@ -100,10 +104,10 @@ public class AmbulanceActivity extends AppCompatActivity implements View.OnClick
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId()==R.id.action_selectLocationForAmbulance_id){
+        if(item.getItemId()==R.id.action_selectLocationForOrganization_id){
             Toast.makeText(this, "clicked!!", Toast.LENGTH_SHORT).show();
 
-            Intent intent =new Intent(AmbulanceActivity.this,districtList_For_AmbulanceSearch.class);
+            Intent intent =new Intent(OrganizationActivity.this,districtList_For_OrganizationSearch.class);
             startActivity(intent);
             finish();
 
@@ -115,7 +119,7 @@ public class AmbulanceActivity extends AppCompatActivity implements View.OnClick
     public boolean onPrepareOptionsMenu(Menu menu) {
 
         if(!final_district_selection.equals("") && exceptionFlag!=1){
-            MenuItem menuItem = menu.findItem(R.id.action_selectLocationForAmbulance_id);
+            MenuItem menuItem = menu.findItem(R.id.action_selectLocationForOrganization_id);
 
             menuItem.setTitle(final_district_selection);
         }

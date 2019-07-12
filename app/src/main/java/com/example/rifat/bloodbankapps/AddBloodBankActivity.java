@@ -38,8 +38,6 @@ public class AddBloodBankActivity extends AppCompatActivity implements View.OnCl
         databaseReference=FirebaseDatabase.getInstance().getReference("BloodBankTable");
 
 
-
-
         bloodBankNameEditText=(EditText) findViewById(R.id.alertDialogBloodBankNameEditText_id);
         bloodBankPhoneEditText=(EditText) findViewById(R.id.alertDialogBloodBankPhoneEditText_id);
         bloodBankDistrictTextView=(TextView) findViewById(R.id.alertDialogBloodBankLocationTextView_id);

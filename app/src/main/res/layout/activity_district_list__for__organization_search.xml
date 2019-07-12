@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".districtList_For_OrganizationSearch">
+
+    <SearchView
+        android:id="@+id/searchView_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search city here"
+        android:background="#f9f8f8">
+
+    </SearchView>
+
+    <ListView
+        android:id="@+id/districtListForOrganizationkListView_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:background="#ffffff"
+        android:divider="#000000"
+        android:dividerHeight="1dp">
+
+
+    </ListView>
+
+</LinearLayout>
