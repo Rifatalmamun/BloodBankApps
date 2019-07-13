@@ -8,104 +8,105 @@
     android:orientation="vertical"
     android:weightSum="10"
     android:padding="20dp"
-    android:background="#ffffff"
+    android:gravity="center"
     tools:context=".SearchBloodActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/bloodbag"
-            android:scaleType="fitXY"/>
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:weightSum="1"
-        android:layout_marginTop="10dp">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight=".7"
-            android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:text="Select Blood Group"
-            android:background="@drawable/textbackground"
-            android:textColor="#ffffff"
-            android:padding="5dp" />
-        <Spinner
-            android:id="@+id/searchPageSelectBloodGroup_id"
-            android:layout_width="0dp"
-            android:layout_weight=".3"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp">
-        </Spinner>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:weightSum="1"
-        android:layout_marginTop="10dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#fad7d8">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="2">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:weightSum="1"
+            android:layout_marginTop="10dp">
             <TextView
+                android:layout_width="0dp"
                 android:layout_weight=".7"
-                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Select City "
-                android:textSize="20sp"
-                android:padding="5dp"
+                android:textSize="22sp"
+                android:text="Select Blood Group"
+                android:textColor="#0a0a0a"
+                android:padding="5dp" />
+            <Spinner
+                android:id="@+id/searchPageSelectBloodGroup_id"
+                android:layout_width="0dp"
+                android:layout_weight=".3"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp">
+            </Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:weightSum="1"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+                <TextView
+                    android:layout_weight=".8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Select City "
+                    android:textSize="22sp"
+                    android:padding="5dp"
+                    android:textColor="#000000" />
+                <TextView
+                    android:id="@+id/selectCityTextView_id"
+                    android:layout_weight=".9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="21sp"
+                    android:padding="5dp"
+                    android:textColor="#e60404" />
+
+                <ImageView
+                    android:id="@+id/selectCityImageView_id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight=".3"
+                    android:backgroundTint="#e60404"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginTop="50dp">
+
+            <Button
+                android:id="@+id/searchPageSearchButton_id"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+
+                android:text="Search Donor"
+                android:textAllCaps="false"
+                android:textSize="23sp"
+                android:background="@drawable/searchbuttonbackground"
                 android:textColor="#ffffff"
-                android:background="@drawable/textbackground"/>
-            <TextView
-                android:id="@+id/selectCityTextView_id"
-                android:layout_weight=".9"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-
-                android:textSize="21sp"
-                android:padding="5dp"
-                android:textColor="#e60404" />
-
-            <ImageView
-                android:id="@+id/selectCityImageView_id"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight=".4"
-                android:backgroundTint="#e60404"
-                android:src="@drawable/ic_arrow_drop_down_black_24dp" />
-
+                />
 
         </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="10dp">
-
-        <Button
-            android:id="@+id/searchPageSearchButton_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Search Donor"
-            android:textAllCaps="false"
-            android:textSize="23sp"
-            android:background="@drawable/searchbuttonbackground"
-            android:textColor="#ffffff"/>
 
     </LinearLayout>
+
+
 
 </LinearLayout>

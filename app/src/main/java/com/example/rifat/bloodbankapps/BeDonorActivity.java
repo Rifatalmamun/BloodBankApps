@@ -92,7 +92,7 @@ public class BeDonorActivity extends AppCompatActivity implements View.OnClickLi
         /*databaseReference=FirebaseDatabase.getInstance().getReference("DonorDetailsTable");
 
         databaseReference1=FirebaseDatabase.getInstance().getReference("MyProfileTable");*/
-        this.setTitle("Be a Donor page");
+        this.setTitle("Registration");
 
         r=new Random();
         // finding all variables....................................................................

@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity
             buildDialog(MainActivity.this).show();
         }
 
-        this.setTitle("JUST Blood Bank");
+        this.setTitle("Blood Bank JUST");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity
         addDonor=(CardView)findViewById(R.id.addDonor_id);
         facts=(CardView)findViewById(R.id.facts_id);
         about=(CardView)findViewById(R.id.about_id);
-        shareApp=(CardView)findViewById(R.id.share_id);
+        //shareApp=(CardView)findViewById(R.id.share_id);
 
         // set OnClick Listener.............................
 
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity
         addDonor.setOnClickListener(this);
         facts.setOnClickListener(this);
         about.setOnClickListener(this);
-        shareApp.setOnClickListener(this);
+        //shareApp.setOnClickListener(this);
     }
 
     private void readLoginInformationFromSharedPreference() {
@@ -190,15 +190,15 @@ public class MainActivity extends AppCompatActivity
 
         }else if(v.getId()==R.id.about_id){
 
-            Intent intent = new Intent(MainActivity.this,currentLocation.class);
+            Intent intent = new Intent(MainActivity.this,AboutActivity.class);
             startActivity(intent);
 
-        }else if(v.getId()==R.id.share_id){
+        }/*else if(v.getId()==R.id.share_id){
 
             Intent intent = new Intent(MainActivity.this,ShareActivity.class);
             startActivity(intent);
 
-        }
+        }*/
     }
 
     @Override

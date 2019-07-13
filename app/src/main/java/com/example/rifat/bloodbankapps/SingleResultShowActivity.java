@@ -48,7 +48,7 @@ public class SingleResultShowActivity extends AppCompatActivity {
         final DatabaseReference singlemyRef=FirebaseDatabase.getInstance().getReference("DonorDetailsTable");
 
         singlemyRef.child(catchSingleBloodGroup).child(catchSingleDistrictName)
-                .orderByChild("donor_phoneNumber").equalTo(catchSinglePhoneNumber).
+                .orderByChild("donor_key").equalTo(catchSinglePhoneNumber).
                addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

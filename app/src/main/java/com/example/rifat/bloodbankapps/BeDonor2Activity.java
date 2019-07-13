@@ -42,6 +42,7 @@ public class BeDonor2Activity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_be_donor2);
+        this.setTitle("Registration");
 
         databaseReference=FirebaseDatabase.getInstance().getReference("DonorDetailsTable");
         databaseReference1=FirebaseDatabase.getInstance().getReference("MyProfileTable");

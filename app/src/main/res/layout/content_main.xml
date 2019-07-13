@@ -29,7 +29,7 @@
                     android:id="@+id/donorNumberTextView_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Donate Blood..Save Life"
+                    android:text="Donate Blood...Save Life"
                     android:textColor="#840909"
                     android:textSize="18sp"
                     android:textAlignment="center"
@@ -42,7 +42,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.3"
             android:orientation="horizontal">
 
             <android.support.v7.widget.CardView
@@ -70,6 +70,12 @@
                         android:layout_height="1dp"
                         android:layout_margin="10dp"
                         android:background="#18492b" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="edit profile information"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:textAppearance="?android:textAppearanceLarge"
@@ -113,6 +119,11 @@
                         android:layout_height="1dp"
                         android:layout_margin="10dp"
                         android:background="#18492b" />
+                    <TextView
+                        android:text="donor search by area"
+                        android:textSize="12sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -131,7 +142,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.3"
             android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
@@ -160,6 +171,11 @@
                         android:layout_height="1dp"
                         android:layout_margin="10dp"
                         android:background="#18492b" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="blood bank near you"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:textAppearance="?android:textAppearanceLarge"
@@ -201,6 +217,11 @@
                         android:layout_height="1dp"
                         android:layout_margin="10dp"
                         android:background="#18492b" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="blood related organization"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:textAppearance="?android:textAppearanceLarge"
@@ -222,7 +243,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.3"
             android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
@@ -253,6 +274,11 @@
                         android:layout_height="1dp"
                         android:layout_margin="10dp"
                         android:background="#18492b" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ambulance service near you"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:textAppearance="?android:textAppearanceLarge"
@@ -291,6 +317,11 @@
                         android:layout_height="1dp"
                         android:layout_margin="10dp"
                         android:background="#18492b" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="blood donation information"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -308,7 +339,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.3"
             android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
@@ -337,6 +368,11 @@
                         android:layout_height="1dp"
                         android:layout_margin="10dp"
                         android:background="#18492b" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="developer and apps details"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:textAppearance="?android:textAppearanceLarge"
@@ -353,57 +389,6 @@
 
 
             </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
-                android:id="@+id/share_id"
-                android:padding="10dp"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:padding="5dp"
-                        android:layout_width="100dp"
-                        android:layout_height="70dp"
-                        android:src="@drawable/share1"  />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_margin="10dp"
-                        android:background="#18492b" />
-
-                    <TextView
-                        android:textAppearance="?android:textAppearanceLarge"
-                        android:text="Share App"
-                        android:layout_marginTop="5dp"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
-                        android:padding="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="sdfsdfsdfsdfsdf"
-                style="@style/Base.Widget.AppCompat.Button.Colored" />
 
         </LinearLayout>
 

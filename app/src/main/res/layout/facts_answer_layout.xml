@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:padding="15dp"
+    android:orientation="vertical">
+
+
+
+    <TextView
+        android:id="@+id/answerTextView_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#8a8a8a"
+        android:paddingBottom="5dp"
+        android:textSize="15sp"
+        android:paddingLeft="?android:expandableListPreferredChildPaddingLeft"
+
+        />
+
+</LinearLayout>

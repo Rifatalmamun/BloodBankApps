@@ -41,7 +41,7 @@ public class SearchBloodActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_blood);
 
-        this.setTitle("Search Blood Page");
+        this.setTitle("Search Blood");
 
 
 
@@ -108,7 +108,9 @@ public class SearchBloodActivity extends AppCompatActivity implements View.OnCli
             if(searchDistrict.isEmpty()){
                 districtName.setError("empty!");
                 districtName.requestFocus();
+                Toast.makeText(getApplicationContext(), "Please select District...", Toast.LENGTH_SHORT).show();
                 return;
+
             }
 
             /*if(!searchDistrict.isEmpty()){

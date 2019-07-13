@@ -97,8 +97,11 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
 
                     if(s.equals("I don't know")){
 
-                        stringBuilder.append(donorClass.getDonor_phoneNumber());
+                        stringBuilder.append(donorClass.getDonor_key());
                         donorList.add(donorClass);
+
+                        String getK=donorClass.getDonor_key();
+                        Toast.makeText(SearchBloodResultShowActivity.this, "Key: "+getK, Toast.LENGTH_SHORT).show();
 
                     }
                     if(!s.equals("I don't know")){
@@ -143,8 +146,13 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
                         int TD=day_diff+(month_diff*30)+(year_diff*365);
 
                         if(TD>=90){
-                            stringBuilder.append(donorClass.getDonor_phoneNumber());
+                            //stringBuilder.append(donorClass.getDonor_phoneNumber());
+                            stringBuilder.append(donorClass.getDonor_key());
                             donorList.add(donorClass);
+
+                            String getK=donorClass.getDonor_name();
+                            Toast.makeText(SearchBloodResultShowActivity.this, "Key: "+getK, Toast.LENGTH_SHORT).show();
+
                         }
                         Toast.makeText(SearchBloodResultShowActivity.this, "gap: "+TD, Toast.LENGTH_LONG).show();
                     }
@@ -186,10 +194,11 @@ public class SearchBloodResultShowActivity extends AppCompatActivity{
 
                 int pos=parent.getPositionForView(view);  // list item er position gulo find korlam
 
-                int s_index=(pos*11);
-                int e_index=((pos+1)*11);
+                int s_index=(pos*20);
+                int e_index=((pos+1)*20);
 
                 tt=ss.substring(s_index,e_index);
+                Toast.makeText(SearchBloodResultShowActivity.this, ""+tt, Toast.LENGTH_SHORT).show();
 
                 //Toast.makeText(SearchBloodResultShowActivity.this, "Click number: "+tt, Toast.LENGTH_SHORT).show();
 

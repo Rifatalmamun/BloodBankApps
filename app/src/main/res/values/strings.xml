@@ -7,6 +7,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+
     <string-array name="bloodArray">
 
         <item>A+</item>
@@ -105,6 +106,33 @@
         <item>2018-19</item>
         <item>2019-20</item>
         <item>2020-21</item>
+
+    </string-array>
+
+    <string-array name="FactsQuestion">
+        <item>After several days blood can be given? </item>
+        <item>What kind of food should you eat after giving blood?</item>
+        <item>If blood donor is drug addicted, then blood can be taken from him?</item>
+        <item>Blood from the blood of the smoker can be taken?</item>
+        <item>Blood donation should be taken from the bank?</item>
+        <item>what is blood6?</item>
+        <item>what is blood7?</item>
+        <item>what is blood8?</item>
+        <item>what is blood9?</item>
+        <item>what is blood10?</item>
+
+    </string-array>
+    <string-array name="FactsAnswer">
+        <item>120 days</item>
+        <item>Liquid foods (water, juice)</item>
+        <item>No</item>
+        <item>you have to take a screening test</item>
+        <item>if you can not get it anywhere, you can take it but you have to take a screening test</item>
+        <item>This is answer6?</item>
+        <item>This is answer7?</item>
+        <item>This is answer8?</item>
+        <item>This is answer9?</item>
+        <item>This is answer10?</item>
 
     </string-array>
 

@@ -50,7 +50,6 @@ public class BloodBankActivity extends AppCompatActivity implements View.OnClick
 
         this.setTitle("Blood Bank");
 
-
         try{
             final_district_selection=getIntent().getExtras().getString("districtNameCatch");
             exceptionFlag=0;
@@ -75,7 +74,7 @@ public class BloodBankActivity extends AppCompatActivity implements View.OnClick
 
         myRefBB.child(final_district_selection).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot){
                 bloodBankList.clear();
 
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
@@ -92,8 +91,6 @@ public class BloodBankActivity extends AppCompatActivity implements View.OnClick
 
             }
         });
-
-
     }
 
     @Override
@@ -118,7 +115,6 @@ public class BloodBankActivity extends AppCompatActivity implements View.OnClick
         this.menu = menu;
         return true;
 
-        //return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -151,5 +147,4 @@ public class BloodBankActivity extends AppCompatActivity implements View.OnClick
 
         menuItem.setTitle(menuName);
     }
-
 }
