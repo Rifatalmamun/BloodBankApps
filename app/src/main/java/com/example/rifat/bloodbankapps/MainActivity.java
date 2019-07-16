@@ -53,16 +53,18 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       try{
+        try{
+           // String catchUpdatePhoneNumber=getIntent().getExtras().getString("sendUpdatePhoneFromProfileEditActivity");
+            readLoginInformationFromSharedPreference();
 
-           readLoginInformationFromSharedPreference();
-
-       }catch(Exception e){}
+        }catch(Exception e){
+            //readLoginInformationFromSharedPreference("");
+        }
 
         try{
             checkPoint=getIntent().getExtras().getString("checkPoint");
 
-           // writeToFile(checkPoint);
+            // writeToFile(checkPoint);
 
         }catch(Exception e){}
 
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity
         //userNumber=(TextView)findViewById(R.id.userNumberTextView_id);
         donorNumber=(TextView)findViewById(R.id.donorNumberTextView_id);
 
-       // beDonor=(CardView)findViewById(R.id.beADonor_id);
+        // beDonor=(CardView)findViewById(R.id.beADonor_id);
         searchBlood=(CardView)findViewById(R.id.searchBlood_id);
         bloodBank=(CardView)findViewById(R.id.bloodBank_id);
         organization=(CardView)findViewById(R.id.organization_id);
@@ -129,10 +131,12 @@ public class MainActivity extends AppCompatActivity
     private void readLoginInformationFromSharedPreference() {
         // For Read Data from sharePreferences...................write this code
         SharedPreferences sharedPreferences=getSharedPreferences("userDetails",Context.MODE_PRIVATE);
-        if(sharedPreferences.contains("userLoginPhoneNumber")){
+        if(sharedPreferences.contains("userLoginPhoneNumber") && sharedPreferences.contains("userLoginPasswordNumber")){
             String getPreviousPhoneNumber=sharedPreferences.getString("userLoginPhoneNumber","userName not found");
+            String getPreviousPassword=sharedPreferences.getString("userLoginPasswordNumber","userPassword not found");
 
             AddDonorActivity.appsUserMobileNumber=getPreviousPhoneNumber;
+            AddDonorActivity.appsUserPasswordNumber=getPreviousPassword;
 
             checkPoint="finish";
 
@@ -147,10 +151,8 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View v) {
 
         /*if(v.getId()==R.id.beADonor_id){
-
             Intent intent = new Intent(MainActivity.this,BeDonorActivity.class);
             startActivity(intent);
-
         }*/ if(v.getId()==R.id.searchBlood_id){
 
             Intent intent = new Intent(MainActivity.this,SearchBloodActivity.class);
@@ -172,12 +174,12 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         }else if(v.getId()==R.id.addDonor_id){
             try{
-               if(checkPoint.equals("finish")){
-                   Intent intent = new Intent(MainActivity.this,AddDonorActivity.class);
-                   startActivity(intent);
+                if(checkPoint.equals("finish")){
+                    Intent intent = new Intent(MainActivity.this,AddDonorActivity.class);
+                    startActivity(intent);
                 }else{
-                   Toast.makeText(this, "Please sign in  to use the feature!", Toast.LENGTH_SHORT).show();
-               }
+                    Toast.makeText(this, "Please sign in  to use the feature!", Toast.LENGTH_SHORT).show();
+                }
 
             }catch (Exception e){
                 Toast.makeText(this, ""+e, Toast.LENGTH_SHORT).show();
@@ -194,10 +196,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         }/*else if(v.getId()==R.id.share_id){
-
             Intent intent = new Intent(MainActivity.this,ShareActivity.class);
             startActivity(intent);
-
         }*/
     }
 
@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem menuItem = menu.findItem(R.id.action_signIn_id);
-        if(checkPoint.equals("finish")){
+        if(!checkPoint.equals("finish")){
             menuItem.setTitle("");
             menuItem.setVisible(false);
             this.invalidateOptionsMenu();
@@ -293,7 +293,7 @@ public class MainActivity extends AppCompatActivity
             return false;
     }
 
-   // alert dialog.....................
+    // alert dialog.....................
     public AlertDialog.Builder buildDialog(Context c)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
@@ -308,10 +308,6 @@ public class MainActivity extends AppCompatActivity
         });
         return builder;
     }
-
-
-
-
 
 
 

@@ -53,7 +53,7 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
     private DonorClass donorClass;
     private String phn="",passw="";
 
-    private String getName,getNumber,getDonationDate,getDepartmetn,getSession,getKey,getrn;
+    private String getName,getNumber,getDonationDate,getDepartmetn,getSession,getKey,getrn,getPassword;
     public String getBloodGroup,getDistrict;
     private LinearLayout loginInputPart,showpart,editpart,imgPart;
 
@@ -63,9 +63,10 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
 
     private TextView myAcName,myAcBloodGroup,myAcLocation,myAcLastDate;
 
-    private String acN,acBg,acDis,acDD;
+    private String acN,acBg,acDis,acDD,acPass;
 
     public static String appsUserMobileNumber="";
+    public static String appsUserPasswordNumber="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,12 +94,13 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
 
         progressbarInAddDonor=(ProgressBar)findViewById(R.id.progressbarAddDonor_id);
         loginPhnNumber.setText(appsUserMobileNumber);
+        loginPassword.setText(appsUserPasswordNumber);
         donorProfileList = new ArrayList<>();
 
         //if(!loginPhnNumber.equals("")){
-           // String loginP=loginPhnNumber.getText().toString();
-            loadUserProfileDataForFirstPage(appsUserMobileNumber);
-       // }
+        // String loginP=loginPhnNumber.getText().toString();
+        loadUserProfileDataForFirstPage(appsUserMobileNumber);
+        // }
 
 
     }
@@ -117,10 +119,11 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
                 {
                     DonorClass donorClass = dataSnapshot1.getValue(DonorClass.class);
 
-                    String acN = donorClass.getDonor_name();
-                    String acBg = donorClass.getDonor_bloodGroup();
-                    String acDis = donorClass.getDonor_district();
-                    String acDD = donorClass.getDonor_lastDonationDate();
+                    acN = donorClass.getDonor_name();
+                    acBg = donorClass.getDonor_bloodGroup();
+                    acDis = donorClass.getDonor_district();
+                    acDD = donorClass.getDonor_lastDonationDate();
+                    acPass = donorClass.getDonor_password();
 
                     myAcName.setText("Name: "+acN);
                     myAcBloodGroup.setText("Blood Group: "+acBg);
@@ -160,10 +163,7 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
     public void onClick(View v) {
         if(v.getId()==R.id.fab_id){
 
-            /*loginInputPart.setVisibility(View.VISIBLE);
-            editpart.setVisibility(View.GONE);
-            showpart.setVisibility(View.VISIBLE);
-*/
+
             if(!isConnected(AddDonorActivity.this)){
                 buildDialog(AddDonorActivity.this,"No Internet","Please Connect with Internet").show();
             }else{
@@ -187,14 +187,14 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
                     return;
                 }
 
-                else{
+                if(passw.equals(acPass)){
 
                     SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
 
                     editor.putString("userPhnNumber",phn);
                     editor.commit();
-                   // Toast.makeText(this, "save phone number", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(this, "save phone number", Toast.LENGTH_SHORT).show();
 
 
                     // for password sharedPreferences.......................
@@ -210,6 +210,8 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
 
                    /* Intent intent = new Intent(AddDonorActivity.this,ProfileEditActivity.class);
                     startActivity(intent);*/
+                }else{
+                    Toast.makeText(this, "Password not match for show profile !!", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -244,13 +246,16 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
                     getSession = donorClass.getDonor_session();
                     getKey = donorClass.getDonor_key();
                     getrn = donorClass.getDonor_rn();
+                    getPassword = donorClass.getDonor_password();
 
-                   // donorProfileList.add(donorClass);
+
+
+                    // donorProfileList.add(donorClass);
                 }
                 if(getBloodGroup==null){
                     buildDialog(AddDonorActivity.this,"Login Failed","Phone number or password don't match!").show();
 
-                }else{
+                }if(loginPassword.getText().toString().equals(getPassword)){
                     //Toast.makeText(AddDonorActivity.this, ""+getName+"\n"+getBloodGroup+"\n"+getDistrict, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(AddDonorActivity.this,ProfileEditActivity.class);
                     intent.putExtra("catchDonorName",getName);
@@ -262,11 +267,14 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
                     intent.putExtra("catchDonorDonationDate",getDonationDate);
                     intent.putExtra("catchDonorKey",getKey);
                     intent.putExtra("catchRandomNumber",getrn);
+                    intent.putExtra("catchDonorPassword",getPassword);
 
                     ProfileEditActivity.flag=0;
 
                     startActivity(intent);
                     //finish();
+                }else{
+                    Toast.makeText(AddDonorActivity.this, "Password not match for updating", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -285,13 +293,11 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
                 }else{
                     updateDepartmentEditText.setText(getDepartmetn);
                 }
-
                 if(getSession.isEmpty()){
                     updateSessionEditText.setVisibility(View.GONE);
                 }else{
                     updateSessionEditText.setText(getSession);
                 }
-
                 Toast.makeText(AddDonorActivity.this, "un: "+getName, Toast.LENGTH_SHORT).show();*/
             }
 
@@ -313,31 +319,22 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
         String up = updatePhoneEditText.getText().toString();
         String udd = updateDonationDateEditText.getText().toString();*/
 
-       // final DonorClass donorClass = new DonorClass(getrn,getKey,un,ubg,up,ud,getDepartmetn,getSession,udd);
+        // final DonorClass donorClass = new DonorClass(getrn,getKey,un,ubg,up,ud,getDepartmetn,getSession,udd);
 
         /*final DatabaseReference updateProfileRef = FirebaseDatabase.getInstance().getReference("MyProfileTable");
         //String key=databaseReference.push().getKey();
-
         updateProfileRef.child(getNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //dataSnapshot.getRef().child(getNumber).removeValue();
-
                 String k =  dataSnapshot.getKey();
-
                 DonorClass d = dataSnapshot.getValue(DonorClass.class);
-
-
                 dataSnapshot.getRef().child(getNumber).child(k).setValue(d);
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
-
 */
         //DonorIdClass donorIdClass=new DonorIdClass(rn,key,donorPhoneNumber);
         //DonorClass profileClass = new DonorClass(rn,key,donorName,donorBloodGroup,donorPhoneNumber,donorDistrict,donorDepartment,donorSession,donorLastDonationDate);
@@ -384,7 +381,7 @@ public class AddDonorActivity extends AppCompatActivity  implements View.OnClick
         return builder;
     }
     // temporary dialog ..............................................
-     public void tempDialog()
+    public void tempDialog()
     {
         //int i =5;
 

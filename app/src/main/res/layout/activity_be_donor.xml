@@ -17,7 +17,7 @@
         android:layout_weight="1">
 
         <TextView
-            android:background="@drawable/seeprofilebordershape"
+            android:background="@drawable/searchbuttonbackground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="please fill up"
@@ -159,6 +159,7 @@
                 android:layout_weight=".4"
                 android:textColor="#a70b0b"
                 android:gravity="center"
+                android:hint="optional"
                 android:textSize="18sp" />
             <ImageView
                 android:id="@+id/departmentSpinner_id"
@@ -190,6 +191,7 @@
                 android:layout_weight=".4"
                 android:textColor="#a70b0b"
                 android:gravity="center"
+                android:hint="optional"
                 android:textSize="18sp" />
             <ImageView
                 android:id="@+id/sessionSpinner_id"
@@ -260,8 +262,9 @@
         android:text="Are you already registered? Login..."
         android:textSize="16sp"
         android:textAlignment="center"
-        android:textColor="#ad0404"
-        />
+        android:padding="2dp"
+        android:textColor="#ad0404" />
+
 
 
 

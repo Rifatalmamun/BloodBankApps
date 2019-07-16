@@ -1,7 +1,9 @@
 package com.example.rifat.bloodbankapps;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -55,6 +57,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
     private String catchSES="";
     private String catchLastDate="";
     private String catchKEY="";
+    private String catchPassword="";
     private String catchRN="";
     private String parentGroup="";
     private String parentDist="";
@@ -105,78 +108,81 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
 
         // first step: ............................................................
 
-            try{
-                final String catchName=getIntent().getExtras().getString("catchDonorName");
-                final String catchBgroup=getIntent().getExtras().getString("catchDonorBloodGroup");
-                parentGroup=catchBgroup;
-                final String catchDistrict=getIntent().getExtras().getString("catchDonorDistrict");
-                parentDist=catchDistrict;
-                final String catchPNumber=getIntent().getExtras().getString("catchDonorNumber");
-                parentPhoneNumber=catchPNumber;
-                final String catchDept=getIntent().getExtras().getString("catchDonorDepartment");
-                final String catchSession=getIntent().getExtras().getString("catchDonorSession");
-                final String catchLastDdate=getIntent().getExtras().getString("catchDonorDonationDate");
-                String catchDonorKey=getIntent().getExtras().getString("catchDonorKey");
-                catchKEY=catchDonorKey;
-                String catchRandomNumbeR=getIntent().getExtras().getString("catchRandomNumber");
-                catchRN=catchRandomNumbeR;
+        try{
+            final String catchName=getIntent().getExtras().getString("catchDonorName");
+            final String catchBgroup=getIntent().getExtras().getString("catchDonorBloodGroup");
+            parentGroup=catchBgroup;
+            final String catchDistrict=getIntent().getExtras().getString("catchDonorDistrict");
+            parentDist=catchDistrict;
+            final String catchPNumber=getIntent().getExtras().getString("catchDonorNumber");
+            parentPhoneNumber=catchPNumber;
+            final String catchDept=getIntent().getExtras().getString("catchDonorDepartment");
+            final String catchSession=getIntent().getExtras().getString("catchDonorSession");
+            final String catchLastDdate=getIntent().getExtras().getString("catchDonorDonationDate");
+            String catchDonorKey=getIntent().getExtras().getString("catchDonorKey");
+            catchKEY=catchDonorKey;
+            String catchRandomNumbeR=getIntent().getExtras().getString("catchRandomNumber");
+            catchRN=catchRandomNumbeR;
+            String catchPasswordNumbeR=getIntent().getExtras().getString("catchDonorPassword");
+            catchPassword=catchPasswordNumbeR;
 
-                updateName.setText(catchName);
-                updateDistrictNameTextView.setText(catchDistrict);
-                updatePhone.setText(catchPNumber);
-                updateDepartmentNameTextView.setText(catchDept);
-                updateSessionFieldTextView.setText(catchSession);
-                updateIdontKnowTextVeiw.setText(catchLastDdate);
+            updateName.setText(catchName);
+            updateDistrictNameTextView.setText(catchDistrict);
+            updatePhone.setText(catchPNumber);
+            updateDepartmentNameTextView.setText(catchDept);
+            updateSessionFieldTextView.setText(catchSession);
+            updateIdontKnowTextVeiw.setText(catchLastDdate);
 
-                // ebar Blood Group spinner ta handle korbo..........................
+            // ebar Blood Group spinner ta handle korbo..........................
 
-                bloodGroupArray=getResources().getStringArray(R.array.bloodArray);
-                ArrayAdapter<String> adapter1=new ArrayAdapter<String>(this,R.layout.bloodgroupsamplelayoutforupdateprofile,R.id.TextViewSample_id,bloodGroupArray);
-                updateBloodgroupSpinner.setAdapter(adapter1);
+            bloodGroupArray=getResources().getStringArray(R.array.bloodArray);
+            ArrayAdapter<String> adapter1=new ArrayAdapter<String>(this,R.layout.bloodgroupsamplelayoutforupdateprofile,R.id.TextViewSample_id,bloodGroupArray);
+            updateBloodgroupSpinner.setAdapter(adapter1);
 
-                for(int i = 0;i<8;i++){
-                    if(catchBgroup.equals(bloodGroupArray[i])){
-                        bloodPosition = i;
-                        break;
-                    }
+            for(int i = 0;i<8;i++){
+                if(catchBgroup.equals(bloodGroupArray[i])){
+                    bloodPosition = i;
+                    break;
                 }
-                updateBloodgroupSpinner.setSelection(bloodPosition);
-            }catch(Exception e){
-               // Toast.makeText(this, "load data"+e, Toast.LENGTH_LONG).show();
             }
+            updateBloodgroupSpinner.setSelection(bloodPosition);
+        }catch(Exception e){
+            // Toast.makeText(this, "load data"+e, Toast.LENGTH_LONG).show();
+        }
 
-            ////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////
 
         if(flag > 0){
-        try{
-            catchSelectedDistrict = getIntent().getExtras().getString("selectedCity");
-            updateDistrictNameTextView.setText(catchSelectedDistrict);
+            try{
+                catchSelectedDistrict = getIntent().getExtras().getString("selectedCity");
+                updateDistrictNameTextView.setText(catchSelectedDistrict);
 
-            catchUN=getIntent().getExtras().getString("UN");
-            updateName.setText(catchUN);
+                catchUN=getIntent().getExtras().getString("UN");
+                updateName.setText(catchUN);
 
-            catchBG=getIntent().getExtras().getString("P");
-            int posi = Integer.parseInt(catchBG);
-            updateBloodgroupSpinner.setSelection(posi);
+                catchBG=getIntent().getExtras().getString("P");
+                int posi = Integer.parseInt(catchBG);
+                updateBloodgroupSpinner.setSelection(posi);
 
-            catchPN=getIntent().getExtras().getString("PN");
-            updatePhone.setText(catchPN);
-            catchDP=getIntent().getExtras().getString("DEPT");
-            updateDepartmentNameTextView.setText(catchDP);
-            catchSES=getIntent().getExtras().getString("SESS");
-            updateSessionFieldTextView.setText(catchSES);
+                catchPN=getIntent().getExtras().getString("PN");
+                updatePhone.setText(catchPN);
+                catchDP=getIntent().getExtras().getString("DEPT");
+                updateDepartmentNameTextView.setText(catchDP);
+                catchSES=getIntent().getExtras().getString("SESS");
+                updateSessionFieldTextView.setText(catchSES);
 
-            catchLastDate=getIntent().getExtras().getString("LAST");
-            updateIdontKnowTextVeiw.setText(catchLastDate);
+                catchLastDate=getIntent().getExtras().getString("LAST");
+                updateIdontKnowTextVeiw.setText(catchLastDate);
 
-            catchKEY=getIntent().getExtras().getString("KEY");
-            catchRN=getIntent().getExtras().getString("RANDOM");
-            parentGroup=getIntent().getExtras().getString("PARENTGROUP");
-            parentDist=getIntent().getExtras().getString("PARENTDISTRICT");
-            parentPhoneNumber=getIntent().getExtras().getString("PARENTPHONENUMBER");
+                catchKEY=getIntent().getExtras().getString("KEY");
+                catchRN=getIntent().getExtras().getString("RANDOM");
+                catchPassword=getIntent().getExtras().getString("PASSWORD");
+                parentGroup=getIntent().getExtras().getString("PARENTGROUP");
+                parentDist=getIntent().getExtras().getString("PARENTDISTRICT");
+                parentPhoneNumber=getIntent().getExtras().getString("PARENTPHONENUMBER");
 
-        }catch (Exception e){
-           // Toast.makeText(this, "exception"+e, Toast.LENGTH_LONG).show();
+            }catch (Exception e){
+                // Toast.makeText(this, "exception"+e, Toast.LENGTH_LONG).show();
             }
         }
 
@@ -212,6 +218,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             intent.putExtra("sendLastDate",lastDate);
             intent.putExtra("sendKEY",catchKEY);
             intent.putExtra("sendRANDOM",catchRN);
+            intent.putExtra("sendPASSWORD",catchPassword);
             intent.putExtra("sendPARENTGROUP",parentGroup);
             intent.putExtra("sendPARENTDISTRICT",parentDist);
             intent.putExtra("sendPARENTPHONENUMBER",parentPhoneNumber);
@@ -221,7 +228,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
         }
         if(v.getId()==R.id.updateDepartmentSpinner_id){
 
-           // take all to pass departmentlist activity.................
+            // take all to pass departmentlist activity.................
 
             // take userName,userBloodGroup
             name=updateName.getText().toString();
@@ -244,6 +251,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             intent.putExtra("sendLastDate",lastDate);
             intent.putExtra("sendKEY",catchKEY);
             intent.putExtra("sendRANDOM",catchRN);
+            intent.putExtra("sendPASSWORD",catchPassword);
             intent.putExtra("sendPARENTGROUP",parentGroup);
             intent.putExtra("sendPARENTDISTRICT",parentDist);
             intent.putExtra("sendPARENTPHONENUMBER",parentPhoneNumber);
@@ -273,6 +281,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
             intent.putExtra("sendLastDate",lastDate);
             intent.putExtra("sendKEY",catchKEY);
             intent.putExtra("sendRANDOM",catchRN);
+            intent.putExtra("sendPASSWORD",catchPassword);
             intent.putExtra("sendPARENTGROUP",parentGroup);
             intent.putExtra("sendPARENTDISTRICT",parentDist);
             intent.putExtra("sendPARENTPHONENUMBER",parentPhoneNumber);
@@ -286,12 +295,6 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
         }
         if(v.getId()==R.id.updateButton_id){
 
-            /*AddDonorActivity addDonorActivity=new AddDonorActivity();
-            String parentBloodGroup= addDonorActivity.getBloodGroup;
-            String parentDistrict=addDonorActivity.getDistrict;*/
-
-           /* Toast.makeText(this, "key: "+catchKEY, Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, "Random: "+catchRN, Toast.LENGTH_SHORT).show();*/
 
             // now take all field value to update this.....................................
 
@@ -320,14 +323,13 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
 
             //........................................................................................
 
-           updateDonorDetailsTableReference=FirebaseDatabase.getInstance().getReference("DonorDetailsTable");
-           updateMyProfileTableReference=FirebaseDatabase.getInstance().getReference("MyProfileTable");
+            updateDonorDetailsTableReference=FirebaseDatabase.getInstance().getReference("DonorDetailsTable");
+            updateMyProfileTableReference=FirebaseDatabase.getInstance().getReference("MyProfileTable");
              /*profileRef=FirebaseDatabase.getInstance().getReference("DonorIdTable");
             // remove first then
             updateDatabaseReference.child(takeBloodGroup).child(takeDistrict).child(catchKEY).removeValue();
             // insert this new data
             DonorClass donorClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
-
             updateDatabaseReference.child(takeBloodGroup).child(takeDistrict).push().setValue(donorClass);
             profileRef.child(takePhone).push().setValue(donorClass);*/
 
@@ -358,13 +360,14 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
 
                 Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
                 AddDonorActivity.appsUserMobileNumber=takePhone;
+                AddDonorActivity.appsUserPasswordNumber=catchPassword;
             }
             //Condition 2: bg same, dist not same, phone same....
             else if(parentGroup.equals(takeBloodGroup) && !parentDist.equals(takeDistrict) && parentPhoneNumber.equals(takePhone)){
 
                 // remove first then insert
                 updateDonorDetailsTableReference.child(parentGroup).child(parentDist).child(catchKEY).removeValue();
-                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation,catchPassword);
                 updateDonorDetailsTableReference.child(parentGroup).child(takeDistrict).child(catchKEY).setValue(dClass);
 
                 updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_name",takeName);
@@ -379,12 +382,13 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
 
                 Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
                 AddDonorActivity.appsUserMobileNumber=takePhone;
+                AddDonorActivity.appsUserPasswordNumber=catchPassword;
             }
             //Condition 3: bg not same, dist same, phone same....
             else if(!parentGroup.equals(takeBloodGroup) && parentDist.equals(takeDistrict) && parentPhoneNumber.equals(takePhone)){
                 // remove first then insert
                 updateDonorDetailsTableReference.child(parentGroup).child(parentDist).child(catchKEY).removeValue();
-                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation,catchPassword);
                 updateDonorDetailsTableReference.child(takeBloodGroup).child(parentDist).child(catchKEY).setValue(dClass);
 
                 updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_name",takeName);
@@ -398,12 +402,13 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
                 updateMyProfileTableReference.updateChildren(updatedvalue1);
                 Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
                 AddDonorActivity.appsUserMobileNumber=takePhone;
+                AddDonorActivity.appsUserPasswordNumber=catchPassword;
             }
             //Condition 4: bg not same, dist not same, phone same....
             else if(!parentGroup.equals(takeBloodGroup) && !parentDist.equals(takeDistrict) && parentPhoneNumber.equals(takePhone)){
                 // remove first then insert
                 updateDonorDetailsTableReference.child(parentGroup).child(parentDist).child(catchKEY).removeValue();
-                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation,catchPassword);
                 updateDonorDetailsTableReference.child(takeBloodGroup).child(takeDistrict).child(catchKEY).setValue(dClass);
 
                 updatedvalue1.put(takePhone+"/"+catchKEY+"/donor_name",takeName);
@@ -417,6 +422,7 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
                 updateMyProfileTableReference.updateChildren(updatedvalue1);
                 Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
                 AddDonorActivity.appsUserMobileNumber=takePhone;
+                AddDonorActivity.appsUserPasswordNumber=catchPassword;
             }
             //Condition 5: bg  same, dist  same, phone not same....
             else if(parentGroup.equals(takeBloodGroup) && parentDist.equals(takeDistrict) && !parentPhoneNumber.equals(takePhone)){
@@ -433,65 +439,72 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
 
                 // remove first then insert
                 updateMyProfileTableReference.child(parentPhoneNumber).child(catchKEY).removeValue();
-                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation,catchPassword);
                 updateMyProfileTableReference.child(takePhone).child(catchKEY).setValue(dClass);
 
                 Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
                 AddDonorActivity.appsUserMobileNumber=takePhone;
+                AddDonorActivity.appsUserPasswordNumber=catchPassword;
             }
             //Condition 6: bg  same, dist not same, phone not same....
             else if(parentGroup.equals(takeBloodGroup) && !parentDist.equals(takeDistrict) && !parentPhoneNumber.equals(takePhone)){
                 // remove first then insert
                 updateDonorDetailsTableReference.child(parentGroup).child(parentDist).child(catchKEY).removeValue();
-                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation,catchPassword);
                 updateDonorDetailsTableReference.child(parentGroup).child(takeDistrict).child(catchKEY).setValue(dClass);
 
 
 
                 // remove first then insert
                 updateMyProfileTableReference.child(parentPhoneNumber).child(catchKEY).removeValue();
-                DonorClass ddClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                DonorClass ddClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation,catchPassword);
                 updateMyProfileTableReference.child(takePhone).child(catchKEY).setValue(ddClass);
 
                 Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
                 AddDonorActivity.appsUserMobileNumber=takePhone;
+                AddDonorActivity.appsUserPasswordNumber=catchPassword;
             }
             //Condition 7: bg not same, dist same, phone not same....
             else if(!parentGroup.equals(takeBloodGroup) && parentDist.equals(takeDistrict) && !parentPhoneNumber.equals(takePhone)){
                 // remove first then insert
                 updateDonorDetailsTableReference.child(parentGroup).child(parentDist).child(catchKEY).removeValue();
-                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation,catchPassword);
                 updateDonorDetailsTableReference.child(takeBloodGroup).child(parentDist).child(catchKEY).setValue(dClass);
 
 
                 // remove first then insert
                 updateMyProfileTableReference.child(parentPhoneNumber).child(catchKEY).removeValue();
-                DonorClass ddClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                DonorClass ddClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation,catchPassword);
                 updateMyProfileTableReference.child(takePhone).child(catchKEY).setValue(ddClass);
 
                 Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
                 AddDonorActivity.appsUserMobileNumber=takePhone;
+                AddDonorActivity.appsUserPasswordNumber=catchPassword;
             }
             //Condition 8: bg not same, dist same, phone not same....
             else if(!parentGroup.equals(takeBloodGroup) && !parentDist.equals(takeDistrict) && !parentPhoneNumber.equals(takePhone)){
                 // remove first then insert
                 updateDonorDetailsTableReference.child(parentGroup).child(parentDist).child(catchKEY).removeValue();
-                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                DonorClass dClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation,catchPassword);
                 updateDonorDetailsTableReference.child(takeBloodGroup).child(takeDistrict).child(catchKEY).setValue(dClass);
 
 
                 // remove first then insert
                 updateMyProfileTableReference.child(parentPhoneNumber).child(catchKEY).removeValue();
-                DonorClass ddClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation);
+                DonorClass ddClass = new DonorClass(catchRN,catchKEY,takeName,takeBloodGroup,takePhone,takeDistrict,takeDepartment,takeSession,takeLastDonation,catchPassword);
                 updateMyProfileTableReference.child(takePhone).child(catchKEY).setValue(ddClass);
 
                 Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
 
                 AddDonorActivity.appsUserMobileNumber=takePhone;
+                AddDonorActivity.appsUserPasswordNumber=catchPassword;
             }
 
+            loginInformationSaveInSharedPreference(takePhone,catchPassword);
 
             Intent intent = new Intent(ProfileEditActivity.this,MainActivity.class);
+            //intent.putExtra("sendUpdatePhoneFromProfileEditActivity",takePhone);
+           // Toast.makeText(this, "update Phone: "+takePhone, Toast.LENGTH_SHORT).show();
             startActivity(intent);
             finish();
         }
@@ -534,5 +547,17 @@ public class ProfileEditActivity extends AppCompatActivity implements View.OnCli
                 },currentYear,currentMonth,currentDay);
 
         date_Picker_Dialog.show();
+    }
+
+    public void loginInformationSaveInSharedPreference(String phone,String password) {
+        AddDonorActivity.appsUserMobileNumber=phone;
+        AddDonorActivity.appsUserPasswordNumber=password;
+
+        SharedPreferences  sharedPreferences=getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("userLoginPhoneNumber",phone);
+
+        editor.commit();
+        Toast.makeText(ProfileEditActivity.this,"Update login info stored Successfully ",Toast.LENGTH_SHORT).show();
     }
 }

@@ -64,7 +64,7 @@ public class BeDonor2Activity extends AppCompatActivity implements View.OnClickL
 
         //finding all id....................
 
-        email=(EditText)findViewById(R.id.emailEditText_id);
+        //email=(EditText)findViewById(R.id.emailEditText_id);
         password=(EditText)findViewById(R.id.passwordEditText_id);
         passwordRe=(EditText)findViewById(R.id.passwordReEditText_id);
         beDonor2SubmitButton=(Button)findViewById(R.id.beDonor2SubmitButton);
@@ -84,11 +84,26 @@ public class BeDonor2Activity extends AppCompatActivity implements View.OnClickL
 
         String donorPassword=password.getText().toString();
         String donorPasswordRe=passwordRe.getText().toString();
-        String donorEmail=email.getText().toString();
 
 
-        // Toast.makeText(this, "......"+donorDistrict, Toast.LENGTH_SHORT).show();
-        //............validation all field.......................
+        if(donorPassword.equals("")){
+            password.setError("Password field empty!");
+            password.requestFocus();
+            return;
+        }
+        else if(donorPasswordRe.equals("")){
+            passwordRe.setError("Password re-enter field empty");
+            passwordRe.requestFocus();
+            return;
+        }else if(donorPassword.length()<6){
+            password.setError("Password length must be at least 6 !");
+            password.requestFocus();
+            return;
+        }else if(!donorPassword.equals(donorPasswordRe)){
+            passwordRe.setError("Password not match !");
+            passwordRe.requestFocus();
+            return;
+        }
 
         // internet connection check;
         if(!isConnected(BeDonor2Activity.this)){
@@ -96,9 +111,9 @@ public class BeDonor2Activity extends AppCompatActivity implements View.OnClickL
         }else{
             String key=databaseReference.push().getKey();
 
-            DonorClass donorClass = new DonorClass(rn,key,name,bloodGroup,phone,district,department,session,lastDonationDate);
+            DonorClass donorClass = new DonorClass(rn,key,name,bloodGroup,phone,district,department,session,lastDonationDate,donorPassword);
             //DonorIdClass donorIdClass=new DonorIdClass(rn,key,donorPhoneNumber);
-            DonorClass profileClass = new DonorClass(rn,key,name,bloodGroup,phone,district,department,session,lastDonationDate);
+            DonorClass profileClass = new DonorClass(rn,key,name,bloodGroup,phone,district,department,session,lastDonationDate,donorPassword);
 
             databaseReference.child(bloodGroup).child(district).child(key).setValue(donorClass);
             //databaseReference1.child(donorBloodGroup).child(donorDistrict).child(key).setValue(donorIdClass);
@@ -106,7 +121,7 @@ public class BeDonor2Activity extends AppCompatActivity implements View.OnClickL
 
             Toast.makeText(getApplicationContext(),"Donor Add Successfull !",Toast.LENGTH_SHORT).show();
 
-            loginInformationSaveInSharedPreference(phone);
+            loginInformationSaveInSharedPreference(phone,donorPassword);
 
             Intent intent = new Intent(BeDonor2Activity.this,MainActivity.class);
             intent.putExtra("checkPoint","finish");
@@ -116,12 +131,14 @@ public class BeDonor2Activity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    public void loginInformationSaveInSharedPreference(String phone) {
+    public void loginInformationSaveInSharedPreference(String phone,String password) {
         AddDonorActivity.appsUserMobileNumber=phone;
+        AddDonorActivity.appsUserPasswordNumber=password;
 
         SharedPreferences  sharedPreferences=getSharedPreferences("userDetails", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
         editor.putString("userLoginPhoneNumber",phone);
+        editor.putString("userLoginPasswordNumber",password);
 
         editor.commit();
         Toast.makeText(BeDonor2Activity.this,"login info stored Successfully ",Toast.LENGTH_SHORT).show();
@@ -131,8 +148,6 @@ public class BeDonor2Activity extends AppCompatActivity implements View.OnClickL
     // clear all field value......................................................
 
  /*   private void clearAllFieldValue() {
-
-
         //email.setText("");
         phoneNumber.setText("");
         select_city.setText("");

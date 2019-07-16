@@ -1,11 +1,10 @@
 package com.example.rifat.bloodbankapps;
 
-public class DonorClass {
+public class ProfileClass {
 
+    private String Donor_rn,Donor_key,Donor_name,Donor_bloodGroup,Donor_phoneNumber,Donor_district,Donor_department,Donor_session,Donor_lastDonationDate;
 
-    private String Donor_rn,Donor_key,Donor_name,Donor_bloodGroup,Donor_phoneNumber,Donor_district,Donor_department,Donor_session,Donor_lastDonationDate,Donor_password;
-
-    public DonorClass(String donor_rn, String donor_key, String donor_name, String donor_bloodGroup, String donor_phoneNumber, String donor_district, String donor_department, String donor_session, String donor_lastDonationDate,String donor_password) {
+    public ProfileClass(String donor_rn, String donor_key, String donor_name, String donor_bloodGroup, String donor_phoneNumber, String donor_district, String donor_department, String donor_session, String donor_lastDonationDate) {
         Donor_rn = donor_rn;
         Donor_key = donor_key;
         Donor_name = donor_name;
@@ -15,13 +14,8 @@ public class DonorClass {
         Donor_department = donor_department;
         Donor_session = donor_session;
         Donor_lastDonationDate = donor_lastDonationDate;
-        Donor_password = donor_password;
     }
-
-    public DonorClass()
-    {
-
-    }
+    ProfileClass(){}
 
     public String getDonor_rn() {
         return Donor_rn;
@@ -93,13 +87,5 @@ public class DonorClass {
 
     public void setDonor_lastDonationDate(String donor_lastDonationDate) {
         Donor_lastDonationDate = donor_lastDonationDate;
-    }
-
-    public String getDonor_password() {
-        return Donor_password;
-    }
-
-    public void setDonor_password(String donor_password) {
-        Donor_password = donor_password;
     }
 }

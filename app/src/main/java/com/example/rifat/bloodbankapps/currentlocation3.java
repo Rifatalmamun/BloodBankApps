@@ -18,7 +18,7 @@ public class currentlocation3 extends AppCompatActivity {
     private String[] cityName;
     private String pos;
 
-    public String catchName,catchBloodGroup,catchPhone,catchDepart,catchSess,catchLastDate,catchkeY,catchRanD,catchParentBG,catchParentDis,catchParentPHN;
+    public String catchName,catchBloodGroup,catchPhone,catchDepart,catchSess,catchLastDate,catchkeY,catchRanD,catchParentBG,catchParentDis,catchParentPHN,catchPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,7 @@ public class currentlocation3 extends AppCompatActivity {
             catchParentBG=getIntent().getExtras().getString("sendPARENTGROUP");
             catchParentDis=getIntent().getExtras().getString("sendPARENTDISTRICT");
             catchParentPHN=getIntent().getExtras().getString("sendPARENTPHONENUMBER");
+            catchPassword=getIntent().getExtras().getString("sendPASSWORD");
 
             if(catchBloodGroup.equals("A+")){
                 pos = "0";
@@ -103,6 +104,7 @@ public class currentlocation3 extends AppCompatActivity {
                     intent.putExtra("PARENTGROUP",catchParentBG);
                     intent.putExtra("PARENTDISTRICT",catchParentDis);
                     intent.putExtra("PARENTPHONENUMBER",catchParentPHN);
+                    intent.putExtra("PASSWORD",catchPassword);
                      startActivity(intent);
 
                     finish();

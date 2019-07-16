@@ -12,7 +12,7 @@
 
     <LinearLayout
         android:padding="10dp"
-        android:layout_weight="1.5"
+        android:layout_weight="2"
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:gravity="center"
@@ -20,28 +20,6 @@
         android:layout_height="0dp">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:drawableLeft="@drawable/ic_mail_outline_black_24dp"
-                android:drawablePadding="15dp"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight=".4"
-                android:text="Email "
-                android:textColor="#000000"
-                android:gravity="fill_vertical"
-                android:textSize="17sp" />
-            <EditText
-                android:id="@+id/emailEditText_id"
-                android:layout_weight=".7"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:hint="enter email address"
-                android:textColor="#a70b0b"
-                android:textSize="20sp" />
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -60,9 +38,10 @@
                 android:layout_weight=".7"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:hint="enter passwrod"
+                android:hint="enter password"
                 android:textColor="#a70b0b"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:inputType="numberPassword"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,9 +61,10 @@
                 android:layout_weight=".7"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:hint="Enter Name"
+                android:hint="Re-enter password"
                 android:textColor="#a70b0b"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:inputType="numberPassword"/>
         </LinearLayout>
 
     </LinearLayout>

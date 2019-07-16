@@ -22,12 +22,12 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText phoneNumber;
+    private EditText phoneNumber,passwordNumber;
     private Button loginButton;
 
     private List<DonorClass> donorProfileList;
 
-    private String chk,findPhone;
+    private String chk,findPhone,findPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         phoneNumber=(EditText)findViewById(R.id.loginActivityPhoneNumber_id);
+        passwordNumber=(EditText)findViewById(R.id.loginActivityPassword_id);
         loginButton=(Button)findViewById(R.id.login_id);
 
         loginButton.setOnClickListener(this);
@@ -47,7 +48,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         if(v.getId()==R.id.login_id){
             String logPhone= phoneNumber.getText().toString();
-
             loadDate(logPhone);
         }
     }
@@ -69,21 +69,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     chk=donorClass.getDonor_bloodGroup();
                     findPhone=donorClass.getDonor_phoneNumber();
+                    findPassword=donorClass.getDonor_password();
                 }
 
                 if(chk==null){
-                    Toast.makeText(LoginActivity.this, "Fail !! ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Fail to login!! ", Toast.LENGTH_SHORT).show();
                     Toast.makeText(LoginActivity.this, "chk: "+chk, Toast.LENGTH_SHORT).show();
-                }else{
-                    loginInformationSaveInSharedPreference(findPhone);
+                }if(passwordNumber.getText().toString().equals(findPassword)){
+                    loginInformationSaveInSharedPreference(findPhone,findPassword);
                     MainActivity.checkPoint="finish";
                     AddDonorActivity.appsUserMobileNumber=findPhone;
+                    AddDonorActivity.appsUserPasswordNumber=findPassword;
 
                     Toast.makeText(LoginActivity.this, "Login Successfull !", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
 
                     finish();
+                }else{
+                    Toast.makeText(LoginActivity.this, "password or phone number wrong!", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -95,12 +99,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    public void loginInformationSaveInSharedPreference(String phone) {
+    public void loginInformationSaveInSharedPreference(String phone,String password) {
         AddDonorActivity.appsUserMobileNumber=phone;
+        AddDonorActivity.appsUserPasswordNumber=password;
 
-        SharedPreferences sharedPreferences=getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+        SharedPreferences  sharedPreferences=getSharedPreferences("userDetails", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
         editor.putString("userLoginPhoneNumber",phone);
+        editor.putString("userLoginPasswordNumber",password);
 
         editor.commit();
         Toast.makeText(LoginActivity.this,"login info stored Successfully ",Toast.LENGTH_SHORT).show();

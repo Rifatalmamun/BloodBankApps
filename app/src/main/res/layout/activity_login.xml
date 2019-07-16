@@ -15,6 +15,12 @@
         android:layout_height="wrap_content"
         android:hint="Enput Phone number"
         android:inputType="number"/>
+    <EditText
+        android:id="@+id/loginActivityPassword_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enput Password"
+        android:inputType="number"/>
 
     <Button
         android:id="@+id/login_id"
