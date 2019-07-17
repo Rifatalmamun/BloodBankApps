@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity
     //Declaring all variables name...........................................
 
     private TextView userNumber,donorNumber;
-    private CardView beDonor,searchBlood,bloodBank,organization,ambulance,addDonor,facts,about,shareApp;
+    private CardView beDonor,searchBlood,bloodBank,organization,ambulance,addDonor,facts,about,shareApp,post;
 
     public static String checkPoint="";
     public  String phonePass="";
@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity
         ambulance=(CardView)findViewById(R.id.ambulance_id);
         addDonor=(CardView)findViewById(R.id.addDonor_id);
         facts=(CardView)findViewById(R.id.facts_id);
+        post=(CardView)findViewById(R.id.post_id);
         about=(CardView)findViewById(R.id.about_id);
         //shareApp=(CardView)findViewById(R.id.share_id);
 
@@ -124,6 +125,7 @@ public class MainActivity extends AppCompatActivity
         ambulance.setOnClickListener(this);
         addDonor.setOnClickListener(this);
         facts.setOnClickListener(this);
+        post.setOnClickListener(this);
         about.setOnClickListener(this);
         //shareApp.setOnClickListener(this);
     }
@@ -188,6 +190,11 @@ public class MainActivity extends AppCompatActivity
         else if(v.getId()==R.id.facts_id){
 
             Intent intent = new Intent(MainActivity.this,FactsActivity.class);
+            startActivity(intent);
+
+        } else if(v.getId()==R.id.post_id){
+
+            Intent intent = new Intent(MainActivity.this,EmmergencyPostActivity.class);
             startActivity(intent);
 
         }else if(v.getId()==R.id.about_id){

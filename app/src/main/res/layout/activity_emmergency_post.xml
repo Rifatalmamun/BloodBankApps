@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:weightSum="3"
+
+    tools:context=".EmmergencyPostActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="2"
+        android:padding="10dp"
+        android:background="#fbd2d2">
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:drawableLeft="@drawable/ic_bubble_chart_black_24dp"
+            android:drawablePadding="15dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".6"
+            android:text="Select Blood Group"
+            android:textColor="#000000"
+            android:gravity="fill_vertical"
+            android:textSize="17sp" />
+        <Spinner
+            android:id="@+id/postSelectBloodGroupSpinner_id"
+            android:layout_marginLeft="20dp"
+            android:layout_weight=".3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <EditText
+            android:id="@+id/postHospitalNameEditText_id"
+            android:drawableLeft="@drawable/ic_local_hospital_black_24dp"
+            android:drawablePadding="15dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".6"
+            android:hint="Enter Hospital Name/Location"
+            android:textColor="#a70b0b"
+            android:gravity="fill_vertical"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:drawableLeft="@drawable/ic_edit_location_black_24dp"
+            android:drawablePadding="15dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".4"
+            android:text="District"
+            android:textColor="#000000"
+            android:gravity="fill_vertical"
+            android:textSize="17sp" />
+        <TextView
+            android:id="@+id/postSelectCityTextView_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".4"
+            android:textColor="#a70b0b"
+            android:gravity="center"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/postSelectCitySpinner_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_weight=".1"
+            android:src="@drawable/ic_arrow_drop_down_black_24dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:drawableLeft="@drawable/ic_local_phone_black_24dp"
+            android:drawablePadding="15dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".3"
+            android:text="Phone"
+            android:textColor="#000000"
+            android:gravity="fill_vertical"
+            android:textSize="17sp" />
+        <EditText
+            android:id="@+id/postPhoneNumberEditText_id"
+            android:layout_marginLeft="20dp"
+            android:layout_weight=".6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="Enter phone no"
+            android:textColor="#a70b0b"
+            android:inputType="number"
+            android:textSize="15sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:drawableLeft="@drawable/ic_home_black_24dp"
+            android:drawablePadding="15dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".1"
+            android:textColor="#000000"
+            android:gravity="fill_vertical"
+            android:textSize="17sp" />
+        <EditText
+            android:id="@+id/postDetailsEditText_id"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="How many bag? Add Details...."
+            android:textColor="#a70b0b"
+            android:textSize="15sp" />
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/postSubmitButton_id"
+                android:background="@drawable/searchbuttonbackground"
+                android:layout_width="230dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Send Post"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

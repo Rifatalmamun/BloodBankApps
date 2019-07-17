@@ -57,7 +57,9 @@
         <activity android:name=".districtListAlertDialogOrganization" />
         <activity android:name=".AddAmbulanceActivity" />
         <activity android:name=".districtList_For_AmbulanceSearch" />
-        <activity android:name=".districtListAlertDialogAmbulance"></activity>
+        <activity android:name=".districtListAlertDialogAmbulance" />
+        <activity android:name=".EmmergencyPostActivity" />
+        <activity android:name=".districtList_For_EmmergencyPost"></activity>
     </application>
 
 </manifest>
